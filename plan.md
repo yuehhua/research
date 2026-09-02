@@ -57,7 +57,7 @@
 - **字體**：Latin 用 Inter（@fontsource，weights 300–800）；中文用系統字堆疊（`PingFang TC`、`Noto Sans CJK TC`、`Microsoft JhengHei`），避免載入巨型 CJK webfont
 - **字級**（fluid）：display `clamp(2.75rem, 8vw, 6rem)`；section 標題 `clamp(1.75rem, 4.5vw, 3.25rem)`；label `0.75rem / uppercase / letter-spacing 0.18em`；body `1rem–1.125rem`
 - **版面**：12 欄概念網格、hairline 分隔、區塊編號 `01–07`、大量留白；桌機左右安全邊界 `clamp(1.25rem, 5vw, 6rem)`
-- **自然元素**：Hero 天空漸層 + 樹葉線稿 SVG（右下）、課程區綠意 wash、深藍頁尾
+- **自然元素**：Hero 天空漸層 + 真實櫻花葉照片（右下；CC0 rawpixel via Openverse，白底轉透明。2026-09-02 決議：手繪與程式生成線稿均被否決，維持照片）、課程區綠意 wash、深藍頁尾
 - **頭像**：彩色（從原始照片重新產生，勿再加灰階濾鏡）
 
 ## 5. 互動行為規格

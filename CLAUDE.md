@@ -32,7 +32,7 @@ node scripts/find-overflow.mjs  # lists elements extending past the viewport wid
 
 ### Hard design constraints
 
-- **Sky-blue × leaf-green palette** (tokens in global.css: `--sky-deep` #0B57A4 headings/footer, `--sky` #1971C2 buttons/links, `--sky-pale`/`--sky-wash` tints, `--leaf` #40A02B live/green accents, `--ink` #16283C body text). User explicitly rejected the earlier pure black-&-white look — don't revert to monochrome. Nature elements: hero sky gradient + branch line-art SVG, teaching slide leaf wash, full-color portrait (no grayscale filter).
+- **Sky-blue × leaf-green palette** (tokens in global.css: `--sky-deep` #0B57A4 headings/footer, `--sky` #1971C2 buttons/links, `--sky-pale`/`--sky-wash` tints, `--leaf` #40A02B live/green accents, `--ink` #16283C body text). User explicitly rejected the earlier pure black-&-white look — don't revert to monochrome. Nature elements: hero sky gradient + **CC0 cherry-leaf photo** (`src/assets/leaf.png`, rawpixel via Openverse — white bg removed to alpha; user rejected both hand-drawn and generated line-art leaves, don't go back to drawing leaves), teaching slide leaf wash, full-color portrait (no grayscale filter).
 - **Desktop slides must fit one screen** (1920×1080 is the QA gate for the presentation use-case). `qa-geometry.mjs` enforces this; if a slide grows past the viewport, tighten density (paddings, `--section-pad`, row spacing) rather than cropping content. Tablet/mobile overflow is accepted by design.
 - **Highlights ordered first**: the projects array order in content.ts is deliberate (Virtual Embryo → GeometricFlux.jl → RAFAEL → CDGRNs.jl).
 - The portrait (`src/assets/portrait.jpg`) is in color; do not re-apply grayscale.
