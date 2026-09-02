@@ -14,9 +14,10 @@ Source repo: **github.com/yuehhua/research** (push to `main` → GitHub Actions 
 npm run dev          # dev server (note: base path means it serves under /research/)
 npm run build        # static build → dist/
 npm run preview      # serve dist/ on :4321 (needed by QA scripts)
-node scripts/qa-geometry.mjs   # layout QA — requires preview running; exit 1 on failure
-node scripts/verify.mjs        # screenshots all slides × 3 viewports × 2 languages → /tmp/isbshots
-node scripts/measure-slides.mjs  # per-element height breakdown for tall slides (debugging)
+node scripts/qa-geometry.mjs    # layout QA gate — requires preview running; exit 1 on failure
+node scripts/verify.mjs         # screenshots all slides × 3 viewports × 2 languages → /tmp/isbshots (needs preview)
+node scripts/measure-slides.mjs # per-element height breakdown for tall slides (debugging)
+node scripts/find-overflow.mjs  # lists elements extending past the viewport width (run from project root)
 ```
 
 ## Architecture
@@ -40,8 +41,10 @@ node scripts/measure-slides.mjs  # per-element height breakdown for tall slides 
 
 - `global.css` is imported **only** in `Home.astro` frontmatter. It was lost once during a refactor and the build still succeeded (scoped styles alone produce a plausible-looking but unstyled page). If layout measurements look wildly wrong, check that the CSS bundle contains `.slide` first.
 - Grid items holding images need `min-width: 0` (grid `min-width: auto` let the 900px portrait blow out mobile layout).
+- `white-space: nowrap` text inside a `max-width: 100%` box still overflows: the box is capped but the text spills, and spilled inline content expands the page's scrollable area **without any element's bounding rect exceeding the viewport** — `find-overflow.mjs` finds nothing in that case. Long chips/badges must wrap on narrow screens (see the `≤560px .chip` override in global.css).
+- Project cards: the tablet 2-column layout needs explicit `grid-column`/`grid-row` placement for the three children (auto-placement drops the description into the metrics rail), and the ≥900px block must reset that placement. Check both media queries when touching `.project` layout.
 - Files under `src/pages/` become routes — page-shaped components (like Home.astro) belong in `src/components/`.
-- Chrome headless CLI screenshots of this site produce blank frames (GPU compositing bug); that's why QA is DOM-measurement based (`qa-geometry.mjs`). Trust geometry over vision tools for this codebase.
+- Verification hierarchy for this codebase: DOM geometry (`qa-geometry.mjs`) > pixel sampling with ImageMagick (`magick img.png -format "%[pixel:p{x,y}]" info:`) > screenshots via puppeteer-core (works; raw `google-chrome --headless --screenshot` CLI blanks frames on this site). Vision/analyze tools hallucinated details on this project — never trust them as the sole verdict.
 
 ## Deployment
 
