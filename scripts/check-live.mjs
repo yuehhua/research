@@ -1,0 +1,10 @@
+import puppeteer from 'puppeteer-core';
+const browser = await puppeteer.launch({ executablePath: '/usr/bin/google-chrome-stable', headless: true, args: ['--no-sandbox'] });
+const page = await browser.newPage();
+await page.setViewport({ width: 1920, height: 1080 });
+await page.goto('https://yuehhua.github.io/research/', { waitUntil: 'networkidle0' });
+await page.screenshot({ path: '/tmp/live-hero.png' });
+await page.evaluate(() => document.getElementById('about').scrollIntoView());
+await new Promise(r => setTimeout(r, 400));
+await page.screenshot({ path: '/tmp/live-about.png' });
+await browser.close();

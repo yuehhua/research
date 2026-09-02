@@ -100,8 +100,8 @@ export const about = {
       en: 'His training spans computer science and biomedicine: dual bachelor degrees in Computer Science and Medical Laboratory Science (NCKU), an M.S. in Bioinformatics from NYMU (first in class), and a Ph.D. from the Academia Sinica–NTU TIGP Bioinformatics Program. He was a postdoctoral researcher at NTU, a machine learning engineer at Taiwan AI Labs, and built bacterial pan-genome databases at Taiwan CDC.',
     },
     {
-      zh: '他也是 Julia Taiwan 社群共同創辦人與開源貢獻者——GeometricFlux.jl 是 Julia 官方機器學習生態系 Flux.jl 的幾何深度學習庫。長期目標：以 AI 理解生命運作的原理，加速新藥發現。',
-      en: 'He co-founded the Julia Taiwan community and contributes to open source—GeometricFlux.jl is the geometric deep learning library of the official Julia ML ecosystem, Flux.jl. His long-term goal is to use AI to understand the principles of life and accelerate drug discovery.',
+      zh: '他也是 Julia Taiwan 社群共同創辦人與開源貢獻者——GeometricFlux.jl 是 Julia 官方機器學習生態系 Flux.jl 的幾何深度學習庫。長期目標：以 AI 解構生命的運作原理，拓展疾病模型，推進對於疾病的理解。',
+      en: 'He co-founded the Julia Taiwan community and contributes to open source—GeometricFlux.jl is the geometric deep learning library of the official Julia ML ecosystem, Flux.jl. His long-term goal: deconstructing the operating principles of life with AI, expanding disease models, and advancing our understanding of disease.',
     },
   ] as L<string>[],
   timeline: [

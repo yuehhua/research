@@ -39,23 +39,26 @@
 | 07 | Join us | 專題生招募條件、期望特質、mailto 按鈕 |
 | — | Footer | 聯絡資訊、ORCID/GitHub/Scholar/個人站連結、版權 |
 
-## 4. 設計系統（Design Tokens）
+## 4. 設計系統（Design Tokens）— 2026-09-02 改版：天空藍 × 葉綠
+
+> 初版為純黑白極簡；主持人看過後改為自然色系（活力 × 專業），從三個色票方案中選定「天空藍主色」。
 
 ```css
---paper: #ffffff;         /* 背景 */
---ink:   #0a0a0a;         /* 主文字/線條 */
---gray-1: #444444;        /* 次要文字 */
---gray-2: #888888;        /* 輔助文字 */
---gray-3: #d4d4d4;        /* 弱線條 */
---hairline: 1px solid var(--ink);   /* 結構線 */
---hairline-soft: 1px solid var(--gray-3);
+--sky-deep: #0b57a4;   /* 標題、頁尾底色 */
+--sky:      #1971c2;   /* 按鈕、連結、活躍狀態 */
+--sky-pale: #74c0fc;   /* 淡天藍點綴、線條 */
+--sky-wash: #e7f5ff;   /* Hero 漸層底 */
+--leaf:     #40a02b;   /* 綠葉點綴（徽章、第一作者標示） */
+--leaf-wash:#f2faf4;   /* 課程區底色 */
+--ink:      #16283c;   /* 內文（藍黑） */
+--paper:    #ffffff;
 ```
 
 - **字體**：Latin 用 Inter（@fontsource，weights 300–800）；中文用系統字堆疊（`PingFang TC`、`Noto Sans CJK TC`、`Microsoft JhengHei`），避免載入巨型 CJK webfont
 - **字級**（fluid）：display `clamp(2.75rem, 8vw, 6rem)`；section 標題 `clamp(1.75rem, 4.5vw, 3.25rem)`；label `0.75rem / uppercase / letter-spacing 0.18em`；body `1rem–1.125rem`
 - **版面**：12 欄概念網格、hairline 分隔、區塊編號 `01–07`、大量留白；桌機左右安全邊界 `clamp(1.25rem, 5vw, 6rem)`
-- **頭像**：`filter: grayscale(1) contrast(1.04)`，加上黑色 hairline 外框
-- **無彩色堅持**：連結 hover 用底線/字重變化，不用顏色變化；focus ring 用 2px 黑實框（同時滿足 a11y）
+- **自然元素**：Hero 天空漸層 + 樹葉線稿 SVG（右下）、課程區綠意 wash、深藍頁尾
+- **頭像**：彩色（從原始照片重新產生，勿再加灰階濾鏡）
 
 ## 5. 互動行為規格
 
