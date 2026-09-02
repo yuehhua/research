@@ -120,16 +120,6 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
             {about.bio.map((p) => <p>{t(p)}</p>)}
           </div>
         </div>
-        <ul class="row-list about-timeline">
-          {
-            about.timeline.map((item) => (
-              <li>
-                <span class="period">{item.period}</span>
-                <span class="what">{t(item.text)}</span>
-              </li>
-            ))
-          }
-        </ul>
       </Slide>
 
       {/* ---------------------------------------------- 03 RESEARCH */}
@@ -469,7 +459,6 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem clamp(1.5rem, 4vw, 3.5rem);
-    margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
     align-items: start;
   }
 
@@ -489,15 +478,6 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
 
   .bio p + p {
     margin-top: 0.9em;
-  }
-
-  .about-timeline {
-    columns: 2;
-    column-gap: clamp(1.5rem, 4vw, 3.5rem);
-  }
-
-  .about-timeline li {
-    break-inside: avoid;
   }
 
   @media (min-width: 768px) {

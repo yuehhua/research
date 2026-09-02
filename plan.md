@@ -31,7 +31,7 @@
 |---|---|---|
 | 00 | Header（固定，非投影片） | 實驗室名、語言切換、導覽錨點 |
 | 01 | Hero | ISB Lab 全名、主持人職稱、定位標語、NeurIPS 2026 挑戰徽示、CTA（Join us / Research） |
-| 02 | About | 灰階頭像、三段簡歷、學經歷時間軸（成大雙學士 → 陽明碩士 → 台大 TIGP 博士 → 博士後/AI Labs/CDC → TMU）、Julia Taiwan 共同創辦人 |
+| 02 | About | 彩色頭像、三段簡介（領域定位／跨域背景敘事／開源與社群＋目標）。**2026-09-02 修訂：應主持人要求移除逐年學經歷時間軸——避免「像履歷」**，校名/年份/職稱序列不再出現 |
 | 03 | Research | 六大研究興趣卡片 ＋ 現況焦點（RNA velocity、GRN、cell-fate prediction、virtual cell、Virtual Embryo Challenge） |
 | 04 | Projects | 四個亮點專案，編號大卡，各附量化指標 |
 | 05 | Publications | 7 篇期刊論文（第一作者加粗標示），連結 DOI/PubMed |

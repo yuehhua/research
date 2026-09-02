@@ -96,60 +96,14 @@ export const about = {
       en: 'Yueh-Hua Tu is a computational biologist specializing in machine learning and deep learning model design. He takes a systems-level view of biology—from gene regulatory networks and RNA velocity to virtual cells—to uncover the dynamics that govern cell-fate decisions.',
     },
     {
-      zh: '學術訓練橫跨資訊與生醫：成功大學資訊工程與醫學檢驗生物技術雙學士、陽明大學生物醫學資訊碩士（第一名畢業）、中央研究院—臺灣大學 TIGP 生物資訊博士。曾任臺灣大學博士後研究員、Taiwan AI Labs 機器學習工程師，並於衛福部疾病管制署期間建立細菌泛基因體資料庫。',
-      en: 'His training spans computer science and biomedicine: dual bachelor degrees in Computer Science and Medical Laboratory Science (NCKU), an M.S. in Bioinformatics from NYMU (first in class), and a Ph.D. from the Academia Sinica–NTU TIGP Bioinformatics Program. He was a postdoctoral researcher at NTU, a machine learning engineer at Taiwan AI Labs, and built bacterial pan-genome databases at Taiwan CDC.',
+      zh: '他的背景橫跨資訊工程與生物醫學：一方面寫程式、設計模型、打造高效能運算框架，一方面理解實驗科學的語言與限制。這樣的雙重訓練，讓他習慣把濕實驗室的問題轉譯成可計算的問題——細菌基因體、全基因體關聯分析、單細胞轉錄體到生成式細胞模型，都在他處理過的資料光譜上。',
+      en: 'His background bridges computer engineering and biomedicine: he writes code, designs models and builds high-performance computing frameworks, while speaking the language—and respecting the limits—of experimental science. This dual training makes him fluent in translating bench-side questions into computable ones; bacterial genomes, genome-wide association studies, single-cell transcriptomes and generative cell models all sit on his data spectrum.',
     },
     {
       zh: '他也是 Julia Taiwan 社群共同創辦人與開源貢獻者——GeometricFlux.jl 是 Julia 官方機器學習生態系 Flux.jl 的幾何深度學習庫。他致力以 AI 解構生命的運作原理，拓展疾病模型，推進對於疾病的理解。',
       en: 'He co-founded the Julia Taiwan community and contributes to open source—GeometricFlux.jl is the geometric deep learning library of the official Julia ML ecosystem, Flux.jl. He aims to deconstruct the operating principles of life with AI, expand disease models, and advance our understanding of disease.',
     },
   ] as L<string>[],
-  timeline: [
-    {
-      period: '2026—',
-      text: {
-        zh: '助理教授 · 臺北醫學大學 智慧醫療跨領域學士學位學程',
-        en: 'Assistant Professor, TMU Intelligent Healthcare Program',
-      },
-    },
-    {
-      period: '2025',
-      text: {
-        zh: '博士後研究員 · 臺灣大學（生成式模型 × 單細胞轉錄體）',
-        en: 'Postdoctoral Researcher, NTU (generative models × single-cell transcriptomics)',
-      },
-    },
-    {
-      period: '2024',
-      text: { zh: 'AI Scientist · 綯元智慧（3D Gaussian Splatting）', en: 'AI Scientist, HIICL (3D Gaussian splatting)' },
-    },
-    {
-      period: '2023',
-      text: { zh: '機器學習工程師 · Taiwan AI Labs（聯邦式 GWAS）', en: 'Machine Learning Engineer, Taiwan AI Labs (federated GWAS)' },
-    },
-    {
-      period: '2019–2022',
-      text: {
-        zh: '生物資訊博士 · 中研院 TIGP／臺灣大學（AS-TIGP Research Performance Fellowship）',
-        en: 'Ph.D. in Bioinformatics, Academia Sinica TIGP / NTU (AS-TIGP Research Performance Fellowship)',
-      },
-    },
-    {
-      period: '2016–2019',
-      text: { zh: '研發替代役 · 衛福部疾病管制署（細菌泛基因體）', en: 'R&D Substitute Service, Taiwan CDC (bacterial pan-genomics)' },
-    },
-    {
-      period: '2014–2016',
-      text: { zh: '生物醫學資訊碩士 · 陽明大學（第一名畢業）', en: 'M.S. in Bioinformatics, NYMU (first in class)' },
-    },
-    {
-      period: '2009–2014',
-      text: {
-        zh: '資訊工程 × 醫學檢驗雙學士 · 成功大學',
-        en: 'Dual B.S. in Computer Science & Medical Laboratory Science, NCKU',
-      },
-    },
-  ] as { period: string; text: L<string> }[],
 };
 
 /* ---------------------------------------------------------- */
