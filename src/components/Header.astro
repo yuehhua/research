@@ -1,0 +1,123 @@
+---
+/**
+ * Header — fixed top bar: wordmark, section anchors (desktop), language toggle.
+ */
+import { profile, ui, slideOrder } from '../data/content';
+
+interface Props {
+  lang: 'zh' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = (x: { zh: string; en: string }) => x[lang];
+const base = (import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL).replace(/\/$/, '');
+const otherLangHref = lang === 'zh' ? `${base}/en/` : `${base}/`;
+
+const navItems = slideOrder.slice(1).map((id) => ({ id, label: t(ui.nav[id]) }));
+---
+
+<header class="site-header no-print">
+  <a class="wordmark" href={`${base}/#${slideOrder[0]}`}>
+    ISB<span> Lab</span>
+  </a>
+
+  <nav class="site-nav" aria-label={lang === 'zh' ? '區塊導覽' : 'Sections'}>
+    {
+      navItems.map((item) => (
+        <a href={item.id === 'join' ? `${base}/` : `${base}/#${item.id}`} class={item.id === 'join' ? 'nav-cta' : ''}>
+          {item.label}
+        </a>
+      ))
+    }
+  </nav>
+
+  <a class="lang-toggle" href={otherLangHref} onclick="this.href += location.hash" hreflang={lang === 'zh' ? 'en' : 'zh'}>
+    {t(ui.langToggle)}
+  </a>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 0.9rem var(--gutter);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: var(--hairline);
+  }
+
+  .wordmark {
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    white-space: nowrap;
+    color: var(--sky-deep);
+  }
+
+  .wordmark span {
+    font-weight: 300;
+  }
+
+  .site-nav {
+    display: none;
+    gap: clamp(1rem, 2.5vw, 2.25rem);
+  }
+
+  .site-nav a {
+    font-size: var(--text-label);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--gray-1);
+    padding: 0.25em 0;
+    border-bottom: 1px solid transparent;
+  }
+
+  .site-nav a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+  }
+
+  .site-nav a.nav-cta {
+    color: var(--sky-deep);
+    border: 1px solid var(--sky);
+    padding: 0.5em 1em;
+  }
+
+  .site-nav a.nav-cta:hover {
+    background: var(--sky);
+    border-color: var(--sky);
+    color: var(--paper);
+  }
+
+  .lang-toggle {
+    font-size: var(--text-label);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    border: 1px solid var(--sky);
+    color: var(--sky);
+    padding: 0.45em 0.9em;
+    white-space: nowrap;
+  }
+
+  .lang-toggle:hover {
+    background: var(--sky-deep);
+    border-color: var(--sky-deep);
+    color: var(--paper);
+  }
+
+  @media (min-width: 1024px) {
+    .site-nav {
+      display: flex;
+    }
+  }
+</style>

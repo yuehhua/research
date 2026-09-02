@@ -1,0 +1,931 @@
+---
+/**
+ * Home — the entire slide deck, rendered per language by thin page wrappers.
+ * All copy comes from src/data/content.ts.
+ */
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+import { Image } from 'astro:assets';
+import Slide from '../layouts/Slide.astro';
+import Header from './Header.astro';
+import NavDots from './NavDots.astro';
+import PageCounter from './PageCounter.astro';
+import portrait from '../assets/portrait.jpg';
+import {
+  ui,
+  profile,
+  hero,
+  about,
+  interests,
+  focusChips,
+  projects,
+  publications,
+  tmuCourses,
+  pastTeaching,
+  join,
+  footer,
+} from '../data/content';
+
+interface Props {
+  lang: 'zh' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = (x: { zh: string; en: string }) => x[lang];
+
+const eyebrow: Record<string, { zh: string; en: string }> = {
+  hero: { zh: 'ISB LAB', en: 'ISB LAB' },
+  about: ui.nav.about,
+  research: ui.nav.research,
+  projects: ui.nav.projects,
+  publications: ui.nav.publications,
+  teaching: ui.nav.teaching,
+  join: ui.nav.join,
+};
+
+const pageTitle =
+  lang === 'zh'
+    ? 'ISB Lab 智慧系統生物實驗室 · 臺北醫學大學'
+    : 'ISB Lab — Intelligent Systems Biology Lab · Taipei Medical University';
+const pageDesc =
+  lang === 'zh'
+    ? '臺北醫學大學智慧系統生物實驗室：計算生物學 × 機器學習，從基因調控網路到虛擬細胞。杜岳華助理教授主持。'
+    : 'Intelligent Systems Biology Lab at Taipei Medical University: computational biology × machine learning, from gene regulatory networks to virtual cells. Led by Assistant Professor Yueh-Hua Tu.';
+const base = (import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL).replace(/\/$/, '');
+const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
+---
+
+<!doctype html>
+<html lang={lang === 'zh' ? 'zh-TW' : 'en'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href={`${base}/`} />
+    <link rel="alternate" hreflang={lang === 'zh' ? 'en' : 'zh'} href={otherLangUrl} />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B57A4'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='800' font-size='14' fill='%23fff' text-anchor='middle'%3EI%3C/text%3E%3C/svg%3E"
+    />
+  </head>
+
+  <body>
+    <Header lang={lang} />
+    <NavDots lang={lang} />
+    <PageCounter lang={lang} />
+
+    <main>
+      {/* ---------------------------------------------- 01 HERO */}
+      <Slide id="hero" num="01" label={t(eyebrow.hero)}>
+        <div class="nature" aria-hidden="true">
+          <svg class="branch" viewBox="0 0 400 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M40 500 C 130 420, 150 320, 250 180 C 290 125, 320 90, 360 60"
+              stroke="#2F9E44"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              opacity="0.5"
+            ></path>
+            <g stroke="#40A02B" stroke-width="1.8" opacity="0.75" stroke-linejoin="round">
+              <path d="M150 330 Q 120 300 90 308 Q 118 332 150 330 Z" fill="#D3F0DA"></path>
+              <path d="M170 305 Q 205 280 232 292 Q 200 315 170 305 Z" fill="#E7F8EC"></path>
+              <path d="M205 255 Q 172 232 145 244 Q 175 265 205 255 Z" fill="#D3F0DA"></path>
+              <path d="M230 225 Q 265 203 292 216 Q 260 238 230 225 Z" fill="#E7F8EC"></path>
+              <path d="M255 185 Q 222 165 197 176 Q 225 196 255 185 Z" fill="#D3F0DA"></path>
+              <path d="M280 155 Q 312 135 338 148 Q 308 168 280 155 Z" fill="#E7F8EC"></path>
+            </g>
+          </svg>
+        </div>
+
+        <p class="hero-kicker">{profile.labName}</p>
+        <h1 class="hero-title">{lang === 'zh' ? profile.labNameZh : profile.labName}</h1>
+        <p class="hero-tagline">{t(hero.tagline)}</p>
+        <p class="hero-sub muted">{t(hero.sub)}</p>
+
+        <p class="hero-byline">
+          <strong>{t(profile.name)}, {profile.degree}</strong> · {t(profile.title)}
+          <span class="hero-affil muted">{t(profile.affiliation)}</span>
+        </p>
+
+        <div class="hero-actions">
+          <a class="chip" href={hero.challengeUrl} target="_blank" rel="noopener">
+            <span class="pulse" aria-hidden="true"></span>
+            {t(hero.challengeBadge)} ↗
+          </a>
+        </div>
+
+        <div class="hero-ctas">
+          <a class="btn btn--solid" href={`${base}/#join`}>{t(hero.cta.join)}</a>
+          <a class="btn" href={`${base}/#research`}>{t(hero.cta.research)}</a>
+        </div>
+      </Slide>
+
+      {/* ---------------------------------------------- 02 ABOUT */}
+      <Slide id="about" num="02" label={t(eyebrow.about)}>
+        <h2 class="slide__title">{t(profile.name)} · {t(profile.title)}</h2>
+        <div class="about-grid">
+          <figure class="portrait">
+            <Image src={portrait} alt={lang === 'zh' ? '杜岳華' : 'Yueh-Hua Tu'} widths={[360, 540, 720]} sizes="(max-width: 1023px) 40vw, 300px" />
+          </figure>
+          <div class="bio">
+            {about.bio.map((p) => <p>{t(p)}</p>)}
+          </div>
+        </div>
+        <ul class="row-list about-timeline">
+          {
+            about.timeline.map((item) => (
+              <li>
+                <span class="period">{item.period}</span>
+                <span class="what">{t(item.text)}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </Slide>
+
+      {/* ---------------------------------------------- 03 RESEARCH */}
+      <Slide id="research" num="03" label={t(eyebrow.research)}>
+        <h2 class="slide__title">{t(ui.nav.research)}</h2>
+        <div class="interest-grid hairline-grid">
+          {
+            interests.map((it, i) => (
+              <article class="interest">
+                <span class="interest-idx">{String(i + 1).padStart(2, '0')}</span>
+                <h3 class="interest-name">{t(it.name)}</h3>
+                <p class="interest-desc muted">{t(it.desc)}</p>
+              </article>
+            ))
+          }
+        </div>
+        <div class="focus">
+          <span class="label">{t(ui.currentFocus)}</span>
+          <ul class="focus-chips">
+            {focusChips.map((c) => <li>{t(c)}</li>)}
+            <li>
+              <a href={hero.challengeUrl} target="_blank" rel="noopener">NeurIPS 2026 Virtual Embryo ↗</a>
+            </li>
+          </ul>
+        </div>
+      </Slide>
+
+      {/* ---------------------------------------------- 04 PROJECTS */}
+      <Slide id="projects" num="04" label={t(eyebrow.projects)}>
+        <h2 class="slide__title">{t(ui.nav.projects)}</h2>
+        <div class="projects">
+          {
+            projects.map((p, i) => (
+              <article class="project">
+                <div class="project-head">
+                  <span class="project-idx">P{i + 1}</span>
+                  <div>
+                    <h3 class="project-name">{p.name}</h3>
+                    <p class="project-tag label">{t(p.tag)}</p>
+                  </div>
+                </div>
+                <p class="project-desc muted">{t(p.desc)}</p>
+                <div class="project-side">
+                  <div class="project-metrics">
+                    {p.metrics.map((m) => (
+                      <div class="metric">
+                        <span class="value">{m.value}</span>
+                        <span class="key">{t(m.label)}</span>
+                      </div>
+                    ))}
+                  </div>
+                  {p.links && (
+                    <p class="project-links">
+                      {p.links.map((l) => (
+                        <a href={l.href} target="_blank" rel="noopener">{l.label} ↗</a>
+                      ))}
+                    </p>
+                  )}
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </Slide>
+
+      {/* ---------------------------------------------- 05 PUBLICATIONS */}
+      <Slide id="publications" num="05" label={t(eyebrow.publications)}>
+        <h2 class="slide__title">{t(ui.nav.publications)}</h2>
+        <ol class="pubs" data-inner-scroll>
+          {
+            publications.map((pub) => (
+              <li class="pub">
+                <span class="pub-year">{pub.year}</span>
+                <div class="pub-main">
+                  <p class="pub-title">
+                    {pub.title}
+                    {pub.firstAuthor && <span class="pub-badge">{t(ui.firstAuthor)}</span>}
+                  </p>
+                  <p class="pub-authors muted">
+                    <span class={pub.firstAuthor ? 'is-first' : ''}>{pub.authors.split(',')[0]}</span>{pub.authors.substring(pub.authors.split(',')[0].length)}
+                  </p>
+                  <p class="pub-venue">{pub.venue}</p>
+                </div>
+                <a class="pub-link" href={`https://doi.org/${pub.doi}`} target="_blank" rel="noopener" aria-label={`${t(ui.viewPaper)}: ${pub.title}`}>↗</a>
+              </li>
+            ))
+          }
+        </ol>
+      </Slide>
+
+      {/* ---------------------------------------------- 06 TEACHING */}
+      <Slide id="teaching" num="06" label={t(eyebrow.teaching)}>
+        <h2 class="slide__title">{t(ui.nav.teaching)}</h2>
+        <div class="course-grid hairline-grid">
+          {
+            tmuCourses.map((c) => (
+              <article class="course">
+                <header class="course-head">
+                  <h3 class="course-name">{t(c.name)}</h3>
+                  <span class="course-credits">{c.credits}</span>
+                </header>
+                <p class="course-type label">{t(c.type)} · {c.credits} {lang === 'zh' ? '學分' : 'credits'}</p>
+                <p class="course-desc muted">{t(c.desc)}</p>
+              </article>
+            ))
+          }
+        </div>
+        <ul class="row-list teaching-past">
+          {
+            pastTeaching.map((item) => (
+              <li>
+                <span class="period">{item.period}</span>
+                <span class="what">{t(item.text)}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </Slide>
+
+      {/* ---------------------------------------------- 07 JOIN US */}
+      <Slide id="join" num="07" label={t(eyebrow.join)}>
+        <h2 class="slide__title">{t(join.heading)}</h2>
+        <p class="join-intro muted">{t(join.intro)}</p>
+        <div class="join-grid">
+          <section class="join-col">
+            <h3 class="label">{t(join.youAre)}</h3>
+            <ul class="join-list">
+              {join.youAreItems.map((item) => <li>{t(item)}</li>)}
+            </ul>
+          </section>
+          <section class="join-col">
+            <h3 class="label">{t(join.weOffer)}</h3>
+            <ul class="join-list">
+              {join.weOfferItems.map((item) => <li>{t(item)}</li>)}
+            </ul>
+          </section>
+        </div>
+        <div class="join-cta">
+          <a class="btn btn--solid" href={`mailto:${profile.email}?subject=${encodeURIComponent('專題生')}`}>{profile.email}</a>
+          <p class="muted">{t(join.cta)}</p>
+        </div>
+      </Slide>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p class="footer-id">
+          <strong>{profile.labShort} · {profile.labName}</strong><br />
+          <span class="muted">{t(footer.address)}</span>
+        </p>
+        <ul class="footer-links">
+          <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
+          {profile.links.map((l) => <li><a href={l.href} target="_blank" rel="noopener">{l.label}</a></li>)}
+        </ul>
+        <p class="footer-copy muted">{t(footer.copyright)}</p>
+      </div>
+    </footer>
+
+    <script>
+      // Deck behavior: active-slide tracking, counter, dots, keyboard navigation.
+      const slides = Array.from(document.querySelectorAll<HTMLElement>('[data-slide]'));
+      const dots = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-dot]'));
+      const counter = document.querySelector<HTMLElement>('[data-counter]');
+      const hint = document.querySelector<HTMLElement>('[data-hint]');
+
+      let idx = 0;
+
+      function render(): void {
+        if (!counter) return;
+        const cur = String(idx + 1).padStart(2, '0');
+        const total = String(slides.length).padStart(2, '0');
+        counter.textContent = `${cur} / ${total}`;
+        dots.forEach((d, i) => {
+          if (i === idx) d.setAttribute('aria-current', 'true');
+          else d.removeAttribute('aria-current');
+        });
+        hint?.classList.toggle('is-visible', idx === 0);
+      }
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              idx = slides.indexOf(e.target as HTMLElement);
+              render();
+            }
+          }
+        },
+        { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
+      );
+      slides.forEach((s) => io.observe(s));
+      render();
+
+      function go(i: number): void {
+        const target = slides[Math.max(0, Math.min(slides.length - 1, i))];
+        target?.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      // Let an inner scrollable list (e.g. publications) finish scrolling first.
+      function innerCanScroll(dir: number): boolean {
+        const el = document.activeElement;
+        if (!el || el === document.body) return false;
+        const scroller = (el as HTMLElement).closest('[data-inner-scroll]');
+        if (!scroller) return false;
+        return dir > 0
+          ? scroller.scrollTop + scroller.clientHeight < scroller.scrollHeight - 1
+          : scroller.scrollTop > 1;
+      }
+
+      window.addEventListener('keydown', (e: KeyboardEvent) => {
+        const next = ['ArrowDown', 'ArrowRight', 'PageDown', ' '];
+        const prev = ['ArrowUp', 'ArrowLeft', 'PageUp'];
+        if (next.includes(e.key)) {
+          if (innerCanScroll(1)) return;
+          e.preventDefault();
+          go(idx + 1);
+        } else if (prev.includes(e.key)) {
+          if (innerCanScroll(-1)) return;
+          e.preventDefault();
+          go(idx - 1);
+        } else if (e.key === 'Home') {
+          e.preventDefault();
+          go(0);
+        } else if (e.key === 'End') {
+          e.preventDefault();
+          go(slides.length - 1);
+        }
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  /* ---------- Hero: sky gradient + leaf branch ---------- */
+  #hero {
+    background:
+      radial-gradient(52rem 30rem at 108% -12%, rgba(116, 192, 252, 0.28), transparent 60%),
+      radial-gradient(40rem 26rem at -14% 112%, rgba(116, 192, 252, 0.2), transparent 62%),
+      linear-gradient(178deg, var(--sky-wash) 0%, var(--paper) 58%);
+  }
+
+  .nature {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .branch {
+    position: absolute;
+    right: max(2rem, calc(var(--gutter) * 0.6));
+    bottom: clamp(1rem, 6vh, 3.5rem);
+    width: clamp(150px, 22vw, 340px);
+    rotate: 6deg;
+  }
+
+  .hero-kicker,
+  .hero-title,
+  .hero-tagline,
+  .hero-sub,
+  .hero-byline,
+  .hero-actions,
+  .hero-ctas {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-kicker {
+    font-size: var(--text-label);
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sky);
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-size: var(--text-display);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    margin-bottom: 1.25rem;
+    max-width: 14ch;
+    color: var(--sky-deep);
+  }
+
+  .hero-tagline {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-sub {
+    max-width: 46ch;
+    margin-bottom: 2rem;
+  }
+
+  .hero-byline {
+    font-size: var(--text-small);
+    border-top: var(--hairline);
+    padding-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    margin-bottom: 1.25rem;
+    max-width: 60ch;
+  }
+
+  .hero-affil {
+    flex-basis: 100%;
+  }
+
+  .hero-actions {
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  /* ---------- About ---------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem clamp(1.5rem, 4vw, 3.5rem);
+    margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
+    align-items: start;
+  }
+
+  /* min-width:0 lets grid items shrink below their content's intrinsic width */
+  .about-grid > * {
+    min-width: 0;
+  }
+
+  .portrait img {
+    width: 100%;
+    border: var(--hairline);
+    filter: grayscale(1) contrast(1.04);
+  }
+
+  .portrait::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(11, 87, 164, 0.08), transparent 45%);
+    pointer-events: none;
+  }
+
+  .portrait {
+    position: relative;
+  }
+
+  .bio p + p {
+    margin-top: 0.9em;
+  }
+
+  .about-timeline {
+    columns: 2;
+    column-gap: clamp(1.5rem, 4vw, 3.5rem);
+  }
+
+  .about-timeline li {
+    break-inside: avoid;
+  }
+
+  @media (min-width: 768px) {
+    .about-grid {
+      grid-template-columns: minmax(180px, 240px) 1fr;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .about-grid {
+      grid-template-columns: minmax(220px, 300px) 1fr;
+    }
+  }
+
+  /* ---------- Research ---------- */
+  .interest-grid {
+    grid-template-columns: 1fr;
+    margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
+  }
+
+  .interest {
+    padding: clamp(1.1rem, 2.5vw, 1.75rem);
+  }
+
+  .interest-idx {
+    font-size: var(--text-label);
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--sky);
+  }
+
+  .interest-name {
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    font-weight: 700;
+    margin: 0.4em 0 0.35em;
+    color: var(--sky-deep);
+  }
+
+  .interest-desc {
+    font-size: var(--text-small);
+    max-width: 38ch;
+  }
+
+  .focus {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    border-top: var(--hairline);
+    padding-top: 1.25rem;
+  }
+
+  .focus-chips {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .focus-chips li {
+    background: var(--sky-wash);
+    padding: 0.45em 0.85em;
+    font-size: var(--text-small);
+    font-weight: 600;
+    color: var(--sky-deep);
+  }
+
+  .focus-chips li:has(a) {
+    background: var(--paper);
+    border: 1px solid var(--leaf);
+    color: var(--leaf-deep);
+  }
+
+  .focus-chips a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .focus-chips a:hover {
+    background: var(--leaf);
+    color: var(--paper);
+  }
+
+  @media (min-width: 640px) {
+    .interest-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .interest-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* ---------- Projects ---------- */
+  .project {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem 2.5rem;
+    border-top: var(--hairline);
+    padding: clamp(1rem, 2.2vh, 1.6rem) 0;
+  }
+
+  .project:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .project-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .project-idx {
+    font-size: var(--text-label);
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--sky);
+  }
+
+  .project-name {
+    font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--sky-deep);
+  }
+
+  .project-tag {
+    margin-top: 0.35em;
+  }
+
+  .project-desc {
+    font-size: var(--text-small);
+    max-width: 62ch;
+  }
+
+  .project-side {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .project-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(5.5rem, 1fr));
+    gap: 1rem 1.5rem;
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    font-size: var(--text-small);
+    font-weight: 600;
+  }
+
+  /* Tablet: two columns — content left, metrics rail right */
+  @media (min-width: 768px) {
+    .project {
+      grid-template-columns: minmax(0, 1fr) minmax(180px, 240px);
+    }
+
+    .project-head,
+    .project-desc {
+      grid-column: 1;
+    }
+
+    .project-side {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      border-left: var(--hairline-soft);
+      padding-left: 1.5rem;
+    }
+  }
+
+  /* Desktop: three columns — head, description, metrics rail */
+  @media (min-width: 900px) {
+    .project {
+      grid-template-columns: minmax(200px, 280px) 1fr minmax(220px, 300px);
+      align-items: start;
+    }
+
+    .project-head,
+    .project-desc {
+      grid-column: auto;
+    }
+
+    .project-side {
+      grid-column: auto;
+      grid-row: auto;
+      padding-left: 2rem;
+    }
+  }
+
+  /* ---------- Publications ---------- */
+  .pubs {
+    list-style: none;
+    max-height: min(58svh, 34rem);
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  .pub {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr auto;
+    gap: 0.75rem 1.5rem;
+    border-top: var(--hairline-soft);
+    padding: 0.9em 0;
+    align-items: start;
+  }
+
+  .pub:first-child {
+    border-top: none;
+  }
+
+  .pub-year {
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .pub-title {
+    font-weight: 700;
+    line-height: 1.35;
+    max-width: 60ch;
+    color: var(--sky-deep);
+  }
+
+  .pub-badge {
+    display: inline-block;
+    border: 1px solid var(--leaf);
+    color: var(--leaf-deep);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 0.1em 0.55em;
+    margin-left: 0.6em;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  .pub-authors {
+    font-size: var(--text-small);
+    line-height: 1.5;
+  }
+
+  .pub-authors .is-first {
+    font-weight: 800;
+  }
+
+  .pub-venue {
+    font-size: var(--text-small);
+    font-style: italic;
+  }
+
+  .pub-link {
+    font-size: 1.1rem;
+    text-decoration: none;
+    padding: 0.2em;
+  }
+
+  .pub-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 640px) {
+    .pub {
+      grid-template-columns: 1fr auto;
+    }
+
+    .pub-year {
+      grid-column: 1 / -1;
+      font-size: var(--text-small);
+    }
+  }
+
+  /* ---------- Teaching: light leaf wash ---------- */
+  #teaching {
+    background:
+      radial-gradient(46rem 26rem at 110% 0%, rgba(64, 160, 43, 0.08), transparent 60%),
+      var(--leaf-wash);
+  }
+
+  .course-grid {
+    grid-template-columns: 1fr;
+    margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
+  }
+
+  .course {
+    padding: clamp(1.1rem, 2.5vw, 1.75rem);
+  }
+
+  .course-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .course-name {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 800;
+    color: var(--sky-deep);
+  }
+
+  .course-credits {
+    display: none;
+  }
+
+  .course-type {
+    margin: 0.5em 0 0.75em;
+  }
+
+  .course-desc {
+    font-size: var(--text-small);
+    max-width: 52ch;
+  }
+
+  @media (min-width: 768px) {
+    .course-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* ---------- Join ---------- */
+  .join-intro {
+    font-size: var(--text-subtitle);
+    font-weight: 500;
+    max-width: 40ch;
+    margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
+  }
+
+  .join-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
+  }
+
+  .join-col h3 {
+    margin-bottom: 0.9em;
+  }
+
+  .join-list {
+    list-style: none;
+  }
+
+  .join-list li {
+    border-top: var(--hairline-soft);
+    padding: 0.7em 0;
+    font-size: var(--text-small);
+  }
+
+  .join-list li:first-child {
+    border-top: none;
+  }
+
+  .join-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    border-top: var(--hairline);
+    padding-top: 1.5rem;
+  }
+
+  .join-cta .muted {
+    font-size: var(--text-small);
+    max-width: 60ch;
+  }
+
+  @media (min-width: 768px) {
+    .join-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* ---------- Footer: deep sky ---------- */
+  .site-footer {
+    background: var(--sky-deep);
+    color: #d9ebfc;
+  }
+
+  .footer-inner {
+    padding: 2.5rem var(--gutter);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 3rem;
+    align-items: baseline;
+    justify-content: space-between;
+    font-size: var(--text-small);
+  }
+
+  .footer-inner strong {
+    color: var(--paper);
+  }
+
+  .footer-inner .muted {
+    color: #9cc3ee;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+  }
+
+  .footer-links a {
+    color: var(--paper);
+    text-decoration-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .footer-links a:hover {
+    text-decoration-color: var(--paper);
+  }
+</style>
