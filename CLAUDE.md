@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-ISB Lab (Intelligent Systems Biology Lab, 臺北醫學大學) academic website. A static Astro site doubling as a presentation deck: full-viewport scroll-snap sections act as slides. Bilingual (zh default, en). Live at https://yuehhua.github.io/research/
+ISB Lab (Intelligent Systems Biology Lab, 臺北醫學大學) academic website. A static Astro site doubling as a presentation deck: full-viewport scroll-snap sections act as slides. Bilingual (zh default, en). Live at <https://yuehhua.github.io/research/>
 
 Source repo: **github.com/yuehhua/research** (push to `main` → GitHub Actions builds and publishes `dist/` to the `research/` directory of the `yuehhua.github.io` repo; requires the `DEPLOY_TOKEN` secret). Do not commit directly to the blog repo.
 
@@ -53,6 +53,3 @@ Automatic via GitHub Actions (`.github/workflows/deploy.yml`): push to `main` in
 
 - `plan.md` — full spec: content model, design tokens, interaction spec, stage-by-stage build log with verification results.
 - Content facts (CV, publication DOIs, course syllabi) were verified against `/run/media/yuehhua/Workbench/Profile/CV/YuehHua Tu_Academic.pdf`, TMU Pure profile, and Crossref at build time (2026-09-02).
-
-
-claude --resume 9c60bc8a-51b6-42d0-9713-9f2d329a172c
