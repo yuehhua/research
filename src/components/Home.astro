@@ -879,6 +879,9 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
   .site-footer {
     background: var(--sky-deep);
     color: #d9ebfc;
+    /* Its own snap target so the footer is reachable past the last slide —
+       the final snap position aligns the viewport bottom with the footer bottom. */
+    scroll-snap-align: end;
   }
 
   .footer-inner {
