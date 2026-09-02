@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ISB Lab (Intelligent Systems Biology Lab, 臺北醫學大學) academic website. A static Astro site doubling as a presentation deck: full-viewport scroll-snap sections act as slides. Bilingual (zh default, en). Live at https://yuehhua.github.io/research/
 
-**This directory is not a git repository.** Deployment is manual (see below); do not `git init` or push from here unless asked.
+Source repo: **github.com/yuehhua/research** (push to `main` → GitHub Actions builds and publishes `dist/` to the `research/` directory of the `yuehhua.github.io` repo; requires the `DEPLOY_TOKEN` secret). Do not commit directly to the blog repo.
 
 ## Commands
 
@@ -31,10 +31,10 @@ node scripts/measure-slides.mjs  # per-element height breakdown for tall slides 
 
 ### Hard design constraints
 
-- **Pure black & white** (`--paper`/`--ink`/grays in global.css tokens). No accent color, anywhere. Hover states invert or underline; they never change hue.
+- **Sky-blue × leaf-green palette** (tokens in global.css: `--sky-deep` #0B57A4 headings/footer, `--sky` #1971C2 buttons/links, `--sky-pale`/`--sky-wash` tints, `--leaf` #40A02B live/green accents, `--ink` #16283C body text). User explicitly rejected the earlier pure black-&-white look — don't revert to monochrome. Nature elements: hero sky gradient + branch line-art SVG, teaching slide leaf wash, full-color portrait (no grayscale filter).
 - **Desktop slides must fit one screen** (1920×1080 is the QA gate for the presentation use-case). `qa-geometry.mjs` enforces this; if a slide grows past the viewport, tighten density (paddings, `--section-pad`, row spacing) rather than cropping content. Tablet/mobile overflow is accepted by design.
 - **Highlights ordered first**: the projects array order in content.ts is deliberate (Virtual Embryo → GeometricFlux.jl → RAFAEL → CDGRNs.jl).
-- The portrait (`src/assets/portrait.jpg`) is pre-grayscaled; keep the `filter: grayscale()` treatment.
+- The portrait (`src/assets/portrait.jpg`) is in color; do not re-apply grayscale.
 
 ### Bugs already fixed — don't reintroduce
 
@@ -45,16 +45,9 @@ node scripts/measure-slides.mjs  # per-element height breakdown for tall slides 
 
 ## Deployment
 
-Manual, to the user's blog repo (yuehhua.github.io, Hexo — don't touch its other files):
+Automatic via GitHub Actions (`.github/workflows/deploy.yml`): push to `main` in `yuehhua/research` → build → publish `dist/` to `yuehhua.github.io` repo's `research/` directory (peaceiris/actions-gh-pages, `DEPLOY_TOKEN` secret). GitHub Pages serves it within ~1–2 min. Check runs with `gh run list --repo yuehhua/research`.
 
-```bash
-npm run build
-git clone --depth 3 https://github.com/yuehhua/yuehhua.github.io.git /tmp/blog-deploy
-rsync -a --delete dist/ /tmp/blog-deploy/research/
-cd /tmp/blog-deploy && git add research && git commit && git push
-```
-
-GitHub Pages serves it within ~1 min. A GitHub Actions workflow for this is a known TODO (recorded in plan.md).
+⚠️ The blog repo is Hexo-deployed by the user. If they run `hexo deploy`, the `research/` directory may be wiped (Hexo cleans non-`public/` files) — the fix is `keep_files: research` in the blog's `_config.yml` deploy section, or re-run this repo's workflow (`gh workflow run deploy.yml --repo yuehhua/research`).
 
 ## Reference
 
