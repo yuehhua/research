@@ -1,8 +1,10 @@
 ---
 /**
  * Home — the entire slide deck, rendered per language by thin page wrappers.
+ * Layout: Bootstrap 5 grid & utilities. Brand: our tokens (sky/leaf) in global.css.
  * All copy comes from src/data/content.ts.
  */
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fontsource-variable/inter';
 import '../styles/global.css';
 import { Image } from 'astro:assets';
@@ -91,32 +93,32 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
         <p class="hero-tagline">{t(hero.tagline)}</p>
         <p class="hero-sub muted">{t(hero.sub)}</p>
 
-        <p class="hero-byline">
-          <strong>{t(profile.name)}, {profile.degree}</strong> · {t(profile.title)}
+        <p class="hero-byline d-flex flex-wrap gap-1 gap-md-3 border-top pt-3 mb-4">
+          <span><strong>{t(profile.name)}, {profile.degree}</strong> · {t(profile.title)}</span>
           <span class="hero-affil muted">{t(profile.affiliation)}</span>
         </p>
 
-        <div class="hero-actions">
+        <div class="hero-actions mb-4">
           <a class="chip" href={hero.challengeUrl} target="_blank" rel="noopener">
             <span class="pulse" aria-hidden="true"></span>
             {t(hero.challengeBadge)} ↗
           </a>
         </div>
 
-        <div class="hero-ctas">
-          <a class="btn btn--solid" href={`${base}/#join`}>{t(hero.cta.join)}</a>
-          <a class="btn" href={`${base}/#research`}>{t(hero.cta.research)}</a>
+        <div class="d-flex flex-wrap gap-3">
+          <a class="btn btn-sky btn-deck" href={`${base}/#join`}>{t(hero.cta.join)}</a>
+          <a class="btn btn-outline-sky btn-deck" href={`${base}/#research`}>{t(hero.cta.research)}</a>
         </div>
       </Slide>
 
       {/* ---------------------------------------------- 02 ABOUT */}
       <Slide id="about" num="02" label={t(eyebrow.about)}>
         <h2 class="slide__title">{t(profile.name)} · {t(profile.title)}</h2>
-        <div class="about-grid">
-          <figure class="portrait">
-            <Image src={portrait} alt={lang === 'zh' ? '杜岳華' : 'Yueh-Hua Tu'} widths={[360, 540, 720]} sizes="(max-width: 1023px) 40vw, 300px" />
+        <div class="row g-4 g-lg-5 about-grid">
+          <figure class="portrait col-12 col-md-4 col-lg-3">
+            <Image src={portrait} alt={lang === 'zh' ? '杜岳華' : 'Yueh-Hua Tu'} widths={[360, 540, 720]} sizes="(max-width: 767px) 92vw, (max-width: 991px) 33vw, 300px" />
           </figure>
-          <div class="bio">
+          <div class="bio col-12 col-md-8 col-lg-9">
             {about.bio.map((p) => <p>{t(p)}</p>)}
           </div>
         </div>
@@ -125,20 +127,20 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
       {/* ---------------------------------------------- 03 RESEARCH */}
       <Slide id="research" num="03" label={t(eyebrow.research)}>
         <h2 class="slide__title">{t(ui.nav.research)}</h2>
-        <div class="interest-grid hairline-grid">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-1 interest-grid mb-4 mb-lg-5">
           {
             interests.map((it, i) => (
-              <article class="interest">
+              <article class="interest border bg-white p-3 p-lg-4">
                 <span class="interest-idx">{String(i + 1).padStart(2, '0')}</span>
-                <h3 class="interest-name">{t(it.name)}</h3>
-                <p class="interest-desc muted">{t(it.desc)}</p>
+                <h3 class="interest-name h6 mt-2 mb-2">{t(it.name)}</h3>
+                <p class="interest-desc muted small mb-0">{t(it.desc)}</p>
               </article>
             ))
           }
         </div>
-        <div class="focus">
+        <div class="focus d-flex flex-wrap align-items-center gap-2 gap-md-4 border-top pt-3">
           <span class="label">{t(ui.currentFocus)}</span>
-          <ul class="focus-chips">
+          <ul class="focus-chips d-flex flex-wrap gap-2 mb-0 ps-0">
             {focusChips.map((c) => <li>{t(c)}</li>)}
             <li>
               <a href={hero.challengeUrl} target="_blank" rel="noopener">NeurIPS 2026 Virtual Embryo ↗</a>
@@ -153,17 +155,15 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
         <div class="projects">
           {
             projects.map((p, i) => (
-              <article class="project">
-                <div class="project-head">
+              <article class={`project row g-3 g-lg-4 border-top${i === 0 ? ' border-top-0 pt-0' : ' pt-2 pt-lg-3'}`}>
+                <div class="project-head col-12 col-lg-3">
                   <span class="project-idx">P{i + 1}</span>
-                  <div>
-                    <h3 class="project-name">{p.name}</h3>
-                    <p class="project-tag label">{t(p.tag)}</p>
-                  </div>
+                  <h3 class="project-name h5 mt-1 mb-1">{p.name}</h3>
+                  <p class="project-tag label mb-0">{t(p.tag)}</p>
                 </div>
-                <p class="project-desc muted">{t(p.desc)}</p>
-                <div class="project-side">
-                  <div class="project-metrics">
+                <p class="project-desc muted small col-12 col-lg-6 mb-0">{t(p.desc)}</p>
+                <div class="project-side col-12 col-lg-3">
+                  <div class="project-metrics d-flex flex-wrap gap-3 gap-lg-4">
                     {p.metrics.map((m) => (
                       <div class="metric">
                         <span class="value">{m.value}</span>
@@ -172,7 +172,7 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
                     ))}
                   </div>
                   {p.links && (
-                    <p class="project-links">
+                    <p class="project-links d-flex flex-wrap gap-2 small fw-bold mb-0 mt-2">
                       {p.links.map((l) => (
                         <a href={l.href} target="_blank" rel="noopener">{l.label} ↗</a>
                       ))}
@@ -188,20 +188,20 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
       {/* ---------------------------------------------- 05 PUBLICATIONS */}
       <Slide id="publications" num="05" label={t(eyebrow.publications)}>
         <h2 class="slide__title">{t(ui.nav.publications)}</h2>
-        <ol class="pubs" data-inner-scroll>
+        <ol class="pubs list-unstyled mb-0" data-inner-scroll>
           {
             publications.map((pub) => (
               <li class="pub">
                 <span class="pub-year">{pub.year}</span>
                 <div class="pub-main">
-                  <p class="pub-title">
+                  <p class="pub-title mb-1">
                     {pub.title}
                     {pub.firstAuthor && <span class="pub-badge">{t(ui.firstAuthor)}</span>}
                   </p>
-                  <p class="pub-authors muted">
+                  <p class="pub-authors muted small mb-1">
                     <span class={pub.firstAuthor ? 'is-first' : ''}>{pub.authors.split(',')[0]}</span>{pub.authors.substring(pub.authors.split(',')[0].length)}
                   </p>
-                  <p class="pub-venue">{pub.venue}</p>
+                  <p class="pub-venue small fst-italic mb-0">{pub.venue}</p>
                 </div>
                 <a class="pub-link" href={`https://doi.org/${pub.doi}`} target="_blank" rel="noopener" aria-label={`${t(ui.viewPaper)}: ${pub.title}`}>↗</a>
               </li>
@@ -213,21 +213,21 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
       {/* ---------------------------------------------- 06 TEACHING */}
       <Slide id="teaching" num="06" label={t(eyebrow.teaching)}>
         <h2 class="slide__title">{t(ui.nav.teaching)}</h2>
-        <div class="course-grid hairline-grid">
+        <div class="row row-cols-1 row-cols-md-2 g-1 course-grid mb-4 mb-lg-5">
           {
             tmuCourses.map((c) => (
-              <article class="course">
-                <header class="course-head">
-                  <h3 class="course-name">{t(c.name)}</h3>
-                  <span class="course-credits">{c.credits}</span>
+              <article class="course border bg-white p-3 p-lg-4">
+                <header class="course-head d-flex justify-content-between align-items-baseline gap-2">
+                  <h3 class="course-name h6 mb-0">{t(c.name)}</h3>
+                  <span class="course-credits h5 mb-0">{c.credits}</span>
                 </header>
-                <p class="course-type label">{t(c.type)} · {c.credits} {lang === 'zh' ? '學分' : 'credits'}</p>
-                <p class="course-desc muted">{t(c.desc)}</p>
+                <p class="course-type label mt-2 mb-2">{t(c.type)} · {c.credits} {lang === 'zh' ? '學分' : 'credits'}</p>
+                <p class="course-desc muted small mb-0">{t(c.desc)}</p>
               </article>
             ))
           }
         </div>
-        <ul class="row-list teaching-past">
+        <ul class="row-list teaching-past mb-0">
           {
             pastTeaching.map((item) => (
               <li>
@@ -243,38 +243,38 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
       <Slide id="join" num="07" label={t(eyebrow.join)}>
         <h2 class="slide__title">{t(join.heading)}</h2>
         <p class="join-intro muted">{t(join.intro)}</p>
-        <div class="join-grid">
-          <section class="join-col">
-            <h3 class="label">{t(join.youAre)}</h3>
-            <ul class="join-list">
+        <div class="row g-4 mb-4 mb-lg-5">
+          <section class="join-col col-12 col-md-6">
+            <h3 class="label mb-3">{t(join.youAre)}</h3>
+            <ul class="join-list mb-0 ps-0">
               {join.youAreItems.map((item) => <li>{t(item)}</li>)}
             </ul>
           </section>
-          <section class="join-col">
-            <h3 class="label">{t(join.weOffer)}</h3>
-            <ul class="join-list">
+          <section class="join-col col-12 col-md-6">
+            <h3 class="label mb-3">{t(join.weOffer)}</h3>
+            <ul class="join-list mb-0 ps-0">
               {join.weOfferItems.map((item) => <li>{t(item)}</li>)}
             </ul>
           </section>
         </div>
-        <div class="join-cta">
-          <a class="btn btn--solid" href={`mailto:${profile.email}?subject=${encodeURIComponent('專題生')}`}>{profile.email}</a>
-          <p class="muted">{t(join.cta)}</p>
+        <div class="join-cta d-flex flex-column align-items-start gap-2 border-top pt-4">
+          <a class="btn btn-sky btn-deck" href={`mailto:${profile.email}?subject=${encodeURIComponent('專題生')}`}>{profile.email}</a>
+          <p class="muted small mb-0">{t(join.cta)}</p>
         </div>
       </Slide>
     </main>
 
     <footer class="site-footer">
-      <div class="footer-inner">
-        <p class="footer-id">
+      <div class="footer-inner row row-cols-1 row-cols-md-3 g-3 mx-0 align-items-baseline">
+        <p class="footer-id col-12 col-md-4 mb-0">
           <strong>{profile.labShort} · {profile.labName}</strong><br />
           <span class="muted">{t(footer.address)}</span>
         </p>
-        <ul class="footer-links">
+        <ul class="footer-links col-12 col-md d-flex flex-wrap justify-content-md-center gap-2 gap-md-3 list-unstyled mb-0">
           <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
           {profile.links.map((l) => <li><a href={l.href} target="_blank" rel="noopener">{l.label}</a></li>)}
         </ul>
-        <p class="footer-copy muted">{t(footer.copyright)}</p>
+        <p class="footer-copy col-12 col-md-auto ms-md-auto mb-0">{t(footer.copyright)}</p>
       </div>
     </footer>
 
@@ -353,7 +353,7 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
 </html>
 
 <style>
-  /* ---------- Hero: sky gradient + leaf branch ---------- */
+  /* ---------- Hero: sky gradient + leaf photo ---------- */
   #hero {
     background:
       radial-gradient(52rem 30rem at 108% -12%, rgba(116, 192, 252, 0.28), transparent 60%),
@@ -369,8 +369,7 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
     overflow: hidden;
   }
 
-  /* CC0 cherry-leaf photo (rawpixel via Openverse), white bg → alpha.
-     Venation echoes the lab's network-biology theme. */
+  /* CC0 leaf photo (rawpixel via Openverse), white bg → alpha */
   .leaf-photo {
     position: absolute;
     right: max(1.5rem, calc(var(--gutter) * 0.5));
@@ -393,7 +392,8 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
   .hero-sub,
   .hero-byline,
   .hero-actions,
-  .hero-ctas {
+  .hero-ctas,
+  .d-flex {
     position: relative;
     z-index: 1;
   }
@@ -431,38 +431,14 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
 
   .hero-byline {
     font-size: var(--text-small);
-    border-top: var(--hairline);
-    padding-top: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem 1rem;
-    margin-bottom: 1.25rem;
-    max-width: 60ch;
+    max-width: 62ch;
   }
 
   .hero-affil {
     flex-basis: 100%;
   }
 
-  .hero-actions {
-    margin-bottom: 1.25rem;
-  }
-
-  .hero-ctas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-
   /* ---------- About ---------- */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem clamp(1.5rem, 4vw, 3.5rem);
-    align-items: start;
-  }
-
-  /* min-width:0 lets grid items shrink below their content's intrinsic width */
   .about-grid > * {
     min-width: 0;
   }
@@ -472,36 +448,11 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
     border: var(--hairline);
   }
 
-  .portrait {
-    position: relative;
-  }
-
   .bio p + p {
     margin-top: 0.9em;
   }
 
-  @media (min-width: 768px) {
-    .about-grid {
-      grid-template-columns: minmax(180px, 240px) 1fr;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .about-grid {
-      grid-template-columns: minmax(220px, 300px) 1fr;
-    }
-  }
-
   /* ---------- Research ---------- */
-  .interest-grid {
-    grid-template-columns: 1fr;
-    margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
-  }
-
-  .interest {
-    padding: clamp(1.1rem, 2.5vw, 1.75rem);
-  }
-
   .interest-idx {
     font-size: var(--text-label);
     font-weight: 800;
@@ -510,31 +461,16 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
   }
 
   .interest-name {
-    font-size: clamp(1.05rem, 2vw, 1.3rem);
-    font-weight: 700;
-    margin: 0.4em 0 0.35em;
     color: var(--sky-deep);
+    font-weight: 800;
   }
 
   .interest-desc {
-    font-size: var(--text-small);
-    max-width: 38ch;
-  }
-
-  .focus {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1rem 1.5rem;
-    border-top: var(--hairline);
-    padding-top: 1.25rem;
+    max-width: 42ch;
   }
 
   .focus-chips {
     list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
   }
 
   .focus-chips li {
@@ -561,38 +497,7 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
     color: var(--paper);
   }
 
-  @media (min-width: 640px) {
-    .interest-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (min-width: 1100px) {
-    .interest-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
   /* ---------- Projects ---------- */
-  .project {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem 2.5rem;
-    border-top: var(--hairline);
-    padding: clamp(0.9rem, 2vh, 1.5rem) 0;
-  }
-
-  .project:first-child {
-    border-top: none;
-    padding-top: 0;
-  }
-
-  .project-head {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-  }
-
   .project-idx {
     font-size: var(--text-label);
     font-weight: 800;
@@ -601,82 +506,23 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
   }
 
   .project-name {
-    font-size: clamp(1.25rem, 2.6vw, 1.75rem);
-    font-weight: 800;
-    line-height: 1.15;
     color: var(--sky-deep);
-  }
-
-  .project-tag {
-    margin-top: 0.35em;
+    font-weight: 800;
   }
 
   .project-desc {
-    font-size: var(--text-small);
-    max-width: 62ch;
+    max-width: 68ch;
   }
 
-  .project-side {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .project-metrics {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(5.5rem, 1fr));
-    gap: 1rem 1.5rem;
-  }
-
-  .project-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.25rem;
-    font-size: var(--text-small);
-    font-weight: 600;
-  }
-
-  /* Tablet: two columns — content left, metrics rail right */
-  @media (min-width: 768px) {
-    .project {
-      grid-template-columns: minmax(0, 1fr) minmax(180px, 240px);
-    }
-
-    .project-head,
-    .project-desc {
-      grid-column: 1;
-    }
-
+  @media (min-width: 992px) {
     .project-side {
-      grid-column: 2;
-      grid-row: 1 / span 2;
       border-left: var(--hairline-soft);
       padding-left: 1.5rem;
     }
   }
 
-  /* Desktop: three columns — head, description, metrics rail (symmetric rails) */
-  @media (min-width: 900px) {
-    .project {
-      grid-template-columns: minmax(200px, 280px) 1fr minmax(200px, 280px);
-      align-items: start;
-    }
-
-    .project-head,
-    .project-desc {
-      grid-column: auto;
-    }
-
-    .project-side {
-      grid-column: auto;
-      grid-row: auto;
-      padding-left: 2rem;
-    }
-  }
-
   /* ---------- Publications ---------- */
   .pubs {
-    list-style: none;
     max-height: min(58svh, 34rem);
     overflow-y: auto;
     scrollbar-width: thin;
@@ -685,9 +531,9 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
   .pub {
     display: grid;
     grid-template-columns: 3.5rem 1fr auto;
-    gap: 0.75rem 1.5rem;
+    gap: 0.25rem 1.5rem;
     border-top: var(--hairline-soft);
-    padding: 0.9em 0;
+    padding: 0.75em 0;
     align-items: start;
   }
 
@@ -697,6 +543,7 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
 
   .pub-year {
     font-weight: 800;
+    color: var(--sky-deep);
     font-variant-numeric: tabular-nums;
   }
 
@@ -720,18 +567,8 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
     white-space: nowrap;
   }
 
-  .pub-authors {
-    font-size: var(--text-small);
-    line-height: 1.5;
-  }
-
   .pub-authors .is-first {
     font-weight: 800;
-  }
-
-  .pub-venue {
-    font-size: var(--text-small);
-    font-style: italic;
   }
 
   .pub-link {
@@ -762,45 +599,17 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
       var(--leaf-wash);
   }
 
-  .course-grid {
-    grid-template-columns: 1fr;
-    margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
-  }
-
-  .course {
-    padding: clamp(1.1rem, 2.5vw, 1.75rem);
-  }
-
-  .course-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-  }
-
   .course-name {
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
-    font-weight: 800;
     color: var(--sky-deep);
+    font-weight: 800;
   }
 
   .course-credits {
-    display: none;
-  }
-
-  .course-type {
-    margin: 0.5em 0 0.75em;
+    color: var(--sky);
   }
 
   .course-desc {
-    font-size: var(--text-small);
     max-width: 52ch;
-  }
-
-  @media (min-width: 768px) {
-    .course-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
   }
 
   /* ---------- Join ---------- */
@@ -809,17 +618,6 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
     font-weight: 500;
     max-width: 40ch;
     margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
-  }
-
-  .join-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
-  }
-
-  .join-col h3 {
-    margin-bottom: 0.9em;
   }
 
   .join-list {
@@ -836,41 +634,16 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
     border-top: none;
   }
 
-  .join-cta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-    border-top: var(--hairline);
-    padding-top: 1.5rem;
-  }
-
-  .join-cta .muted {
-    font-size: var(--text-small);
-    max-width: 60ch;
-  }
-
-  @media (min-width: 768px) {
-    .join-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
   /* ---------- Footer: deep sky ---------- */
   .site-footer {
     background: var(--sky-deep);
     color: #d9ebfc;
-    /* Its own snap target so the footer is reachable past the last slide —
-       the final snap position aligns the viewport bottom with the footer bottom. */
+    /* Its own snap target so the footer is reachable past the last slide. */
     scroll-snap-align: end;
   }
 
   .footer-inner {
     padding: 2.5rem var(--gutter);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem 3rem;
-    align-items: baseline;
-    justify-content: space-between;
     font-size: var(--text-small);
   }
 
@@ -880,13 +653,6 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
 
   .footer-inner .muted {
     color: #9cc3ee;
-  }
-
-  .footer-links {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.5rem;
   }
 
   .footer-links a {

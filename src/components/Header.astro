@@ -21,7 +21,7 @@ const navItems = slideOrder.slice(1).map((id) => ({ id, label: t(ui.nav[id]) }))
     ISB<span> Lab</span>
   </a>
 
-  <nav class="site-nav" aria-label={lang === 'zh' ? '區塊導覽' : 'Sections'}>
+  <nav class="site-nav d-none d-lg-flex gap-3 gap-xl-4" aria-label={lang === 'zh' ? '區塊導覽' : 'Sections'}>
     {
       navItems.map((item) => (
         <a href={item.id === 'join' ? `${base}/` : `${base}/#${item.id}`} class={item.id === 'join' ? 'nav-cta' : ''}>
@@ -63,11 +63,6 @@ const navItems = slideOrder.slice(1).map((id) => ({ id, label: t(ui.nav[id]) }))
 
   .wordmark span {
     font-weight: 300;
-  }
-
-  .site-nav {
-    display: none;
-    gap: clamp(1rem, 2.5vw, 2.25rem);
   }
 
   .site-nav a {
@@ -113,11 +108,5 @@ const navItems = slideOrder.slice(1).map((id) => ({ id, label: t(ui.nav[id]) }))
     background: var(--sky-deep);
     border-color: var(--sky-deep);
     color: var(--paper);
-  }
-
-  @media (min-width: 1024px) {
-    .site-nav {
-      display: flex;
-    }
   }
 </style>

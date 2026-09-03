@@ -42,6 +42,12 @@
   /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --dur: 0.6s;
+
+  /* Bootstrap integration: tint its borders with our sky hairline color */
+  --bs-border-color: #bbd9f5;
+  --bs-link-color: #1971c2;
+  --bs-link-color-rgb: 25, 113, 194;
+  --bs-body-font-family: var(--font-body);
 }
 
 /* ---------- Reset ---------- */
@@ -181,40 +187,38 @@ a:hover {
 
 /* ---------- Patterns ---------- */
 
-/* Buttons — sky fill / sky outline, deepening on hover */
-.btn {
-  display: inline-block;
-  border: 1px solid var(--sky);
-  padding: 0.85em 1.75em;
+/* Bootstrap button variants in our palette */
+.btn-sky {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--sky);
+  --bs-btn-border-color: var(--sky);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--sky-deep);
+  --bs-btn-hover-border-color: var(--sky-deep);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--sky-deep);
+  --bs-btn-active-border-color: var(--sky-deep);
+  --bs-btn-focus-shadow-rgb: 25, 113, 194;
+}
+
+.btn-outline-sky {
+  --bs-btn-color: var(--sky);
+  --bs-btn-border-color: var(--sky);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--sky-deep);
+  --bs-btn-hover-border-color: var(--sky-deep);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--sky-deep);
+  --bs-btn-active-border-color: var(--sky-deep);
+  --bs-btn-focus-shadow-rgb: 25, 113, 194;
+}
+
+/* Deck button typography on top of Bootstrap .btn */
+.btn-deck {
   font-size: var(--text-small);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  text-decoration: none;
-  cursor: pointer;
-  background: var(--paper);
-  color: var(--sky);
-  transition: background 0.2s var(--ease-out), color 0.2s var(--ease-out),
-    border-color 0.2s var(--ease-out);
-}
-
-.btn:hover {
-  background: var(--sky-deep);
-  border-color: var(--sky-deep);
-  color: var(--paper);
-  text-decoration: none;
-}
-
-.btn--solid {
-  background: var(--sky);
-  border-color: var(--sky);
-  color: var(--paper);
-}
-
-.btn--solid:hover {
-  background: var(--sky-deep);
-  border-color: var(--sky-deep);
-  color: var(--paper);
 }
 
 /* Badge chip — leaf-green "live" state */
@@ -264,18 +268,6 @@ a:hover {
   50% {
     opacity: 0.25;
   }
-}
-
-/* Hairline grid — 1px gaps reveal the line color */
-.hairline-grid {
-  display: grid;
-  gap: 1px;
-  background: var(--hairline-color);
-  border: 1px solid var(--hairline-color);
-}
-
-.hairline-grid > * {
-  background: var(--paper);
 }
 
 /* Metric pair — big number, small label */
