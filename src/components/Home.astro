@@ -261,22 +261,23 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
           <a class="btn btn-sky btn-deck" href={`mailto:${profile.email}?subject=${encodeURIComponent('專題生')}`}>{profile.email}</a>
           <p class="muted small mb-0">{t(join.cta)}</p>
         </div>
+
+        {/* Footer anchored to the bottom of the last slide — visible without an extra scroll */}
+        <footer class="site-footer">
+          <div class="footer-inner row row-cols-1 row-cols-md-3 g-2 g-md-3 mx-0 align-items-baseline">
+            <p class="footer-id col-12 col-md-4 mb-0">
+              <strong>{profile.labShort} · {profile.labName}</strong><br />
+              <span class="muted">{t(footer.address)}</span>
+            </p>
+            <ul class="footer-links col-12 col-md d-flex flex-wrap justify-content-md-center gap-2 gap-md-3 list-unstyled mb-0">
+              <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
+              {profile.links.map((l) => <li><a href={l.href} target="_blank" rel="noopener">{l.label}</a></li>)}
+            </ul>
+            <p class="footer-copy col-12 col-md-auto ms-md-auto mb-0">{t(footer.copyright)}</p>
+          </div>
+        </footer>
       </Slide>
     </main>
-
-    <footer class="site-footer">
-      <div class="footer-inner row row-cols-1 row-cols-md-3 g-3 mx-0 align-items-baseline">
-        <p class="footer-id col-12 col-md-4 mb-0">
-          <strong>{profile.labShort} · {profile.labName}</strong><br />
-          <span class="muted">{t(footer.address)}</span>
-        </p>
-        <ul class="footer-links col-12 col-md d-flex flex-wrap justify-content-md-center gap-2 gap-md-3 list-unstyled mb-0">
-          <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
-          {profile.links.map((l) => <li><a href={l.href} target="_blank" rel="noopener">{l.label}</a></li>)}
-        </ul>
-        <p class="footer-copy col-12 col-md-auto ms-md-auto mb-0">{t(footer.copyright)}</p>
-      </div>
-    </footer>
 
     <script>
       // Deck behavior: active-slide tracking, counter, dots, keyboard navigation.
@@ -354,12 +355,6 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
 
 <style>
   /* ---------- Hero: sky gradient + leaf photo ---------- */
-  #hero {
-    background:
-      radial-gradient(52rem 30rem at 108% -12%, rgba(116, 192, 252, 0.28), transparent 60%),
-      radial-gradient(40rem 26rem at -14% 112%, rgba(116, 192, 252, 0.2), transparent 62%),
-      linear-gradient(178deg, var(--sky-wash) 0%, var(--paper) 58%);
-  }
 
   .nature {
     position: absolute;
@@ -593,12 +588,6 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
   }
 
   /* ---------- Teaching: light leaf wash ---------- */
-  #teaching {
-    background:
-      radial-gradient(46rem 26rem at 110% 0%, rgba(64, 160, 43, 0.08), transparent 60%),
-      var(--leaf-wash);
-  }
-
   .course-name {
     color: var(--sky-deep);
     font-weight: 800;
@@ -634,16 +623,16 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
     border-top: none;
   }
 
-  /* ---------- Footer: deep sky ---------- */
+  /* ---------- Footer: deep sky band at the bottom of the last slide ---------- */
   .site-footer {
     background: var(--sky-deep);
     color: #d9ebfc;
-    /* Its own snap target so the footer is reachable past the last slide. */
-    scroll-snap-align: end;
+    /* Full-bleed: escape the slide's horizontal padding; margin-top:auto pins it to the slide bottom */
+    margin: auto calc(var(--gutter) * -1) 0;
+    padding: 1.5rem var(--gutter) 1.25rem;
   }
 
   .footer-inner {
-    padding: 2.5rem var(--gutter);
     font-size: var(--text-small);
   }
 
@@ -662,5 +651,28 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
 
   .footer-links a:hover {
     text-decoration-color: var(--paper);
+  }
+</style>
+
+<style is:global>
+  /* Slide-level backgrounds & padding overrides.
+     These target <section> roots rendered by Slide.astro, which does NOT carry
+     this component's data-astro-cid scope — so they must be global to match. */
+  #hero {
+    background:
+      radial-gradient(52rem 30rem at 108% -12%, rgba(116, 192, 252, 0.28), transparent 60%),
+      radial-gradient(40rem 26rem at -14% 112%, rgba(116, 192, 252, 0.2), transparent 62%),
+      linear-gradient(178deg, var(--sky-wash) 0%, var(--paper) 58%);
+  }
+
+  #teaching {
+    background:
+      radial-gradient(46rem 26rem at 110% 0%, rgba(64, 160, 43, 0.08), transparent 60%),
+      var(--leaf-wash);
+  }
+
+  #join {
+    /* The footer lives inside this slide, anchored to its bottom edge */
+    padding-bottom: 0;
   }
 </style>
