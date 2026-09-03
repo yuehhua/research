@@ -23,7 +23,6 @@ import {
   projects,
   publications,
   tmuCourses,
-  pastTeaching,
   join,
   footer,
 } from '../data/content';
@@ -212,30 +211,16 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
       {/* ---------------------------------------------- 06 TEACHING */}
       <Slide id="teaching" num="06" label={t(eyebrow.teaching)}>
         <h2 class="slide__title">{t(ui.nav.teaching)}</h2>
-        <div class="row row-cols-1 row-cols-md-2 g-1 course-grid mb-4 mb-lg-5">
+        <div class="row row-cols-1 row-cols-md-2 g-1 course-grid">
           {
             tmuCourses.map((c) => (
               <article class="course border bg-white p-3 p-lg-4">
-                <header class="course-head d-flex justify-content-between align-items-baseline gap-2">
-                  <h3 class="course-name h6 mb-0">{t(c.name)}</h3>
-                  <span class="course-credits h5 mb-0">{c.credits}</span>
-                </header>
-                <p class="course-type label mt-2 mb-2">{t(c.type)} · {c.credits} {lang === 'zh' ? '學分' : 'credits'}</p>
-                <p class="course-desc muted small mb-0">{t(c.desc)}</p>
+                <h3 class="course-name h6 mt-0 mb-0">{t(c.name)}</h3>
+                <p class="course-desc muted small mt-2 mb-0">{t(c.desc)}</p>
               </article>
             ))
           }
         </div>
-        <ul class="row-list teaching-past mb-0">
-          {
-            pastTeaching.map((item) => (
-              <li>
-                <span class="period">{item.period}</span>
-                <span class="what">{t(item.text)}</span>
-              </li>
-            ))
-          }
-        </ul>
       </Slide>
 
       {/* ---------------------------------------------- 07 JOIN US */}
@@ -256,9 +241,10 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
             </ul>
           </section>
         </div>
-        <div class="join-cta d-flex flex-column align-items-start gap-2 border-top pt-4">
-          <a class="btn btn-sky btn-deck" href={`mailto:${profile.email}?subject=${encodeURIComponent('專題生')}`}>{profile.email}</a>
-          <p class="muted small mb-0">{t(join.cta)}</p>
+        <div class="join-cta border-top pt-4">
+          <p class="small mb-0">
+            <span class="muted">{t(join.ctaPre)}</span><a class="fw-bold" href={`mailto:${profile.email}?subject=${encodeURIComponent('專題生')}`}>{profile.email}</a><span class="muted">{t(join.ctaPost)}</span>
+          </p>
         </div>
 
         {/* Footer anchored to the bottom of the last slide — visible without an extra scroll */}
@@ -612,14 +598,10 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
     }
   }
 
-  /* ---------- Teaching: light leaf wash ---------- */
+  /* ---------- Teaching ---------- */
   .course-name {
     color: var(--sky-deep);
     font-weight: 800;
-  }
-
-  .course-credits {
-    color: var(--sky);
   }
 
   .course-desc {

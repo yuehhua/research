@@ -318,16 +318,12 @@ export const publications: Pub[] = [
 
 export interface Course {
   name: L<string>;
-  type: L<string>;
-  credits: number;
   desc: L<string>;
 }
 
 export const tmuCourses: Course[] = [
   {
     name: { zh: '離散數學', en: 'Discrete Mathematics' },
-    type: { zh: '必修 · 演講', en: 'Required · Lecture' },
-    credits: 3,
     desc: {
       zh: '從邏輯與證明到圖論與組合最佳化；每週搭配臨床與生醫轉譯案例——醫療 AI 的邏輯誤區、GWAS 基因檢索、V(D)J 重組的組合學、德布魯因圖基因體組裝。',
       en: 'From logic and proofs to graph theory and combinatorial optimization, with weekly clinical and biomedical translation cases—logic pitfalls in medical AI, GWAS retrieval, combinatorics of V(D)J recombination, de Bruijn-graph genome assembly.',
@@ -335,8 +331,6 @@ export const tmuCourses: Course[] = [
   },
   {
     name: { zh: '資料結構與演算法', en: 'Data Structures and Algorithms' },
-    type: { zh: '必修 · 實習', en: 'Required · Practical' },
-    credits: 2,
     desc: {
       zh: '記憶體模型到動態規劃的實作導向課程；每種資料結構都對應生醫應用——急診檢傷佇列（heap）、病房巡房名單（linked list）、醫學詞彙自動完成（Trie）。',
       en: 'Implementation-driven course from memory models to dynamic programming; each data structure maps to a biomedical build—ER triage queues (heaps), ward round lists (linked lists), medical-term autocomplete (tries).',
@@ -344,8 +338,6 @@ export const tmuCourses: Course[] = [
   },
   {
     name: { zh: '生物資訊', en: 'Bioinformatics' },
-    type: { zh: '必修 · 演講', en: 'Required · Lecture' },
-    credits: 2,
     desc: {
       zh: '序列分析、基因體學到單細胞資料分析的入門，銜接實驗室目前的研究主題。',
       en: 'From sequence analysis and genomics to single-cell data analysis, connecting directly to the lab’s current research.',
@@ -353,39 +345,9 @@ export const tmuCourses: Course[] = [
   },
   {
     name: { zh: '智慧醫療大數據分析與實務', en: 'Big Data Analytics for Smart Healthcare' },
-    type: { zh: '必修 · 實習', en: 'Required · Practical' },
-    credits: 2,
     desc: {
       zh: '醫療資料的取得、清理、分析到視覺化的完整實務流程。',
       en: 'Hands-on pipeline for healthcare data: acquisition, cleaning, analysis and visualization.',
-    },
-  },
-];
-
-export const pastTeaching: { period: string; text: L<string> }[] = [
-  {
-    period: '2023–2026',
-    text: {
-      zh: 'Advanced Algorithms in Computational Biology（EMI）· 講師 · 中央研究院',
-      en: 'Advanced Algorithms in Computational Biology (EMI) · Lecturer · Academia Sinica',
-    },
-  },
-  {
-    period: '2023',
-    text: { zh: 'Python Programming（EMI）· 講師 · 中央研究院', en: 'Python Programming (EMI) · Lecturer · Academia Sinica' },
-  },
-  {
-    period: '2018—',
-    text: {
-      zh: '機器學習、深度學習與其應用 · 講師 · 工研院產業學院',
-      en: 'Machine Learning, Deep Learning and Their Applications · Lecturer · ITRI College',
-    },
-  },
-  {
-    period: '2016—',
-    text: {
-      zh: 'Julia Taiwan 社群共同創辦人；COSCUP ×9 講者；台大生物資訊營講者',
-      en: 'Co-founder of Julia Taiwan; 9× COSCUP speaker; NTU Bioinformatics Camp speaker',
     },
   },
 ];
@@ -414,9 +376,10 @@ export const join = {
     { zh: '成果路徑：競賽、研討會、論文與開源貢獻', en: 'Concrete outputs: competitions, conferences, papers, open source' },
     { zh: '研究所升學與職涯建議', en: 'Graduate-school and career advice' },
   ] as L<string>[],
-  cta: {
-    zh: '寄信至 yuehhua.tu@tmu.edu.tw，主旨註明【專題生】，附上一段自我介紹（系級、背景、想探索的方向）。',
-    en: 'Email yuehhua.tu@tmu.edu.tw with subject【專題生】plus a short intro (year/major, background, what you’d like to explore).',
+  ctaPre: { zh: '寄信至 ', en: 'Email ' },
+  ctaPost: {
+    zh: '，主旨註明【專題生】，附上一段自我介紹（系級、背景、想探索的方向）。',
+    en: ' with subject【專題生】plus a short intro (year/major, background, what you’d like to explore).',
   },
 };
 
