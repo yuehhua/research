@@ -26,7 +26,6 @@ export const ui = {
   scrollHint: { zh: '捲動或按 ↓ 換頁', en: 'Scroll or press ↓' },
   langToggle: { zh: 'EN', en: '中文' },
   backToTop: { zh: '回封面', en: 'Back to top' },
-  firstAuthor: { zh: '第一作者', en: 'First author' },
   viewPaper: { zh: '論文連結', en: 'View paper' },
   currentFocus: { zh: '現況焦點', en: 'Current focus' },
 } as const;
@@ -226,13 +225,10 @@ export const projects: Project[] = [
     name: 'CDGRNs.jl',
     tag: { zh: '博士研究 · Briefings in Bioinformatics 2023', en: 'Ph.D. research · Briefings in Bioinformatics 2023' },
     desc: {
-      zh: '第一個整合基因調控網路推論與細胞軌跡推論的方法：以高斯混合模型與未剪接轉錄體（unspliced transcripts）推導情境相依的調控動力學，同時解釋細胞命運軌跡。發表於 Briefings in Bioinformatics（第一作者）。',
-      en: 'The first method unifying gene regulatory network inference with trajectory inference: a Gaussian-mixture model over unspliced transcripts derives context-dependent regulatory dynamics while explaining cell-fate trajectories. Published in Briefings in Bioinformatics (first author).',
+      zh: '第一個整合基因調控網路推論與細胞軌跡推論的方法：以高斯混合模型與未剪接轉錄體（unspliced transcripts）推導情境相依的調控動力學，同時解釋細胞命運軌跡。發表於 Briefings in Bioinformatics。',
+      en: 'The first method unifying gene regulatory network inference with trajectory inference: a Gaussian-mixture model over unspliced transcripts derives context-dependent regulatory dynamics while explaining cell-fate trajectories. Published in Briefings in Bioinformatics.',
     },
-    metrics: [
-      { value: '1st', label: { zh: '第一作者論文', en: 'first-author paper' } },
-      { value: 'GRN + TI', label: { zh: '首個整合方法', en: 'first unified method' } },
-    ],
+    metrics: [{ value: 'GRN + TI', label: { zh: '首個整合方法', en: 'first unified method' } }],
     links: [
       { label: 'Paper', href: 'https://doi.org/10.1093/bib/bbac633' },
       { label: 'GitHub', href: 'https://github.com/yuehhua/CDGRNs.jl' },
@@ -249,7 +245,6 @@ export interface Pub {
   title: string;
   venue: string;
   year: number;
-  firstAuthor: boolean;
   doi: string;
 }
 
@@ -259,7 +254,6 @@ export const publications: Pub[] = [
     title: 'Context-dependent gene regulatory network reveals regulation dynamics and cell trajectories using unspliced transcripts',
     venue: 'Briefings in Bioinformatics',
     year: 2023,
-    firstAuthor: true,
     doi: '10.1093/bib/bbac633',
   },
   {
@@ -267,7 +261,6 @@ export const publications: Pub[] = [
     title: 'Thymic macrophages consist of two populations with distinct localization and origin',
     venue: 'eLife',
     year: 2022,
-    firstAuthor: false,
     doi: '10.7554/eLife.75148',
   },
   {
@@ -275,7 +268,6 @@ export const publications: Pub[] = [
     title: 'cgMLST@Taiwan: a web service platform for Vibrio cholerae cgMLST profiling and global strain tracking',
     venue: 'Journal of Microbiology, Immunology and Infection',
     year: 2022,
-    firstAuthor: false,
     doi: '10.1016/j.jmii.2020.12.007',
   },
   {
@@ -283,7 +275,6 @@ export const publications: Pub[] = [
     title: 'Identification of cell states using super-enhancer RNA',
     venue: 'BMC Genomics',
     year: 2021,
-    firstAuthor: true,
     doi: '10.1186/s12864-021-08092-1',
   },
   {
@@ -291,7 +282,6 @@ export const publications: Pub[] = [
     title: 'Emergence of Vibrio cholerae O1 sequence type 75 in Taiwan',
     venue: 'Emerging Infectious Diseases',
     year: 2020,
-    firstAuthor: true,
     doi: '10.3201/eid2601.190934',
   },
   {
@@ -299,7 +289,6 @@ export const publications: Pub[] = [
     title: 'New multidrug-resistant Salmonella enterica serovar Anatum clone, Taiwan, 2015–2017',
     venue: 'Emerging Infectious Diseases',
     year: 2019,
-    firstAuthor: false,
     doi: '10.3201/eid2501.181103',
   },
   {
@@ -307,7 +296,6 @@ export const publications: Pub[] = [
     title: 'Genetic relationships among multidrug-resistant Salmonella enterica serovar Typhimurium strains from humans and animals',
     venue: 'Antimicrobial Agents and Chemotherapy',
     year: 2018,
-    firstAuthor: false,
     doi: '10.1128/AAC.00213-18',
   },
 ];

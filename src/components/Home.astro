@@ -192,13 +192,8 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
               <li class="pub">
                 <span class="pub-year">{pub.year}</span>
                 <div class="pub-main">
-                  <p class="pub-title mb-1">
-                    {pub.title}
-                    {pub.firstAuthor && <span class="pub-badge">{t(ui.firstAuthor)}</span>}
-                  </p>
-                  <p class="pub-authors muted small mb-1">
-                    <span class={pub.firstAuthor ? 'is-first' : ''}>{pub.authors.split(',')[0]}</span>{pub.authors.substring(pub.authors.split(',')[0].length)}
-                  </p>
+                  <p class="pub-title mb-1">{pub.title}</p>
+                  <p class="pub-authors muted small mb-1">{pub.authors}</p>
                   <p class="pub-venue small fst-italic mb-0">{pub.venue}</p>
                 </div>
                 <a class="pub-link" href={`https://doi.org/${pub.doi}`} target="_blank" rel="noopener" aria-label={`${t(ui.viewPaper)}: ${pub.title}`}>↗</a>
@@ -560,23 +555,6 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
     line-height: 1.35;
     max-width: 60ch;
     color: var(--sky-deep);
-  }
-
-  .pub-badge {
-    display: inline-block;
-    border: 1px solid var(--leaf);
-    color: var(--leaf-deep);
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    padding: 0.1em 0.55em;
-    margin-left: 0.6em;
-    vertical-align: middle;
-    white-space: nowrap;
-  }
-
-  .pub-authors .is-first {
-    font-weight: 800;
   }
 
   .pub-link {
