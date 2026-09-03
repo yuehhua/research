@@ -43,6 +43,8 @@ node scripts/find-overflow.mjs  # lists elements extending past the viewport wid
 ### Bugs already fixed — don't reintroduce
 
 - `global.css` is imported **only** in `Home.astro` frontmatter (after `bootstrap.min.css`). It was lost once during a refactor and the build still succeeded (scoped styles alone produce a plausible-looking but unstyled page). If layout measurements look wildly wrong, check that the CSS bundle contains `.slide` first.
+- **Astro scoping pitfall:** selectors in Home.astro's scoped `<style>` compile with `data-astro-cid`, but the `<section>` roots are rendered by `Slide.astro` and never receive Home's cid — so `#hero`/`#teaching`/`#join` rules written there **silently never match**. Slide-level overrides must live in the `<style is:global>` block in Home.astro.
+- The footer lives **inside the Join slide** (margin-top: auto, full-bleed negative margins), not after the deck — otherwise mandatory scroll-snap hides it behind an extra scroll.
 - Grid items holding images need `min-width: 0` (grid `min-width: auto` let the 900px portrait blow out mobile layout).
 - `white-space: nowrap` text inside a `max-width: 100%` box still overflows: the box is capped but the text spills, and spilled inline content expands the page's scrollable area **without any element's bounding rect exceeding the viewport** — `find-overflow.mjs` finds nothing in that case. Long chips/badges must wrap on narrow screens (see the `≤560px .chip` override in global.css).
 - Files under `src/pages/` become routes — page-shaped components (like Home.astro) belong in `src/components/`. (A temporary `leaf-picker.astro` page lived there once; it was deleted after use.)
