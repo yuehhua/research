@@ -12,7 +12,7 @@ import Slide from '../layouts/Slide.astro';
 import Header from './Header.astro';
 import NavDots from './NavDots.astro';
 import portrait from '../assets/portrait.jpg';
-import leafImg from '../assets/leaf.png';
+import leafImg from '../assets/leaf.svg';
 import {
   ui,
   profile,
@@ -84,7 +84,7 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
       {/* ---------------------------------------------- 01 HERO */}
       <Slide id="hero" num="01" label={t(eyebrow.hero)}>
         <div class="nature" aria-hidden="true">
-          <Image class="leaf-photo" src={leafImg} alt="" widths={[480, 720, 960]} sizes="(max-width: 640px) 200px, 34vw" loading="lazy" />
+          <Image class="leaf-photo" src={leafImg} alt="" loading="lazy" />
         </div>
 
         <p class="hero-kicker">{profile.labName}</p>
@@ -225,26 +225,28 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
 
       {/* ---------------------------------------------- 07 JOIN US */}
       <Slide id="join" num="07" label={t(eyebrow.join)}>
-        <h2 class="slide__title">{t(join.heading)}</h2>
-        <p class="join-intro muted">{t(join.intro)}</p>
-        <div class="row g-4 mb-4 mb-lg-5">
-          <section class="join-col col-12 col-md-6">
-            <h3 class="label mb-3">{t(join.youAre)}</h3>
-            <ul class="join-list mb-0 ps-0">
-              {join.youAreItems.map((item) => <li>{t(item)}</li>)}
-            </ul>
-          </section>
-          <section class="join-col col-12 col-md-6">
-            <h3 class="label mb-3">{t(join.weOffer)}</h3>
-            <ul class="join-list mb-0 ps-0">
-              {join.weOfferItems.map((item) => <li>{t(item)}</li>)}
-            </ul>
-          </section>
-        </div>
-        <div class="join-cta border-top pt-4">
-          <p class="small mb-0">
-            <span class="muted">{t(join.ctaPre)}</span><a class="fw-bold" href={`mailto:${profile.email}?subject=${encodeURIComponent('專題生')}`}>{profile.email}</a><span class="muted">{t(join.ctaPost)}</span>
-          </p>
+        <div class="join-content">
+          <h2 class="slide__title">{t(join.heading)}</h2>
+          <p class="join-intro muted">{t(join.intro)}</p>
+          <div class="row g-4 mb-4 mb-lg-5">
+            <section class="join-col col-12 col-md-6">
+              <h3 class="label mb-3">{t(join.youAre)}</h3>
+              <ul class="join-list mb-0 ps-0">
+                {join.youAreItems.map((item) => <li>{t(item)}</li>)}
+              </ul>
+            </section>
+            <section class="join-col col-12 col-md-6">
+              <h3 class="label mb-3">{t(join.weOffer)}</h3>
+              <ul class="join-list mb-0 ps-0">
+                {join.weOfferItems.map((item) => <li>{t(item)}</li>)}
+              </ul>
+            </section>
+          </div>
+          <div class="join-cta border-top pt-4">
+            <p class="small mb-0">
+              <span class="muted">{t(join.ctaPre)}</span><a class="fw-bold" href={`mailto:${profile.email}?subject=${encodeURIComponent('專題生')}`}>{profile.email}</a><span class="muted">{t(join.ctaPost)}</span>
+            </p>
+          </div>
         </div>
 
         {/* Footer anchored to the bottom of the last slide — visible without an extra scroll */}
@@ -609,6 +611,16 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
   }
 
   /* ---------- Join ---------- */
+  /* Content centers in the space ABOVE the footer, so the last page's visual
+     balance matches the other slides despite the footer band. */
+  .join-content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 0;
+  }
+
   .join-intro {
     font-size: var(--text-subtitle);
     font-weight: 500;
@@ -636,7 +648,7 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
     color: #d9ebfc;
     /* Full-bleed: escape the slide's horizontal padding; margin-top:auto pins it to the slide bottom */
     margin: auto calc(var(--gutter) * -1) 0;
-    padding: 1.5rem var(--gutter) 1.25rem;
+    padding: 1rem var(--gutter) 0.9rem;
   }
 
   .footer-inner {
