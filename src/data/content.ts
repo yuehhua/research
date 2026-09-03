@@ -23,7 +23,7 @@ export const ui = {
     teaching: { zh: '課程', en: 'Teaching' },
     join: { zh: '加入我們', en: 'Join us' },
   },
-  counterHint: { zh: '捲動或按 ↓ 換頁', en: 'Scroll or press ↓' },
+  scrollHint: { zh: '捲動或按 ↓ 換頁', en: 'Scroll or press ↓' },
   langToggle: { zh: 'EN', en: '中文' },
   backToTop: { zh: '回封面', en: 'Back to top' },
   firstAuthor: { zh: '第一作者', en: 'First author' },

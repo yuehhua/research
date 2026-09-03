@@ -66,11 +66,10 @@ for (const vp of VIEWPORTS) {
         out.overlaps.push({ pair: 'portrait×bio', ix: Math.round(ix), iy: Math.round(iy) });
       }
 
-      // header / dots / counter in viewport
+      // header / dots in viewport
       for (const [key, sel] of [
         ['header', '.site-header'],
         ['dots', '.dots'],
-        ['counter', '.counter'],
       ]) {
         const el = document.querySelector(sel);
         if (!el) { out.chrome[key] = { missing: true }; continue; }

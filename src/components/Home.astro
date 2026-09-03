@@ -11,7 +11,6 @@ import { Image } from 'astro:assets';
 import Slide from '../layouts/Slide.astro';
 import Header from './Header.astro';
 import NavDots from './NavDots.astro';
-import PageCounter from './PageCounter.astro';
 import portrait from '../assets/portrait.jpg';
 import leafImg from '../assets/leaf.png';
 import {
@@ -79,7 +78,8 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
   <body>
     <Header lang={lang} />
     <NavDots lang={lang} />
-    <PageCounter lang={lang} />
+
+    <p class="scroll-hint no-print" data-hint aria-hidden="true">{t(ui.scrollHint)}</p>
 
     <main>
       {/* ---------------------------------------------- 01 HERO */}
@@ -154,10 +154,9 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
         <h2 class="slide__title">{t(ui.nav.projects)}</h2>
         <div class="projects">
           {
-            projects.map((p, i) => (
-              <article class={`project row g-3 g-lg-4 border-top${i === 0 ? ' border-top-0 pt-0' : ' pt-2 pt-lg-3'}`}>
+            projects.map((p) => (
+              <article class="project row g-3 g-lg-4 py-2 py-lg-3">
                 <div class="project-head col-12 col-lg-3">
-                  <span class="project-idx">P{i + 1}</span>
                   <h3 class="project-name h5 mt-1 mb-1">{p.name}</h3>
                   <p class="project-tag label mb-0">{t(p.tag)}</p>
                 </div>
@@ -280,19 +279,14 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
     </main>
 
     <script>
-      // Deck behavior: active-slide tracking, counter, dots, keyboard navigation.
+      // Deck behavior: active-slide tracking, dots, keyboard navigation.
       const slides = Array.from(document.querySelectorAll<HTMLElement>('[data-slide]'));
       const dots = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-dot]'));
-      const counter = document.querySelector<HTMLElement>('[data-counter]');
       const hint = document.querySelector<HTMLElement>('[data-hint]');
 
       let idx = 0;
 
       function render(): void {
-        if (!counter) return;
-        const cur = String(idx + 1).padStart(2, '0');
-        const total = String(slides.length).padStart(2, '0');
-        counter.textContent = `${cur} / ${total}`;
         dots.forEach((d, i) => {
           if (i === idx) d.setAttribute('aria-current', 'true');
           else d.removeAttribute('aria-current');
@@ -354,6 +348,44 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
 </html>
 
 <style>
+  /* ---------- Scroll hint (right side, cover slide only) ---------- */
+  .scroll-hint {
+    position: fixed;
+    right: var(--gutter);
+    bottom: 1.25rem;
+    z-index: 90;
+    font-size: var(--text-label);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gray-2);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-out);
+  }
+
+  .scroll-hint.is-visible {
+    opacity: 1;
+    animation: nudge 2.2s var(--ease-out) infinite;
+  }
+
+  @keyframes nudge {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 3px;
+    }
+  }
+
+  /* Clear of the mobile dot rail */
+  @media (max-width: 767px) {
+    .scroll-hint {
+      display: none;
+    }
+  }
+
   /* ---------- Hero: sky gradient + leaf photo ---------- */
 
   .nature {
@@ -493,13 +525,6 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
   }
 
   /* ---------- Projects ---------- */
-  .project-idx {
-    font-size: var(--text-label);
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    color: var(--sky);
-  }
-
   .project-name {
     color: var(--sky-deep);
     font-weight: 800;
@@ -657,12 +682,27 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
 <style is:global>
   /* Slide-level backgrounds & padding overrides.
      These target <section> roots rendered by Slide.astro, which does NOT carry
-     this component's data-astro-cid scope — so they must be global to match. */
+     this component's data-astro-cid scope — so they must be global to match.
+     Background rhythm: cover = sky gradient, then light-blue / light-green /
+     white alternate so no two adjacent slides share a background. */
   #hero {
     background:
       radial-gradient(52rem 30rem at 108% -12%, rgba(116, 192, 252, 0.28), transparent 60%),
       radial-gradient(40rem 26rem at -14% 112%, rgba(116, 192, 252, 0.2), transparent 62%),
       linear-gradient(178deg, var(--sky-wash) 0%, var(--paper) 58%);
+  }
+
+  #about,
+  #publications {
+    background:
+      radial-gradient(46rem 26rem at 110% 0%, rgba(116, 192, 252, 0.1), transparent 60%),
+      var(--sky-wash);
+  }
+
+  #research {
+    background:
+      radial-gradient(46rem 26rem at -10% 100%, rgba(64, 160, 43, 0.08), transparent 60%),
+      var(--leaf-wash);
   }
 
   #teaching {
