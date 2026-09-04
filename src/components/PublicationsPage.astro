@@ -8,7 +8,7 @@ import '@fontsource-variable/inter';
 import '../styles/global.css';
 import Header from './Header.astro';
 import { profile, publications, ui, type Lang } from '../data/content';
-import { themeUi } from '../data/research';
+import { themeUi, researchThemes } from '../data/research';
 
 interface Props {
   lang: Lang;
@@ -53,7 +53,7 @@ const years = [...byYear.keys()].sort((a, b) => b - a);
 
     <header class="pubs-hero">
       <div class="pubs-wrap">
-        <a class="crumb no-print" href={`${base}/#research`}>← {t(ui.nav.research)}</a>
+        <a class="crumb no-print" href={`${base}/#${researchThemes[0].slug}`}>← {t(ui.nav.research)}</a>
         <p class="slide__eyebrow"><span class="num">{lang === 'zh' ? '論文' : 'PUBS'}</span><span aria-hidden="true">—</span><span class="label-text">{t(themeUi.pubHeading)}</span></p>
         <h1 class="slide__title">{t(themeUi.pubHeading)}</h1>
         <p class="pubs-intro muted">{t(themeUi.pubIntro)}</p>
@@ -86,7 +86,7 @@ const years = [...byYear.keys()].sort((a, b) => b - a);
 
     <footer class="pubs-footer">
       <div class="pubs-wrap footer-row">
-        <a href={`${base}/#research`}>← {t(themeUi.sectionTitle)}</a>
+        <a href={`${base}/#${researchThemes[0].slug}`}>← {t(themeUi.sectionTitle)}</a>
         <a href={`${base}/#about`}>{t(themeUi.meetLab)} ↗</a>
         <p class="footer-id mb-0">
           <strong>{profile.labShort}</strong> · {t(profile.affiliation)}

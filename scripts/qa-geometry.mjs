@@ -11,7 +11,10 @@ const BASE = 'http://localhost:4321/research';
 const SLIDES = [
   'hero',
   'about',
-  'research',
+  'virtual-embryo',
+  'geometricflux',
+  'federated-learning',
+  'cdgrn',
   'discrete-math',
   'data-structures-algorithms',
   'bioinformatics',

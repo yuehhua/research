@@ -118,7 +118,7 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
 
         <div class="d-flex flex-wrap gap-3">
           <a class="btn btn-sky btn-deck" href={`${base}/#join`}>{t(hero.cta.join)}</a>
-          <a class="btn btn-outline-sky btn-deck" href={`${base}/#research`}>{t(hero.cta.research)}</a>
+          <a class="btn btn-outline-sky btn-deck" href={`${base}/#${researchThemes[0].slug}`}>{t(hero.cta.research)}</a>
         </div>
       </Slide>
 
@@ -135,37 +135,44 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
         </div>
       </Slide>
 
-      {/* ---------------------------------------------- 03 RESEARCH — 主題研究 (featured themes) */}
-      <Slide id="research" num="03" label={t(eyebrow.research)}>
-        <h2 class="slide__title">{t(themeUi.sectionTitle)}</h2>
-        <div class="row row-cols-1 row-cols-md-2 g-3 g-lg-4 theme-grid">
-          {
-            researchThemes.map((theme) => (
-              <article class="theme-card border bg-white p-3 p-lg-4">
-                <a class="theme-card-link" href={`${base}/${theme.slug}/`}>
-                  <div class="theme-visual">
-                    <Image class="theme-visual-img" src={themeImages[theme.slug]} alt={t(visuals[theme.slug].alt)} loading="lazy" widths={[360, 540]} sizes="(max-width: 767px) 90vw, 380px" />
-                  </div>
-                  <h3 class="theme-name h6 mt-3 mb-1">
-                    {t(theme.name)} <span class="theme-link-mark" aria-hidden="true">↗</span>
-                  </h3>
-                  <p class="theme-short muted small mb-2">{t(theme.short)}</p>
-                  <ul class="theme-tag-row d-flex flex-wrap gap-1 ps-0 mb-0">
-                    {theme.tags.map((tag) => (
-                      <li>{t(tag)}</li>
-                    ))}
-                  </ul>
+      {/* ---------------------------------------------- 03–06 RESEARCH (one slide per theme) */}
+      {
+        researchThemes.map((theme, i) => (
+          <Slide id={theme.slug} num={String(i + 3).padStart(2, '0')} label={t(eyebrow.research)}>
+            <div class="row g-4 g-lg-5 align-items-center research-slide-body">
+              <div class="research-slide-text col-12 col-lg-7">
+                <h2 class="slide__title research-slide-title">{t(theme.name)}</h2>
+                <p class="research-slide-short muted">{t(theme.short)}</p>
+                <ul class="research-tags d-flex flex-wrap gap-2 ps-0 mb-0">
+                  {theme.tags.map((tag) => (
+                    <li>{t(tag)}</li>
+                  ))}
+                </ul>
+                <a class="btn btn-outline-sky btn-deck mt-4" href={`${base}/${theme.slug}/`}>
+                  {t(themeUi.viewTheme)} ↗
                 </a>
-              </article>
-            ))
-          }
-        </div>
-      </Slide>
+              </div>
+              <div class="col-12 col-lg-5">
+                <div class="research-figure">
+                  <Image
+                    class="research-figure-img"
+                    src={themeImages[theme.slug]}
+                    alt={t(visuals[theme.slug].alt)}
+                    loading="lazy"
+                    widths={[360, 540, 760]}
+                    sizes="(max-width: 991px) 90vw, 460px"
+                  />
+                </div>
+              </div>
+            </div>
+          </Slide>
+        ))
+      }
 
-      {/* ---------------------------------------------- 04–07 LESSONS (one slide per course) */}
+      {/* ---------------------------------------------- 07–10 LESSONS (one slide per course) */}
       {
         lessonSlides.map(({ lesson, bg, linked }, i) => (
-          <Slide id={lesson.slug} num={String(i + 4).padStart(2, '0')} label={t(ui.lessonNav)}>
+          <Slide id={lesson.slug} num={String(i + 7).padStart(2, '0')} label={t(ui.lessonNav)}>
             {bg && (
               <div class="lesson-nature" aria-hidden="true">
                 <Image class="lesson-bg-img" src={bg} alt="" loading="lazy" widths={[640, 1024, 1376]} sizes="100vw" />
@@ -191,8 +198,8 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
         ))
       }
 
-      {/* ---------------------------------------------- 08 JOIN US */}
-      <Slide id="join" num="08" label={t(eyebrow.join)}>
+      {/* ---------------------------------------------- 11 JOIN US */}
+      <Slide id="join" num="11" label={t(eyebrow.join)}>
         <div class="join-content">
           <h2 class="slide__title">{t(join.heading)}</h2>
           <p class="join-slogan">{t(join.slogan)}</p>
@@ -442,60 +449,45 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
     margin-top: 0.9em;
   }
 
-  /* ---------- Research: 主題研究 theme cards ---------- */
-  .theme-card-link {
-    display: block;
-    height: 100%;
-    color: inherit;
-    text-decoration: none;
+  /* ---------- Research slides (one per theme) ---------- */
+  .research-slide-title {
+    max-width: 16ch;
+    font-size: clamp(1.75rem, 3.2vw, 2.6rem);
   }
 
-  .theme-visual {
-    height: clamp(5.5rem, 12vh, 8rem);
-    display: grid;
-    place-items: center;
-    background: var(--sky-wash);
-    overflow: hidden;
+  .research-slide-short {
+    font-size: var(--text-subtitle);
+    font-weight: 500;
+    max-width: 40ch;
+    margin-bottom: clamp(1rem, 2.5vh, 1.5rem);
   }
 
-  .theme-visual-img {
-    max-height: 100%;
-    width: auto;
-    max-width: 100%;
-    object-fit: contain;
-  }
-
-  .theme-name {
-    color: var(--sky-deep);
-    font-weight: 800;
-  }
-
-  .theme-card-link:hover .theme-name {
-    text-decoration: underline;
-    text-decoration-color: var(--sky-pale);
-  }
-
-  .theme-link-mark {
-    font-size: 0.85em;
-    color: var(--sky);
-  }
-
-  .theme-short {
-    max-width: 44ch;
-  }
-
-  .theme-tag-row {
+  .research-tags {
     list-style: none;
   }
 
-  .theme-tag-row li {
-    border: 1px solid var(--sky-pale);
-    color: var(--gray-1);
-    padding: 0.25em 0.6em;
-    font-size: var(--text-label);
+  .research-tags li {
+    border: var(--hairline);
+    background: rgba(255, 255, 255, 0.78);
+    padding: 0.4em 0.85em;
+    font-size: var(--text-small);
     font-weight: 600;
-    white-space: nowrap;
+    color: var(--ink);
+  }
+
+  .research-figure {
+    background: var(--paper);
+    border: var(--hairline);
+    padding: clamp(1rem, 2vw, 1.75rem);
+    display: grid;
+    place-items: center;
+  }
+
+  .research-figure-img {
+    max-height: min(28rem, 46svh);
+    width: auto;
     max-width: 100%;
+    object-fit: contain;
   }
 
   /* ---------- Lesson slides (one per course) ---------- */
@@ -646,17 +638,25 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
       linear-gradient(178deg, var(--sky-wash) 0%, var(--paper) 58%);
   }
 
-  #about,
-  #publications {
+  #about {
     background:
       radial-gradient(46rem 26rem at 110% 0%, rgba(116, 192, 252, 0.1), transparent 60%),
       var(--sky-wash);
   }
 
-  #research {
+  /* Research slides alternate leaf/sky so no two adjacent slides share a wash */
+  #virtual-embryo,
+  #federated-learning {
     background:
       radial-gradient(46rem 26rem at -10% 100%, rgba(64, 160, 43, 0.08), transparent 60%),
       var(--leaf-wash);
+  }
+
+  #geometricflux,
+  #cdgrn {
+    background:
+      radial-gradient(46rem 26rem at 110% 0%, rgba(116, 192, 252, 0.12), transparent 60%),
+      var(--sky-wash);
   }
 
   /* Lesson slides carry their own designed background images; the one

@@ -183,6 +183,13 @@ join       // { zh/en }: 條件、特質、CTA
 - [x] 視覺（現成素材）：VE task2.webp（競賽網站，頁上標註出處）、GeometricFlux logo（MIT）、RAFAEL logo、CDGRN 概念圖（用戶自己的 diagrams.net SVG → rsvg-convert 轉 PNG）
 - [x] RAFAEL 以領域名呈現：聯邦式學習
 **驗收**：✅ 桌機 8 頁單螢幕全過、5 個新頁面零溢出（390/1920）、nav 發光walk 正確、相關論文 2/4 篇對應、論文頁 7 篇×6 年份
+
+### Stage 7：主題研究拆頁 ✔️ 完成（2026-09-05）
+- [x] 2×2 主題卡總覽 slide 移除，**每個研究一頁 deck slide**（同課程模式）：左＝名稱＋一句話＋標籤＋「查看主題 ↗」，右＝代表性視覺 figure
+- [x] Deck 11 頁：封面→關於→研究×4→課程×4→加入我們；wash 依位置輪替葉綠/天空藍
+- [x] 選單：單一「研究」按鈕（群組發光，連到第一個研究 slide）
+- [x] Hero 的「查看研究」按鈕、詳細頁麵包屑、論文頁返回連結都改指向對應 slide 錨點
+**驗收**：✅ 桌機 11 頁單螢幕全過、walk 發光正確（研究×4 亮「研究」）、figure 全載入、wash 輪替無相鄰重複
 **驗收**：✅ 全路由 build、零水平溢出 390–1920、snap=none、語言切換指向兄弟頁、pixel sampling 確認 hero（天空藍/葉綠）/scrim/footer
 
 ## 11. 設計理由（為何這樣做）

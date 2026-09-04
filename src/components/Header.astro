@@ -4,6 +4,7 @@
  */
 import { profile, ui, slideOrder } from '../data/content';
 import { lessonOrder } from '../data/lessons';
+import { researchThemes } from '../data/research';
 
 interface Props {
   lang: 'zh' | 'en';
@@ -20,18 +21,30 @@ const otherLangHref = toggleHref ?? (lang === 'zh' ? `${base}/en/` : `${base}/`)
 /* On the deck the toggle preserves the current slide via the hash; on a lesson page it just swaps routes. */
 const toggleAttrs = toggleHref ? {} : { onclick: 'this.href += location.hash' };
 
-/* One nav entry for all lessons (label 課程/Lesson, links to the first
-   lesson slide). It glows while any lesson slide is active — the deck
-   script matches via data-nav-group. Join stays the bordered CTA. */
-const isLesson = (id: string) => (lessonOrder as readonly string[]).includes(id);
+/* One nav entry for all research slides, one for all lesson slides —
+   each links to its first slide and glows while any of its slides is
+   active (the deck script matches via data-nav-group). Join stays the
+   bordered CTA. */
+const researchSlugs = researchThemes.map((r) => r.slug);
+const lessonSlugs = lessonOrder as readonly string[];
+const isLesson = (id: string) => lessonSlugs.includes(id);
+const isResearch = (id: string) => researchSlugs.includes(id);
 const navItems: { href: string; label: string; navId?: string; group?: string; cta?: boolean }[] = [];
 for (const id of slideOrder.slice(1)) {
-  if (isLesson(id)) {
-    if (!navItems.some((n) => n.group)) {
+  if (isResearch(id)) {
+    if (!navItems.some((n) => n.group === researchSlugs.join(','))) {
       navItems.push({
-        href: `${base}/#${lessonOrder[0]}`,
+        href: `${base}/#${researchSlugs[0]}`,
+        label: t(ui.nav.research),
+        group: researchSlugs.join(','),
+      });
+    }
+  } else if (isLesson(id)) {
+    if (!navItems.some((n) => n.group === lessonSlugs.join(','))) {
+      navItems.push({
+        href: `${base}/#${lessonSlugs[0]}`,
         label: t(ui.lessonNav),
-        group: (lessonOrder as readonly string[]).join(','),
+        group: lessonSlugs.join(','),
       });
     }
   } else if (id === 'join') {

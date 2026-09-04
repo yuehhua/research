@@ -61,7 +61,7 @@ const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
     {/* ---------- Hero ---------- */}
     <header class="theme-hero">
       <div class="theme-wrap hero-content">
-        <a class="crumb no-print" href={`${base}/#research`}>← {t(themeUi.sectionTitle)}</a>
+        <a class="crumb no-print" href={`${base}/#${theme.slug}`}>← {t(themeUi.sectionTitle)}</a>
         <p class="label hero-eyebrow">{t(themeUi.sectionTitle)}</p>
         <h1 class="slide__title theme-title">{t(theme.name)}</h1>
         <p class="theme-status">{t(theme.status)}</p>
@@ -132,7 +132,7 @@ const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
     {/* ---------- Slim closing band ---------- */}
     <footer class="theme-footer">
       <div class="theme-wrap footer-row">
-        <a href={`${base}/#research`}>← {t(themeUi.backToResearch)}</a>
+        <a href={`${base}/#${theme.slug}`}>← {t(themeUi.backToResearch)}</a>
         <a href={lang === 'zh' ? `${base}/publications/` : `${base}/en/publications/`}>{t(themeUi.allPubs)} ↗</a>
         <a href={`${base}/#about`}>{t(themeUi.meetLab)} ↗</a>
         <p class="footer-id mb-0">

@@ -31,12 +31,15 @@ export const ui = {
   currentFocus: { zh: '現況焦點', en: 'Current focus' },
 } as const;
 
-/* Lesson ids are the course slugs from src/data/lessons.ts; each renders
-   as its own deck slide between publications and join. */
+/* Research theme slugs (src/data/research.ts) and lesson slugs
+   (src/data/lessons.ts) each render as their own deck slide. */
 export const slideOrder = [
   'hero',
   'about',
-  'research',
+  'virtual-embryo',
+  'geometricflux',
+  'federated-learning',
+  'cdgrn',
   'discrete-math',
   'data-structures-algorithms',
   'bioinformatics',
