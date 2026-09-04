@@ -1,0 +1,7 @@
+---
+import ResearchPage from '../components/ResearchPage.astro';
+import { researchThemes, visuals, themeImages } from '../data/research';
+
+const theme = researchThemes.find((t) => t.slug === 'virtual-embryo')!;
+---
+<ResearchPage theme={theme} lang="zh" visual={themeImages['virtual-embryo']} alt={visuals['virtual-embryo'].alt.zh} credit={visuals['virtual-embryo'].credit?.zh} />

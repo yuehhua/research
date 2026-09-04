@@ -9,9 +9,11 @@ interface Props {
   lang: 'zh' | 'en';
   /** Lang-toggle target for non-deck pages (e.g. the same lesson in the other language). */
   toggleHref?: string;
+  /** Pre-lit nav entry on off-deck pages (e.g. 'publications' on the pubs page). */
+  activeNav?: string;
 }
 
-const { lang, toggleHref } = Astro.props;
+const { lang, toggleHref, activeNav } = Astro.props;
 const t = (x: { zh: string; en: string }) => x[lang];
 const base = (import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL).replace(/\/$/, '');
 const otherLangHref = toggleHref ?? (lang === 'zh' ? `${base}/en/` : `${base}/`);
@@ -33,6 +35,12 @@ for (const id of slideOrder.slice(1)) {
       });
     }
   } else if (id === 'join') {
+    // The full publication list lives off-deck; its nav entry is a page link.
+    navItems.push({
+      href: `${lang === 'zh' ? base : `${base}/en`}/publications/`,
+      label: t(ui.nav.publications),
+      navId: 'publications',
+    });
     navItems.push({ href: `${base}/`, label: t(ui.nav.join), navId: id, cta: true });
   } else {
     navItems.push({ href: `${base}/#${id}`, label: t(ui.nav[id as keyof typeof ui.nav]), navId: id });
@@ -48,7 +56,13 @@ for (const id of slideOrder.slice(1)) {
   <nav class="site-nav d-none d-lg-flex gap-3 gap-xl-4" aria-label={lang === 'zh' ? '區塊導覽' : 'Sections'}>
     {
       navItems.map((item) => (
-        <a href={item.href} class={item.cta ? 'nav-cta' : ''} data-nav={item.navId} data-nav-group={item.group}>
+        <a
+          href={item.href}
+          class={item.cta ? 'nav-cta' : ''}
+          data-nav={item.navId}
+          data-nav-group={item.group}
+          aria-current={item.navId && item.navId === activeNav ? 'true' : undefined}
+        >
           {item.label}
         </a>
       ))

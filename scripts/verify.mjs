@@ -13,8 +13,6 @@ const SLIDES = [
   'hero',
   'about',
   'research',
-  'projects',
-  'publications',
   'discrete-math',
   'data-structures-algorithms',
   'bioinformatics',

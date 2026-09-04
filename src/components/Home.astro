@@ -21,10 +21,6 @@ import {
   profile,
   hero,
   about,
-  interests,
-  focusChips,
-  projects,
-  publications,
   join,
   footer,
 } from '../data/content';
@@ -36,6 +32,7 @@ import {
   smartHealthcareBigData,
   type Lesson,
 } from '../data/lessons';
+import { themeUi, researchThemes, themeImages, visuals } from '../data/research';
 
 interface Props {
   lang: 'zh' | 'en';
@@ -57,8 +54,6 @@ const eyebrow: Record<string, { zh: string; en: string }> = {
   hero: { zh: 'ISB LAB', en: 'ISB LAB' },
   about: ui.nav.about,
   research: ui.nav.research,
-  projects: ui.nav.projects,
-  publications: ui.nav.publications,
   join: ui.nav.join,
 };
 
@@ -140,90 +135,37 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
         </div>
       </Slide>
 
-      {/* ---------------------------------------------- 03 RESEARCH */}
+      {/* ---------------------------------------------- 03 RESEARCH — 主題研究 (featured themes) */}
       <Slide id="research" num="03" label={t(eyebrow.research)}>
-        <h2 class="slide__title">{t(ui.nav.research)}</h2>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-1 interest-grid mb-4 mb-lg-5">
+        <h2 class="slide__title">{t(themeUi.sectionTitle)}</h2>
+        <div class="row row-cols-1 row-cols-md-2 g-3 g-lg-4 theme-grid">
           {
-            interests.map((it, i) => (
-              <article class="interest border bg-white p-3 p-lg-4">
-                <span class="interest-idx">{String(i + 1).padStart(2, '0')}</span>
-                <h3 class="interest-name h6 mt-2 mb-2">{t(it.name)}</h3>
-                <p class="interest-desc muted small mb-0">{t(it.desc)}</p>
-              </article>
-            ))
-          }
-        </div>
-        <div class="focus d-flex flex-wrap align-items-center gap-2 gap-md-4 border-top pt-3">
-          <span class="label">{t(ui.currentFocus)}</span>
-          <ul class="focus-chips d-flex flex-wrap gap-2 mb-0 ps-0">
-            {focusChips.map((c) => <li>{t(c)}</li>)}
-            <li>
-              <a href={hero.challengeUrl} target="_blank" rel="noopener">NeurIPS 2026 Virtual Embryo ↗</a>
-            </li>
-          </ul>
-        </div>
-      </Slide>
-
-      {/* ---------------------------------------------- 04 PROJECTS */}
-      <Slide id="projects" num="04" label={t(eyebrow.projects)}>
-        <h2 class="slide__title">{t(ui.nav.projects)}</h2>
-        <div class="projects">
-          {
-            projects.map((p) => (
-              <article class="project row g-3 g-lg-4 py-2 py-lg-3">
-                <div class="project-head col-12 col-lg-3">
-                  <h3 class="project-name h5 mt-1 mb-1">{p.name}</h3>
-                  <p class="project-tag label mb-0">{t(p.tag)}</p>
-                </div>
-                <p class="project-desc muted small col-12 col-lg-6 mb-0">{t(p.desc)}</p>
-                <div class="project-side col-12 col-lg-3">
-                  <div class="project-metrics d-flex flex-wrap gap-3 gap-lg-4">
-                    {p.metrics.map((m) => (
-                      <div class="metric">
-                        <span class="value">{m.value}</span>
-                        <span class="key">{t(m.label)}</span>
-                      </div>
-                    ))}
+            researchThemes.map((theme) => (
+              <article class="theme-card border bg-white p-3 p-lg-4">
+                <a class="theme-card-link" href={`${base}/${theme.slug}/`}>
+                  <div class="theme-visual">
+                    <Image class="theme-visual-img" src={themeImages[theme.slug]} alt={t(visuals[theme.slug].alt)} loading="lazy" widths={[360, 540]} sizes="(max-width: 767px) 90vw, 380px" />
                   </div>
-                  {p.links && (
-                    <p class="project-links d-flex flex-wrap gap-2 small fw-bold mb-0 mt-2">
-                      {p.links.map((l) => (
-                        <a href={l.href} target="_blank" rel="noopener">{l.label} ↗</a>
-                      ))}
-                    </p>
-                  )}
-                </div>
+                  <h3 class="theme-name h6 mt-3 mb-1">
+                    {t(theme.name)} <span class="theme-link-mark" aria-hidden="true">↗</span>
+                  </h3>
+                  <p class="theme-short muted small mb-2">{t(theme.short)}</p>
+                  <ul class="theme-tag-row d-flex flex-wrap gap-1 ps-0 mb-0">
+                    {theme.tags.map((tag) => (
+                      <li>{t(tag)}</li>
+                    ))}
+                  </ul>
+                </a>
               </article>
             ))
           }
         </div>
       </Slide>
 
-      {/* ---------------------------------------------- 05 PUBLICATIONS */}
-      <Slide id="publications" num="05" label={t(eyebrow.publications)}>
-        <h2 class="slide__title">{t(ui.nav.publications)}</h2>
-        <ol class="pubs list-unstyled mb-0" data-inner-scroll>
-          {
-            publications.map((pub) => (
-              <li class="pub">
-                <span class="pub-year">{pub.year}</span>
-                <div class="pub-main">
-                  <p class="pub-title mb-1">{pub.title}</p>
-                  <p class="pub-authors muted small mb-1">{pub.authors}</p>
-                  <p class="pub-venue small fst-italic mb-0">{pub.venue}</p>
-                </div>
-                <a class="pub-link" href={`https://doi.org/${pub.doi}`} target="_blank" rel="noopener" aria-label={`${t(ui.viewPaper)}: ${pub.title}`}>↗</a>
-              </li>
-            ))
-          }
-        </ol>
-      </Slide>
-
-      {/* ---------------------------------------------- 06–09 LESSONS (one slide per course) */}
+      {/* ---------------------------------------------- 04–07 LESSONS (one slide per course) */}
       {
         lessonSlides.map(({ lesson, bg, linked }, i) => (
-          <Slide id={lesson.slug} num={String(i + 6).padStart(2, '0')} label={t(ui.lessonNav)}>
+          <Slide id={lesson.slug} num={String(i + 4).padStart(2, '0')} label={t(ui.lessonNav)}>
             {bg && (
               <div class="lesson-nature" aria-hidden="true">
                 <Image class="lesson-bg-img" src={bg} alt="" loading="lazy" widths={[640, 1024, 1376]} sizes="100vw" />
@@ -249,8 +191,8 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
         ))
       }
 
-      {/* ---------------------------------------------- 10 JOIN US */}
-      <Slide id="join" num="10" label={t(eyebrow.join)}>
+      {/* ---------------------------------------------- 08 JOIN US */}
+      <Slide id="join" num="08" label={t(eyebrow.join)}>
         <div class="join-content">
           <h2 class="slide__title">{t(join.heading)}</h2>
           <p class="join-slogan">{t(join.slogan)}</p>
@@ -500,120 +442,60 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
     margin-top: 0.9em;
   }
 
-  /* ---------- Research ---------- */
-  .interest-idx {
-    font-size: var(--text-label);
+  /* ---------- Research: 主題研究 theme cards ---------- */
+  .theme-card-link {
+    display: block;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .theme-visual {
+    height: clamp(5.5rem, 12vh, 8rem);
+    display: grid;
+    place-items: center;
+    background: var(--sky-wash);
+    overflow: hidden;
+  }
+
+  .theme-visual-img {
+    max-height: 100%;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .theme-name {
+    color: var(--sky-deep);
     font-weight: 800;
-    letter-spacing: 0.1em;
+  }
+
+  .theme-card-link:hover .theme-name {
+    text-decoration: underline;
+    text-decoration-color: var(--sky-pale);
+  }
+
+  .theme-link-mark {
+    font-size: 0.85em;
     color: var(--sky);
   }
 
-  .interest-name {
-    color: var(--sky-deep);
-    font-weight: 800;
+  .theme-short {
+    max-width: 44ch;
   }
 
-  .interest-desc {
-    max-width: 42ch;
-  }
-
-  .focus-chips {
+  .theme-tag-row {
     list-style: none;
   }
 
-  .focus-chips li {
-    background: var(--sky-wash);
-    padding: 0.45em 0.85em;
-    font-size: var(--text-small);
+  .theme-tag-row li {
+    border: 1px solid var(--sky-pale);
+    color: var(--gray-1);
+    padding: 0.25em 0.6em;
+    font-size: var(--text-label);
     font-weight: 600;
-    color: var(--sky-deep);
-  }
-
-  .focus-chips li:has(a) {
-    background: var(--paper);
-    border: 1px solid var(--leaf);
-    color: var(--leaf-deep);
-  }
-
-  .focus-chips a {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .focus-chips a:hover {
-    background: var(--leaf);
-    color: var(--paper);
-  }
-
-  /* ---------- Projects ---------- */
-  .project-name {
-    color: var(--sky-deep);
-    font-weight: 800;
-  }
-
-  .project-desc {
-    max-width: 68ch;
-  }
-
-  @media (min-width: 992px) {
-    .project-side {
-      border-left: var(--hairline-soft);
-      padding-left: 1.5rem;
-    }
-  }
-
-  /* ---------- Publications ---------- */
-  .pubs {
-    max-height: min(58svh, 34rem);
-    overflow-y: auto;
-    scrollbar-width: thin;
-  }
-
-  .pub {
-    display: grid;
-    grid-template-columns: 3.5rem 1fr auto;
-    gap: 0.25rem 1.5rem;
-    border-top: var(--hairline-soft);
-    padding: 0.75em 0;
-    align-items: start;
-  }
-
-  .pub:first-child {
-    border-top: none;
-  }
-
-  .pub-year {
-    font-weight: 800;
-    color: var(--sky-deep);
-    font-variant-numeric: tabular-nums;
-  }
-
-  .pub-title {
-    font-weight: 700;
-    line-height: 1.35;
-    max-width: 60ch;
-    color: var(--sky-deep);
-  }
-
-  .pub-link {
-    font-size: 1.1rem;
-    text-decoration: none;
-    padding: 0.2em;
-  }
-
-  .pub-link:hover {
-    text-decoration: underline;
-  }
-
-  @media (max-width: 640px) {
-    .pub {
-      grid-template-columns: 1fr auto;
-    }
-
-    .pub-year {
-      grid-column: 1 / -1;
-      font-size: var(--text-small);
-    }
+    white-space: nowrap;
+    max-width: 100%;
   }
 
   /* ---------- Lesson slides (one per course) ---------- */

@@ -175,6 +175,14 @@ join       // { zh/en }: 條件、特質、CTA
 - [x] 課程四：智慧醫療大數據分析與實務——deck slide 已上（sky-wash、4 模組 chips），**詳細頁待主持人提供背景圖**
 - [x] 課程總覽拆解（2026-09-04 晚）：2×2 卡片總覽 slide 移除，改為**每門課一頁 deck slide**（slideOrder: publications → 4 個課程 slug → join）；選單每門課一個「課程/Lesson」項目，作用中發光；`tmuCourses` 移除（lessons.ts 為唯一課程資料源）
 - [x] Join 頁：slogan「想要跟老師一起貢獻科學研究」；「一對一指導」→「老師親自指導，共同創造」
+
+### Stage 6：主題研究重構 ✔️ 完成（2026-09-04 深夜）
+- [x] Deck 縮為 8 頁：research slide → 主題研究（4 主題卡：視覺＋名稱＋一行＋領域標籤）；**移除** projects slide、publications slide、6 格興趣卡、焦點 chips
+- [x] 每主題詳細頁 `/research/{virtual-embryo,geometricflux,federated-learning,cdgrn}/`：視覺figure、簡介、指標、連結、標籤、**相關論文**（DOI 對應 content.ts）
+- [x] 完整論文頁 `/research/publications/`（依年份分組）；選單「論文」改為頁面連結（在 deck 上不發亮；於論文頁預亮）
+- [x] 視覺（現成素材）：VE task2.webp（競賽網站，頁上標註出處）、GeometricFlux logo（MIT）、RAFAEL logo、CDGRN 概念圖（用戶自己的 diagrams.net SVG → rsvg-convert 轉 PNG）
+- [x] RAFAEL 以領域名呈現：聯邦式學習
+**驗收**：✅ 桌機 8 頁單螢幕全過、5 個新頁面零溢出（390/1920）、nav 發光walk 正確、相關論文 2/4 篇對應、論文頁 7 篇×6 年份
 **驗收**：✅ 全路由 build、零水平溢出 390–1920、snap=none、語言切換指向兄弟頁、pixel sampling 確認 hero（天空藍/葉綠）/scrim/footer
 
 ## 11. 設計理由（為何這樣做）
