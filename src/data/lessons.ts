@@ -1,0 +1,140 @@
+/**
+ * lessons.ts — per-course lesson pages (linked from the Teaching slide).
+ * Content policy: module overview + one featured clinical translation case
+ * per module. No operational info (textbook, hours, grading) on public pages.
+ * Tagline mirrors the course desc in content.ts.
+ */
+import type { L } from './content';
+
+export interface LessonCase {
+  week: string; // e.g. 'W1'
+  title: L<string>;
+  body: L<string>;
+}
+
+export interface LessonModule {
+  num: string; // e.g. 'M1'
+  weeks: string; // e.g. 'W1–W3'
+  name: L<string>;
+  summary: L<string>;
+  case: LessonCase;
+}
+
+export interface Lesson {
+  slug: string;
+  accent: 'sky' | 'leaf';
+  name: L<string>;
+  tagline: L<string>;
+  goal: L<string>;
+  modules: LessonModule[];
+}
+
+export const lessonUi = {
+  heroEyebrow: { zh: 'ISB LAB · TMU 課程', en: 'ISB LAB · TMU COURSE' },
+  goalLabel: { zh: '課程目標', en: 'Course goal' },
+  courseMap: { zh: '課程地圖', en: 'Course map' },
+  clinicalCase: { zh: '臨床與生醫轉譯', en: 'Clinical & biomedical translation' },
+  backToCourses: { zh: '回課程總覽', en: 'Back to courses' },
+  meetLab: { zh: '認識 ISB Lab', en: 'About ISB Lab' },
+} satisfies Record<string, L<string>>;
+
+export const discreteMath: Lesson = {
+  slug: 'discrete-math',
+  accent: 'sky',
+  name: { zh: '離散數學', en: 'Discrete Mathematics' },
+  tagline: {
+    zh: '從邏輯與證明到圖論與組合最佳化；每週搭配臨床與生醫轉譯案例——醫療 AI 的邏輯誤區、GWAS 基因檢索、V(D)J 重組的組合學、德布魯因圖基因體組裝。',
+    en: 'From logic and proofs to graph theory and combinatorial optimization, with weekly clinical and biomedical translation cases—logic pitfalls in medical AI, GWAS retrieval, combinatorics of V(D)J recombination, de Bruijn-graph genome assembly.',
+  },
+  goal: {
+    zh: '用邏輯拆解問題——建立嚴謹的數學思維，掌握演算法底層的離散結構，並能將真實世界問題（特別是生醫問題）抽象化為數學模型。',
+    en: 'Learn to take problems apart with logic—build rigorous mathematical thinking, master the discrete structures beneath algorithms, and translate real-world (especially biomedical) problems into mathematical models.',
+  },
+  modules: [
+    {
+      num: 'M1',
+      weeks: 'W1–W3',
+      name: { zh: '邏輯、證明與基本結構', en: 'Logic, Proofs, and Foundations' },
+      summary: {
+        zh: '命題與述詞邏輯、證明方法、集合與函數——後續所有單元共通的語言基礎。',
+        en: 'Propositional and predicate logic, proof techniques, sets and functions—the shared language for everything that follows.',
+      },
+      case: {
+        week: 'W1',
+        title: { zh: '醫療 AI 的邏輯誤區', en: 'When medical AI gets its logic wrong' },
+        body: {
+          zh: '臨床決策支援系統中，把 AND 與 OR 搞混（誤用 De Morgan 定律）看似小錯，卻可能釀成致命的給藥錯誤。',
+          en: 'In clinical decision-support rules, mixing up AND with OR (misapplying De Morgan’s laws) is a small slip that can cause a fatal medication error.',
+        },
+      },
+    },
+    {
+      num: 'M2',
+      weeks: 'W4–W6',
+      name: { zh: '演算法、數論與遞迴', en: 'Algorithms, Number Theory, and Recursion' },
+      summary: {
+        zh: '時間複雜度分析、同餘運算與進位制、數學歸納法與遞迴——演算法設計的數學底層。',
+        en: 'Complexity analysis, modular arithmetic and number bases, induction and recursion—the mathematics beneath algorithm design.',
+      },
+      case: {
+        week: 'W5',
+        title: { zh: 'DNA 的 2-bit 壓縮', en: 'DNA as 2-bit code' },
+        body: {
+          zh: '以二進位與位元運算將 A、C、G、T 編碼為 2 位元，讓全基因體大數據塞進有限的記憶體。',
+          en: 'Encoding A, C, G, T as two bits each—bit-level arithmetic that fits whole-genome data into memory.',
+        },
+      },
+    },
+    {
+      num: 'M3',
+      weeks: 'W7–W8',
+      name: { zh: '計數與機率', en: 'Counting and Discrete Probability' },
+      summary: {
+        zh: '排列組合、鴿籠原理、條件機率與貝氏定理——刻畫「可能性」的工具箱。',
+        en: 'Combinatorics, the pigeonhole principle, conditional probability and Bayes’ theorem—a toolkit for reasoning about possibility.',
+      },
+      case: {
+        week: 'W7',
+        title: { zh: '免疫系統的組合學', en: 'The combinatorics of immunity' },
+        body: {
+          zh: 'B 細胞透過 V(D)J 基因重組產生數十億種抗體；同一套計數原理，也決定了抗癌藥物雞尾酒療法要搜索的組合空間。',
+          en: 'B cells generate billions of antibodies through V(D)J recombination; the same counting shows how vast the search space of cancer drug cocktails really is.',
+        },
+      },
+    },
+    {
+      num: 'M4',
+      weeks: 'W10–W11',
+      name: { zh: '進階計數與關係', en: 'Advanced Counting & Relations' },
+      summary: {
+        zh: '遞迴關係與分治法、關係與等價——用數學結構描述會成長、會分岔的系統。',
+        en: 'Recurrence relations, divide-and-conquer, relations and equivalence—mathematical structure for systems that grow and branch.',
+      },
+      case: {
+        week: 'W10',
+        title: { zh: '癌細胞增生與 R₀', en: 'Cancer growth and R₀' },
+        body: {
+          zh: '以遞迴關係式模擬癌細胞在離散時間點的分裂增長；同樣的數學，也預測傳染病的基本傳染數 R₀。',
+          en: 'Recurrence relations model how cancer cells divide across discrete time steps—the same math predicts an epidemic’s basic reproduction number R₀.',
+        },
+      },
+    },
+    {
+      num: 'M5',
+      weeks: 'W12–W16',
+      name: { zh: '圖論與樹狀結構', en: 'Graph Theory and Trees' },
+      summary: {
+        zh: '圖的表示與走訪、最短路徑、樹狀結構、布林代數與有限狀態機——網路世界的完整工具箱。',
+        en: 'Graph representations and traversals, shortest paths, trees, Boolean algebra and finite-state machines—the complete toolkit for networked systems.',
+      },
+      case: {
+        week: 'W13',
+        title: { zh: '從七橋問題到基因體組裝', en: 'From the Seven Bridges to genome assembly' },
+        body: {
+          zh: '以德布魯因圖與尤拉路徑，在線性時間內將 30 億個被打碎的 DNA 短序列拼回完整基因體。',
+          en: 'De Bruijn graphs and Euler paths reassemble billions of shattered DNA reads into a complete genome in linear time.',
+        },
+      },
+    },
+  ],
+};

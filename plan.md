@@ -165,6 +165,13 @@ join       // { zh/en }: 條件、特質、CTA
 - [ ] GitHub Actions 自動化 workflow（日後補；目前手動：build 後 rsync + push）
 **驗收**：✅ 上線 https://yuehhua.github.io/research/
 
+### Stage 5：課程獨立頁（lesson pages）✔️ 完成（2026-09-04）
+- [x] 資料模型 `src/data/lessons.ts`（bilingual）：模組總覽＋每模組一個精選臨床轉譯案例；**不放**經營資訊（教科書/時數/配分——主持人明確拒絕）
+- [x] `LessonPage.astro` 共用元件（一般捲動頁、`html.no-snap` 脫離 deck snap、per-lesson accent sky|leaf）
+- [x] 首頁課程卡片經 `Course.slug` 連結 lesson 頁（首批：離散數學）
+- [x] 主持人設計的背景圖（discrete_math_Gemini.png 天空藍 1376×768 → webp 16–52KB；data_structure_algo_Gemini.png 葉綠 1408×768 備用）
+**驗收**：✅ 4 路由 build、零水平溢出 390–1920、snap=none、語言切換指向兄弟頁、5 模組×5 案例卡、pixel sampling 確認 hero/scrim/footer
+
 ## 11. 設計理由（為何這樣做）
 
 - **Astro 而非純 HTML**：主持人偏好 + 未來內容會增長（論文、課程逐年累積）；零 JS 框架輸出保證簡報時載入快速

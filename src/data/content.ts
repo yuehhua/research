@@ -307,10 +307,13 @@ export const publications: Pub[] = [
 export interface Course {
   name: L<string>;
   desc: L<string>;
+  /** When set, the course card links to its dedicated lesson page (src/pages/lessons/<slug>). */
+  slug?: string;
 }
 
 export const tmuCourses: Course[] = [
   {
+    slug: 'discrete-math',
     name: { zh: '離散數學', en: 'Discrete Mathematics' },
     desc: {
       zh: '從邏輯與證明到圖論與組合最佳化；每週搭配臨床與生醫轉譯案例——醫療 AI 的邏輯誤區、GWAS 基因檢索、V(D)J 重組的組合學、德布魯因圖基因體組裝。',

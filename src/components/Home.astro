@@ -208,7 +208,15 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
           {
             tmuCourses.map((c) => (
               <article class="course border bg-white p-3 p-lg-4">
-                <h3 class="course-name h6 mt-0 mb-0">{t(c.name)}</h3>
+                <h3 class="course-name h6 mt-0 mb-0">
+                  {c.slug ? (
+                    <a href={`${base}/lessons/${c.slug}/`}>
+                      {t(c.name)} <span class="course-link-mark" aria-hidden="true">↗</span>
+                    </a>
+                  ) : (
+                    t(c.name)
+                  )}
+                </h3>
                 <p class="course-desc muted small mt-2 mb-0">{t(c.desc)}</p>
               </article>
             ))
@@ -582,6 +590,21 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
   .course-name {
     color: var(--sky-deep);
     font-weight: 800;
+  }
+
+  .course-name a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .course-name a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--sky-pale);
+  }
+
+  .course-link-mark {
+    font-size: 0.85em;
+    color: var(--sky);
   }
 
   .course-desc {

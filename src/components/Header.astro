@@ -6,12 +6,16 @@ import { profile, ui, slideOrder } from '../data/content';
 
 interface Props {
   lang: 'zh' | 'en';
+  /** Lang-toggle target for non-deck pages (e.g. the same lesson in the other language). */
+  toggleHref?: string;
 }
 
-const { lang } = Astro.props;
+const { lang, toggleHref } = Astro.props;
 const t = (x: { zh: string; en: string }) => x[lang];
 const base = (import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL).replace(/\/$/, '');
-const otherLangHref = lang === 'zh' ? `${base}/en/` : `${base}/`;
+const otherLangHref = toggleHref ?? (lang === 'zh' ? `${base}/en/` : `${base}/`);
+/* On the deck the toggle preserves the current slide via the hash; on a lesson page it just swaps routes. */
+const toggleAttrs = toggleHref ? {} : { onclick: 'this.href += location.hash' };
 
 const navItems = slideOrder.slice(1).map((id) => ({ id, label: t(ui.nav[id]) }));
 ---
@@ -35,7 +39,7 @@ const navItems = slideOrder.slice(1).map((id) => ({ id, label: t(ui.nav[id]) }))
     }
   </nav>
 
-  <a class="lang-toggle" href={otherLangHref} onclick="this.href += location.hash" hreflang={lang === 'zh' ? 'en' : 'zh'}>
+  <a class="lang-toggle" href={otherLangHref} hreflang={lang === 'zh' ? 'en' : 'zh'} {...toggleAttrs}>
     {t(ui.langToggle)}
   </a>
 </header>
