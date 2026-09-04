@@ -21,6 +21,7 @@ import {
   profile,
   hero,
   about,
+  publications,
   join,
   footer,
 } from '../data/content';
@@ -148,9 +149,32 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
                     <li>{t(tag)}</li>
                   ))}
                 </ul>
-                <a class="btn btn-outline-sky btn-deck mt-4" href={`${base}/${theme.slug}/`}>
-                  {t(themeUi.viewTheme)} ↗
-                </a>
+                <div class="d-flex flex-wrap align-items-center gap-3 mt-4">
+                  <a class="btn btn-outline-sky btn-deck" href={`${base}/${theme.slug}/`}>
+                    {t(themeUi.viewTheme)} ↗
+                  </a>
+                  {theme.links.map((l) => (
+                    <a class="research-slide-link" href={l.href} target="_blank" rel="noopener">
+                      {l.label} ↗
+                    </a>
+                  ))}
+                </div>
+                {theme.pubDois.length > 0 && (
+                  <div class="research-slide-pubs mt-4">
+                    <p class="label mb-2">{t(themeUi.relatedPubs)}</p>
+                    <ul class="ps-0 mb-0">
+                      {publications
+                        .filter((p) => theme.pubDois.includes(p.doi))
+                        .map((pub) => (
+                          <li>
+                            <a href={`https://doi.org/${pub.doi}`} target="_blank" rel="noopener">
+                              {pub.venue} {pub.year} ↗
+                            </a>
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                )}
               </div>
               <div class="col-12 col-lg-5">
                 <div class="research-figure">
@@ -460,6 +484,36 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
     font-weight: 500;
     max-width: 40ch;
     margin-bottom: clamp(1rem, 2.5vh, 1.5rem);
+  }
+
+  .research-slide-link {
+    font-size: var(--text-small);
+    font-weight: 700;
+    color: var(--sky-deep);
+  }
+
+  .research-slide-pubs ul {
+    list-style: none;
+  }
+
+  .research-slide-pubs li {
+    padding: 0.35em 0;
+    border-top: var(--hairline-soft);
+    font-size: var(--text-small);
+  }
+
+  .research-slide-pubs li:first-child {
+    border-top: none;
+  }
+
+  .research-slide-pubs a {
+    color: var(--gray-1);
+    text-decoration: none;
+  }
+
+  .research-slide-pubs a:hover {
+    color: var(--sky);
+    text-decoration: underline;
   }
 
   .research-tags {
