@@ -329,6 +329,7 @@ export const tmuCourses: Course[] = [
     },
   },
   {
+    slug: 'bioinformatics',
     name: { zh: '生物資訊', en: 'Bioinformatics' },
     desc: {
       zh: '序列分析、基因體學到單細胞資料分析的入門，銜接實驗室目前的研究主題。',

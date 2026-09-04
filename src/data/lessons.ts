@@ -14,10 +14,11 @@ export interface LessonCase {
 
 export interface LessonModule {
   num: string; // e.g. 'M1'
-  weeks: string; // e.g. 'W1–W3'
+  weeks: string; // e.g. 'W1–W3' or a date '2026/09/30'
   name: L<string>;
   summary: L<string>;
-  case: LessonCase;
+  /** Featured translation case — optional (seminar-style courses may have none). */
+  case?: LessonCase;
 }
 
 export interface Lesson {
@@ -37,6 +38,76 @@ export const lessonUi = {
   backToCourses: { zh: '回課程總覽', en: 'Back to courses' },
   meetLab: { zh: '認識 ISB Lab', en: 'About ISB Lab' },
 } satisfies Record<string, L<string>>;
+
+export const bioinformatics: Lesson = {
+  slug: 'bioinformatics',
+  accent: 'leaf',
+  name: { zh: '生物資訊', en: 'Bioinformatics' },
+  tagline: {
+    zh: '從序列分析、基因體學到單細胞資料分析的入門，銜接實驗室目前的研究主題。',
+    en: 'From sequence analysis and genomics to single-cell data analysis, connecting directly to the lab’s current research.',
+  },
+  goal: {
+    zh: '從序列到細胞——走過基因體、轉錄體到單細胞與空間轉錄體的完整分析視野，銜接實驗室的研究主題。',
+    en: 'From sequences to cells—a full analytical arc through genomics, transcriptomics, single-cell and spatial data, connecting directly to the lab’s research.',
+  },
+  modules: [
+    {
+      num: 'M1',
+      weeks: '2026/09/30',
+      name: { zh: '定序技術', en: 'Sequencing Technologies' },
+      summary: {
+        zh: '次世代高通量定序（NGS）與第三代長讀取定序（PacBio、Oxford Nanopore）的原理與應用。',
+        en: 'Next-generation high-throughput sequencing (NGS) and third-generation long-read platforms (PacBio, Oxford Nanopore)—principles and applications.',
+      },
+    },
+    {
+      num: 'M2',
+      weeks: '2026/10/07',
+      name: { zh: '基因體組裝與比較基因體學', en: 'Genome Assembly & Comparative Genomics' },
+      summary: {
+        zh: 'Mapping、variant calling 與 synteny analysis；以 IGV、UCSC Genome Browser、Circos plots 進行視覺化。',
+        en: 'Mapping, variant calling and synteny analysis, visualized with IGV, UCSC Genome Browser and Circos plots.',
+      },
+    },
+    {
+      num: 'M3',
+      weeks: '2026/10/14',
+      name: { zh: '轉錄體學', en: 'Transcriptomics' },
+      summary: {
+        zh: '序列比對與定量——從 reads 到基因表現量的完整工作流程。',
+        en: 'Alignment and quantification—the full workflow from reads to gene expression.',
+      },
+    },
+    {
+      num: 'M4',
+      weeks: '2026/10/21',
+      name: { zh: '網路生物學', en: 'Network Biology' },
+      summary: {
+        zh: '生物系統的網路建模與分析——從蛋白質交互作用到基因調控網路。',
+        en: 'Network modeling of biological systems—from protein interactions to gene regulation.',
+      },
+    },
+    {
+      num: 'M5',
+      weeks: '2026/11/04',
+      name: { zh: '單細胞 RNA 定序分析', en: 'Single-Cell RNA-Seq' },
+      summary: {
+        zh: '降維與分群——在單細胞解析度下辨識細胞型態與狀態。',
+        en: 'Dimensionality reduction and clustering—identifying cell types and states at single-cell resolution.',
+      },
+    },
+    {
+      num: 'M6',
+      weeks: '2026/11/11',
+      name: { zh: '空間轉錄體學', en: 'Spatial Transcriptomics' },
+      summary: {
+        zh: '保留空間資訊的基因表現分析——把細胞放回組織原位。',
+        en: 'Gene expression with spatial context—putting cells back in place within the tissue.',
+      },
+    },
+  ],
+};
 
 export const dataStructuresAlgorithms: Lesson = {
   slug: 'data-structures-algorithms',

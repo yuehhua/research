@@ -80,21 +80,25 @@ const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
           lesson.modules.map((m) => (
             <article class="module">
               <div class="row g-4 g-lg-5">
-                <div class="col-12 col-lg-5">
-                  <p class="label module-weeks">{m.num} · {m.weeks}</p>
+                <div class={m.case ? 'col-12 col-lg-5' : 'col-12'}>
+                  <p class="label module-weeks">
+                    {m.num} · {m.weeks}
+                  </p>
                   <h2 class="module-name">{t(m.name)}</h2>
                   <p class="module-summary muted">{t(m.summary)}</p>
                 </div>
-                <div class="col-12 col-lg-7">
-                  <aside class="case-card">
-                    <p class="case-meta">
-                      <span class="case-week">{m.case.week}</span>
-                      <span class="label">{t(lessonUi.clinicalCase)}</span>
-                    </p>
-                    <h3 class="case-title">{t(m.case.title)}</h3>
-                    <p class="case-body muted mb-0">{t(m.case.body)}</p>
-                  </aside>
-                </div>
+                {m.case && (
+                  <div class="col-12 col-lg-7">
+                    <aside class="case-card">
+                      <p class="case-meta">
+                        <span class="case-week">{m.case.week}</span>
+                        <span class="label">{t(lessonUi.clinicalCase)}</span>
+                      </p>
+                      <h3 class="case-title">{t(m.case.title)}</h3>
+                      <p class="case-body muted mb-0">{t(m.case.body)}</p>
+                    </aside>
+                  </div>
+                )}
               </div>
             </article>
           ))
