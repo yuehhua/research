@@ -20,9 +20,10 @@ export const ui = {
     research: { zh: '研究', en: 'Research' },
     projects: { zh: '專案', en: 'Projects' },
     publications: { zh: '論文', en: 'Papers' },
-    teaching: { zh: '課程', en: 'Teaching' },
     join: { zh: '加入我們', en: 'Join us' },
   },
+  /* Every lesson slide shares one nav label — the active one glows. */
+  lessonNav: { zh: '課程', en: 'Lesson' },
   scrollHint: { zh: '捲動或按 ↓ 換頁', en: 'Scroll or press ↓' },
   langToggle: { zh: 'EN', en: '中文' },
   backToTop: { zh: '回封面', en: 'Back to top' },
@@ -30,13 +31,18 @@ export const ui = {
   currentFocus: { zh: '現況焦點', en: 'Current focus' },
 } as const;
 
+/* Lesson ids are the course slugs from src/data/lessons.ts; each renders
+   as its own deck slide between publications and join. */
 export const slideOrder = [
   'hero',
   'about',
   'research',
   'projects',
   'publications',
-  'teaching',
+  'discrete-math',
+  'data-structures-algorithms',
+  'bioinformatics',
+  'smart-healthcare-big-data',
   'join',
 ] as const;
 
@@ -301,56 +307,15 @@ export const publications: Pub[] = [
 ];
 
 /* ---------------------------------------------------------- */
-/* Teaching                                                    */
-/* ---------------------------------------------------------- */
-
-export interface Course {
-  name: L<string>;
-  desc: L<string>;
-  /** When set, the course card links to its dedicated lesson page (src/pages/lessons/<slug>). */
-  slug?: string;
-}
-
-export const tmuCourses: Course[] = [
-  {
-    slug: 'discrete-math',
-    name: { zh: '離散數學', en: 'Discrete Mathematics' },
-    desc: {
-      zh: '從邏輯與證明到圖論與組合最佳化；每週搭配臨床與生醫轉譯案例——醫療 AI 的邏輯誤區、GWAS 基因檢索、V(D)J 重組的組合學、德布魯因圖基因體組裝。',
-      en: 'From logic and proofs to graph theory and combinatorial optimization, with weekly clinical and biomedical translation cases—logic pitfalls in medical AI, GWAS retrieval, combinatorics of V(D)J recombination, de Bruijn-graph genome assembly.',
-    },
-  },
-  {
-    slug: 'data-structures-algorithms',
-    name: { zh: '資料結構與演算法', en: 'Data Structures and Algorithms' },
-    desc: {
-      zh: '記憶體模型到動態規劃的實作導向課程；每種資料結構都對應生醫應用——急診檢傷佇列（heap）、病房巡房名單（linked list）、醫學詞彙自動完成（Trie）。',
-      en: 'Implementation-driven course from memory models to dynamic programming; each data structure maps to a biomedical build—ER triage queues (heaps), ward round lists (linked lists), medical-term autocomplete (tries).',
-    },
-  },
-  {
-    slug: 'bioinformatics',
-    name: { zh: '生物資訊', en: 'Bioinformatics' },
-    desc: {
-      zh: '序列分析、基因體學到單細胞資料分析的入門，銜接實驗室目前的研究主題。',
-      en: 'From sequence analysis and genomics to single-cell data analysis, connecting directly to the lab’s current research.',
-    },
-  },
-  {
-    name: { zh: '智慧醫療大數據分析與實務', en: 'Big Data Analytics for Smart Healthcare' },
-    desc: {
-      zh: '醫療資料的取得、清理、分析到視覺化的完整實務流程。',
-      en: 'Hands-on pipeline for healthcare data: acquisition, cleaning, analysis and visualization.',
-    },
-  },
-];
-
-/* ---------------------------------------------------------- */
 /* Join us                                                     */
 /* ---------------------------------------------------------- */
 
 export const join = {
   heading: { zh: '招募大學部專題生', en: 'Undergraduate research openings' },
+  slogan: {
+    zh: '想要跟老師一起貢獻科學研究',
+    en: 'Contribute to science, side by side with your advisor',
+  },
   intro: {
     zh: 'ISB Lab 是 2026 年新成立的實驗室——加入我們，你會直接參與從零到一的研究。',
     en: 'ISB Lab was founded in 2026—join us and take part in research from day zero.',
@@ -364,7 +329,7 @@ export const join = {
   ] as L<string>[],
   weOffer: { zh: '我們提供', en: 'What we offer' },
   weOfferItems: [
-    { zh: '一對一指導與每週討論', en: 'One-on-one mentoring and weekly meetings' },
+    { zh: '老師親自指導，共同創造，每週一起討論', en: 'Direct guidance from the professor—co-creating, with weekly discussions' },
     { zh: '運算資源與研究環境', en: 'Compute resources and a research environment' },
     { zh: '成果路徑：競賽、研討會、論文與開源貢獻', en: 'Concrete outputs: competitions, conferences, papers, open source' },
     { zh: '研究所升學與職涯建議', en: 'Graduate-school and career advice' },

@@ -3,6 +3,7 @@
  * Header — fixed top bar: wordmark, section anchors (desktop), language toggle.
  */
 import { profile, ui, slideOrder } from '../data/content';
+import { lessonOrder } from '../data/lessons';
 
 interface Props {
   lang: 'zh' | 'en';
@@ -17,7 +18,13 @@ const otherLangHref = toggleHref ?? (lang === 'zh' ? `${base}/en/` : `${base}/`)
 /* On the deck the toggle preserves the current slide via the hash; on a lesson page it just swaps routes. */
 const toggleAttrs = toggleHref ? {} : { onclick: 'this.href += location.hash' };
 
-const navItems = slideOrder.slice(1).map((id) => ({ id, label: t(ui.nav[id]) }));
+/* Lesson slides each get a nav entry sharing one label (課程/Lesson);
+   the active slide's entry glows via the deck script's aria-current. */
+const navItems = slideOrder.slice(1).map((id) =>
+  (lessonOrder as readonly string[]).includes(id)
+    ? { id, label: t(ui.lessonNav) }
+    : { id, label: t(ui.nav[id as keyof typeof ui.nav]) },
+);
 ---
 
 <header class="site-header no-print">

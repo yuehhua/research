@@ -9,7 +9,18 @@ import puppeteer from 'puppeteer-core';
 import { mkdirSync } from 'node:fs';
 
 const BASE = 'http://localhost:4321/research';
-const SLIDES = ['hero', 'about', 'research', 'projects', 'publications', 'teaching', 'join'];
+const SLIDES = [
+  'hero',
+  'about',
+  'research',
+  'projects',
+  'publications',
+  'discrete-math',
+  'data-structures-algorithms',
+  'bioinformatics',
+  'smart-healthcare-big-data',
+  'join',
+];
 const VIEWPORTS = [
   { name: 'desktop', width: 1920, height: 1080 },
   { name: 'tablet', width: 768, height: 1024 },

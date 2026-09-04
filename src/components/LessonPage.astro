@@ -14,6 +14,7 @@ import Header from './Header.astro';
 import { profile, ui, type Lang } from '../data/content';
 import { lessonUi, type Lesson } from '../data/lessons';
 
+
 interface Props {
   lesson: Lesson;
   lang: Lang;
@@ -59,7 +60,7 @@ const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
         <Image src={heroImage} alt="" widths={[640, 1024, 1376]} sizes="100vw" loading="eager" class="hero-img" />
       </div>
       <div class="lesson-wrap hero-content">
-        <a class="crumb no-print" href={`${base}/#teaching`}>← {t(ui.nav.teaching)}</a>
+        <a class="crumb no-print" href={`${base}/#${lesson.slug}`}>← {t(ui.lessonNav)}</a>
         <p class="label hero-eyebrow">{t(lessonUi.heroEyebrow)}</p>
         <h1 class="slide__title lesson-title">{t(lesson.name)}</h1>
         <p class="hero-tagline muted">{t(lesson.tagline)}</p>
@@ -109,7 +110,7 @@ const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
     {/* ---------- Slim closing band ---------- */}
     <footer class="lesson-footer">
       <div class="lesson-wrap footer-row">
-        <a href={`${base}/#teaching`}>← {t(lessonUi.backToCourses)}</a>
+        <a href={`${base}/#${lesson.slug}`}>← {t(lessonUi.backToCourses)}</a>
         <a href={`${base}/#about`}>{t(lessonUi.meetLab)} ↗</a>
         <p class="footer-id mb-0">
           <strong>{profile.labShort}</strong> · {t(profile.affiliation)}

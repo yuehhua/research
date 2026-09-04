@@ -35,9 +35,18 @@ export const lessonUi = {
   goalLabel: { zh: '課程目標', en: 'Course goal' },
   courseMap: { zh: '課程地圖', en: 'Course map' },
   clinicalCase: { zh: '臨床與生醫轉譯', en: 'Clinical & biomedical translation' },
-  backToCourses: { zh: '回課程總覽', en: 'Back to courses' },
+  backToCourses: { zh: '回課程', en: 'Back to lessons' },
   meetLab: { zh: '認識 ISB Lab', en: 'About ISB Lab' },
+  viewCourse: { zh: '查看完整課程', en: 'View full course' },
 } satisfies Record<string, L<string>>;
+
+/** Deck order of the lesson slides (also their anchor ids in the deck). */
+export const lessonOrder = [
+  'discrete-math',
+  'data-structures-algorithms',
+  'bioinformatics',
+  'smart-healthcare-big-data',
+] as const;
 
 export const bioinformatics: Lesson = {
   slug: 'bioinformatics',
@@ -188,6 +197,58 @@ export const dataStructuresAlgorithms: Lesson = {
           zh: '把反應的能耗當作邊的權重，用 Dijkstra 在代謝網路中找出能量消耗最小的反應路徑。',
           en: 'Weight reactions by their energy cost and let Dijkstra find the cheapest path through the metabolic network.',
         },
+      },
+    },
+  ],
+};
+
+export const smartHealthcareBigData: Lesson = {
+  slug: 'smart-healthcare-big-data',
+  accent: 'sky',
+  name: { zh: '智慧醫療大數據分析與實務', en: 'Big Data Analytics for Smart Healthcare' },
+  tagline: {
+    zh: '醫療資料的取得、清理、分析到視覺化的完整實務流程。',
+    en: 'Hands-on pipeline for healthcare data: acquisition, cleaning, analysis and visualization.',
+  },
+  goal: {
+    zh: '從臨床場景出發，親手走過醫療大數據的完整實務——取得、清理、分析到視覺化。',
+    en: 'Starting from real clinical scenarios, work hands-on through healthcare big data—acquisition, cleaning, analysis and visualization.',
+  },
+  modules: [
+    {
+      num: 'M1',
+      weeks: '2026/09/15',
+      name: { zh: '基因體學介紹與臨床應用場景', en: 'Genomics & Clinical Scenarios' },
+      summary: {
+        zh: '基因體學基礎與臨床應用場景導覽。',
+        en: 'Foundations of genomics and a tour of clinical application scenarios.',
+      },
+    },
+    {
+      num: 'M2',
+      weeks: '2026/09/22',
+      name: { zh: '數據儲存庫與序列比對演算法', en: 'Data Repositories & Sequence Alignment' },
+      summary: {
+        zh: '公開基因體數據儲存庫，與序列比對演算法的核心邏輯。',
+        en: 'Public genomics data repositories and the core logic of sequence alignment algorithms.',
+      },
+    },
+    {
+      num: 'M3',
+      weeks: '2026/09/29',
+      name: { zh: '變異點偵測與基因標記', en: 'Variant Detection & Genetic Markers' },
+      summary: {
+        zh: '從定序資料偵測變異點，連結疾病風險的基因標記。',
+        en: 'Detecting variants from sequencing data and linking them to disease-risk markers.',
+      },
+    },
+    {
+      num: 'M4',
+      weeks: '2026/10/06',
+      name: { zh: '單細胞基因體學', en: 'Single-Cell Genomics' },
+      summary: {
+        zh: '在單細胞解析度下分析基因體數據。',
+        en: 'Analyzing genomic data at single-cell resolution.',
       },
     },
   ],

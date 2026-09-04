@@ -172,7 +172,9 @@ join       // { zh/en }: 條件、特質、CTA
 - [x] 課程一：離散數學（accent sky；5 模組×5 案例；背景 discrete_math_Gemini.png 1376×768 → webp 16–52KB）
 - [x] 課程二：資料結構與演算法（accent leaf；4 模組×4 案例；背景 data_structure_algo_Gemini.png 1408×768）
 - [x] 課程三：生物資訊（accent leaf；6 個日期模組、無案例卡——`LessonModule.case` 改為選填；背景 bioinfo_Gemini.png 1408×768）
-- [ ] 課程四：智慧醫療大數據分析與實務——大綱已收到（4 週：基因體學介紹→儲存庫與序列比對→變異點偵測→單細胞基因體學），**待主持人提供背景圖**
+- [x] 課程四：智慧醫療大數據分析與實務——deck slide 已上（sky-wash、4 模組 chips），**詳細頁待主持人提供背景圖**
+- [x] 課程總覽拆解（2026-09-04 晚）：2×2 卡片總覽 slide 移除，改為**每門課一頁 deck slide**（slideOrder: publications → 4 個課程 slug → join）；選單每門課一個「課程/Lesson」項目，作用中發光；`tmuCourses` 移除（lessons.ts 為唯一課程資料源）
+- [x] Join 頁：slogan「想要跟老師一起貢獻科學研究」；「一對一指導」→「老師親自指導，共同創造」
 **驗收**：✅ 全路由 build、零水平溢出 390–1920、snap=none、語言切換指向兄弟頁、pixel sampling 確認 hero（天空藍/葉綠）/scrim/footer
 
 ## 11. 設計理由（為何這樣做）
