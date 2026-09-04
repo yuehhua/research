@@ -18,13 +18,26 @@ const otherLangHref = toggleHref ?? (lang === 'zh' ? `${base}/en/` : `${base}/`)
 /* On the deck the toggle preserves the current slide via the hash; on a lesson page it just swaps routes. */
 const toggleAttrs = toggleHref ? {} : { onclick: 'this.href += location.hash' };
 
-/* Lesson slides each get a nav entry sharing one label (課程/Lesson);
-   the active slide's entry glows via the deck script's aria-current. */
-const navItems = slideOrder.slice(1).map((id) =>
-  (lessonOrder as readonly string[]).includes(id)
-    ? { id, label: t(ui.lessonNav) }
-    : { id, label: t(ui.nav[id as keyof typeof ui.nav]) },
-);
+/* One nav entry for all lessons (label 課程/Lesson, links to the first
+   lesson slide). It glows while any lesson slide is active — the deck
+   script matches via data-nav-group. Join stays the bordered CTA. */
+const isLesson = (id: string) => (lessonOrder as readonly string[]).includes(id);
+const navItems: { href: string; label: string; navId?: string; group?: string; cta?: boolean }[] = [];
+for (const id of slideOrder.slice(1)) {
+  if (isLesson(id)) {
+    if (!navItems.some((n) => n.group)) {
+      navItems.push({
+        href: `${base}/#${lessonOrder[0]}`,
+        label: t(ui.lessonNav),
+        group: (lessonOrder as readonly string[]).join(','),
+      });
+    }
+  } else if (id === 'join') {
+    navItems.push({ href: `${base}/`, label: t(ui.nav.join), navId: id, cta: true });
+  } else {
+    navItems.push({ href: `${base}/#${id}`, label: t(ui.nav[id as keyof typeof ui.nav]), navId: id });
+  }
+}
 ---
 
 <header class="site-header no-print">
@@ -35,11 +48,7 @@ const navItems = slideOrder.slice(1).map((id) =>
   <nav class="site-nav d-none d-lg-flex gap-3 gap-xl-4" aria-label={lang === 'zh' ? '區塊導覽' : 'Sections'}>
     {
       navItems.map((item) => (
-        <a
-          href={item.id === 'join' ? `${base}/` : `${base}/#${item.id}`}
-          class={item.id === 'join' ? 'nav-cta' : ''}
-          data-nav={item.id}
-        >
+        <a href={item.href} class={item.cta ? 'nav-cta' : ''} data-nav={item.navId} data-nav-group={item.group}>
           {item.label}
         </a>
       ))

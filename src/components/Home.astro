@@ -296,7 +296,8 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
     <script>
       // Deck behavior: active-slide tracking (header nav glow), keyboard navigation.
       const slides = Array.from(document.querySelectorAll<HTMLElement>('[data-slide]'));
-      const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-nav]'));
+      // .site-nav a covers both single entries ([data-nav]) and the grouped Lesson entry ([data-nav-group])
+      const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('.site-nav a'));
       const hint = document.querySelector<HTMLElement>('[data-hint]');
 
       let idx = 0;
@@ -304,8 +305,11 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
       function render(): void {
         const current = slides[idx]?.id;
         navLinks.forEach((a) => {
-          // Cover (hero) has no nav entry, so nothing is highlighted there.
-          if (a.dataset.nav === current) a.setAttribute('aria-current', 'true');
+          // The single Lesson entry matches any lesson slide via data-nav-group;
+          // other entries match their own slide. Cover (hero) highlights none.
+          const group = a.dataset.navGroup?.split(',');
+          const on = group ? group.includes(current) : a.dataset.nav === current;
+          if (on) a.setAttribute('aria-current', 'true');
           else a.removeAttribute('aria-current');
         });
         hint?.classList.toggle('is-visible', idx === 0);
