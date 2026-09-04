@@ -171,8 +171,8 @@ join       // { zh/en }: 條件、特質、CTA
 - [x] 首頁課程卡片經 `Course.slug` 連結 lesson 頁
 - [x] 課程一：離散數學（accent sky；5 模組×5 案例；背景 discrete_math_Gemini.png 1376×768 → webp 16–52KB）
 - [x] 課程二：資料結構與演算法（accent leaf；4 模組×4 案例；背景 data_structure_algo_Gemini.png 1408×768）
-- [ ] 課程三：生物資訊——背景圖已備（bioinfo_Gemini.png），**大綱資料夾為空，待主持人提供 syllabus**
-- [ ] 課程四：智慧醫療大數據分析與實務——尚無背景圖與大綱
+- [x] 課程三：生物資訊（accent leaf；6 個日期模組、無案例卡——`LessonModule.case` 改為選填；背景 bioinfo_Gemini.png 1408×768）
+- [ ] 課程四：智慧醫療大數據分析與實務——大綱已收到（4 週：基因體學介紹→儲存庫與序列比對→變異點偵測→單細胞基因體學），**待主持人提供背景圖**
 **驗收**：✅ 全路由 build、零水平溢出 390–1920、snap=none、語言切換指向兄弟頁、pixel sampling 確認 hero（天空藍/葉綠）/scrim/footer
 
 ## 11. 設計理由（為何這樣做）
