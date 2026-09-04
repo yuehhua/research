@@ -321,6 +321,7 @@ export const tmuCourses: Course[] = [
     },
   },
   {
+    slug: 'data-structures-algorithms',
     name: { zh: '資料結構與演算法', en: 'Data Structures and Algorithms' },
     desc: {
       zh: '記憶體模型到動態規劃的實作導向課程；每種資料結構都對應生醫應用——急診檢傷佇列（heap）、病房巡房名單（linked list）、醫學詞彙自動完成（Trie）。',

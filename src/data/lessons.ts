@@ -38,6 +38,90 @@ export const lessonUi = {
   meetLab: { zh: '認識 ISB Lab', en: 'About ISB Lab' },
 } satisfies Record<string, L<string>>;
 
+export const dataStructuresAlgorithms: Lesson = {
+  slug: 'data-structures-algorithms',
+  accent: 'leaf',
+  name: { zh: '資料結構與演算法', en: 'Data Structures and Algorithms' },
+  tagline: {
+    zh: '記憶體模型到動態規劃的實作導向課程；每種資料結構都對應生醫應用——急診檢傷佇列（heap）、病房巡房名單（linked list）、醫學詞彙自動完成（Trie）。',
+    en: 'Implementation-driven course from memory models to dynamic programming; each data structure maps to a biomedical build—ER triage queues (heaps), ward round lists (linked lists), medical-term autocomplete (tries).',
+  },
+  goal: {
+    zh: '將邏輯化為演算法，並解決問題——每種資料結構都親手實作一次，用程式把抽象結構變成可運作的系統。',
+    en: 'Turn logic into algorithms that solve problems—implement every data structure yourself and build abstract structures into working systems.',
+  },
+  modules: [
+    {
+      num: 'M1',
+      weeks: 'W1–W4',
+      name: { zh: '基礎線性資料結構與記憶體操作', en: 'Linear Structures & Memory' },
+      summary: {
+        zh: '記憶體模型、陣列與指標、堆疊佇列與鏈結串列——親手操作記憶體，理解資料「怎麼被放」。',
+        en: 'Memory models, arrays and pointers, stacks/queues and linked lists—handle memory yourself and see how data actually lives.',
+      },
+      case: {
+        week: 'W4',
+        title: { zh: '病房巡房名單', en: 'The ward-round list' },
+        body: {
+          zh: '以鏈結串列實作可動態增刪病患的巡房名單——出入院只是改兩個指標的事。',
+          en: 'A linked-list ward-round list that grows and shrinks with every admission—insertion and deletion are just a couple of pointer updates.',
+        },
+      },
+    },
+    {
+      num: 'M2',
+      weeks: 'W5–W7',
+      name: { zh: '搜尋與樹狀結構', en: 'Search & Trees' },
+      summary: {
+        zh: '從二分搜尋到二元搜尋樹與字典樹——把「找東西」變成對數時間的藝術。',
+        en: 'From binary search to BSTs and tries—turning “look it up” into logarithmic-time art.',
+      },
+      case: {
+        week: 'W6',
+        title: { zh: '醫學詞彙自動完成', en: 'Medical autocomplete' },
+        body: {
+          zh: '輸入法為什麼能在一毫秒內跳出 “Taipei”？用 Trie（字典樹）為醫學專有名詞與基因片段打造自動完成檢索。',
+          en: 'How does a keyboard suggest “Taipei” in a millisecond? Build autocomplete for medical terms and genetic motifs with a trie.',
+        },
+      },
+    },
+    {
+      num: 'M3',
+      weeks: 'W8–W13',
+      name: { zh: '排序與動態規劃', en: 'Sorting & Dynamic Programming' },
+      summary: {
+        zh: '分治、堆積、貪婪到動態規劃——從排序的極限走向最佳化問題的核心方法。',
+        en: 'Divide-and-conquer, heaps, greedy and dynamic programming—from the limits of sorting to the core of optimization.',
+      },
+      case: {
+        week: 'W9',
+        title: { zh: '急診檢傷佇列', en: 'The ER triage queue' },
+        body: {
+          zh: '以 Max-Heap 實作急診檢傷分類佇列，確保最危險的病患永遠排在隊伍最前面。',
+          en: 'A max-heap triage queue for the emergency room, guaranteeing the most critical patient is always first in line.',
+        },
+      },
+    },
+    {
+      num: 'M4',
+      weeks: 'W14–W16',
+      name: { zh: '圖論演算法', en: 'Graph Algorithms' },
+      summary: {
+        zh: '圖的走訪、拓撲排序與最短路徑——用圖建模一切會連動的系統。',
+        en: 'Traversals, topological sort and shortest paths—modeling any system that connects.',
+      },
+      case: {
+        week: 'W15',
+        title: { zh: '代謝網路的最短路徑', en: 'Shortest paths in metabolism' },
+        body: {
+          zh: '把反應的能耗當作邊的權重，用 Dijkstra 在代謝網路中找出能量消耗最小的反應路徑。',
+          en: 'Weight reactions by their energy cost and let Dijkstra find the cheapest path through the metabolic network.',
+        },
+      },
+    },
+  ],
+};
+
 export const discreteMath: Lesson = {
   slug: 'discrete-math',
   accent: 'sky',

@@ -168,9 +168,12 @@ join       // { zh/en }: 條件、特質、CTA
 ### Stage 5：課程獨立頁（lesson pages）✔️ 完成（2026-09-04）
 - [x] 資料模型 `src/data/lessons.ts`（bilingual）：模組總覽＋每模組一個精選臨床轉譯案例；**不放**經營資訊（教科書/時數/配分——主持人明確拒絕）
 - [x] `LessonPage.astro` 共用元件（一般捲動頁、`html.no-snap` 脫離 deck snap、per-lesson accent sky|leaf）
-- [x] 首頁課程卡片經 `Course.slug` 連結 lesson 頁（首批：離散數學）
-- [x] 主持人設計的背景圖（discrete_math_Gemini.png 天空藍 1376×768 → webp 16–52KB；data_structure_algo_Gemini.png 葉綠 1408×768 備用）
-**驗收**：✅ 4 路由 build、零水平溢出 390–1920、snap=none、語言切換指向兄弟頁、5 模組×5 案例卡、pixel sampling 確認 hero/scrim/footer
+- [x] 首頁課程卡片經 `Course.slug` 連結 lesson 頁
+- [x] 課程一：離散數學（accent sky；5 模組×5 案例；背景 discrete_math_Gemini.png 1376×768 → webp 16–52KB）
+- [x] 課程二：資料結構與演算法（accent leaf；4 模組×4 案例；背景 data_structure_algo_Gemini.png 1408×768）
+- [ ] 課程三：生物資訊——背景圖已備（bioinfo_Gemini.png），**大綱資料夾為空，待主持人提供 syllabus**
+- [ ] 課程四：智慧醫療大數據分析與實務——尚無背景圖與大綱
+**驗收**：✅ 全路由 build、零水平溢出 390–1920、snap=none、語言切換指向兄弟頁、pixel sampling 確認 hero（天空藍/葉綠）/scrim/footer
 
 ## 11. 設計理由（為何這樣做）
 
