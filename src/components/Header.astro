@@ -24,7 +24,11 @@ const navItems = slideOrder.slice(1).map((id) => ({ id, label: t(ui.nav[id]) }))
   <nav class="site-nav d-none d-lg-flex gap-3 gap-xl-4" aria-label={lang === 'zh' ? '區塊導覽' : 'Sections'}>
     {
       navItems.map((item) => (
-        <a href={item.id === 'join' ? `${base}/` : `${base}/#${item.id}`} class={item.id === 'join' ? 'nav-cta' : ''}>
+        <a
+          href={item.id === 'join' ? `${base}/` : `${base}/#${item.id}`}
+          class={item.id === 'join' ? 'nav-cta' : ''}
+          data-nav={item.id}
+        >
           {item.label}
         </a>
       ))
@@ -74,11 +78,23 @@ const navItems = slideOrder.slice(1).map((id) => ({ id, label: t(ui.nav[id]) }))
     color: var(--gray-1);
     padding: 0.25em 0;
     border-bottom: 1px solid transparent;
+    transition:
+      color 0.25s var(--ease-out),
+      border-color 0.25s var(--ease-out),
+      text-shadow 0.25s var(--ease-out);
   }
 
   .site-nav a:hover {
     color: var(--ink);
     border-bottom-color: var(--ink);
+  }
+
+  /* Current slide: its nav entry lights up with a sky glow.
+     Set by the deck script in Home.astro (aria-current). Cover shows none. */
+  .site-nav a[aria-current='true'] {
+    color: var(--sky-deep);
+    border-bottom-color: var(--sky);
+    text-shadow: 0 0 14px rgba(25, 113, 194, 0.55);
   }
 
   .site-nav a.nav-cta {
@@ -87,10 +103,12 @@ const navItems = slideOrder.slice(1).map((id) => ({ id, label: t(ui.nav[id]) }))
     padding: 0.5em 1em;
   }
 
-  .site-nav a.nav-cta:hover {
+  .site-nav a.nav-cta:hover,
+  .site-nav a.nav-cta[aria-current='true'] {
     background: var(--sky);
     border-color: var(--sky);
     color: var(--paper);
+    text-shadow: none;
   }
 
   .lang-toggle {

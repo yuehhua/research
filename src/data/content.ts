@@ -91,16 +91,16 @@ export const hero = {
 export const about = {
   bio: [
     {
-      zh: '杜岳華是計算生物學家，專長機器學習與深度學習模型設計。他以系統生物學的觀點解析生物問題——從基因調控網路、RNA velocity 到虛擬細胞（virtual cell）——研究細胞命運決定背後的動力學法則。',
-      en: 'Yueh-Hua Tu is a computational biologist specializing in machine learning and deep learning model design. He takes a systems-level view of biology—from gene regulatory networks and RNA velocity to virtual cells—to uncover the dynamics that govern cell-fate decisions.',
+      zh: '杜岳華是計算生物學家，專長機器學習與深度學習模型設計。他以系統生物學的觀點解析生物問題——從基因調控網路、RNA velocity 到虛擬細胞（virtual cell）——研究細胞命運決定背後的動力學法則。他致力以 AI 解構生命的運作原理，拓展疾病模型，推進對於疾病的理解。',
+      en: 'Yueh-Hua Tu is a computational biologist specializing in machine learning and deep learning model design. He takes a systems-level view of biology—from gene regulatory networks and RNA velocity to virtual cells—to uncover the dynamics that govern cell-fate decisions. He aims to deconstruct the operating principles of life with AI, expand disease models, and advance our understanding of disease.',
     },
     {
       zh: '他的背景橫跨資訊工程與生物醫學：一方面寫程式、設計模型、打造高效能運算框架，一方面理解實驗科學的語言與限制。這樣的雙重訓練，讓他習慣把濕實驗室的問題轉譯成可計算的問題——細菌基因體、全基因體關聯分析、單細胞轉錄體到生成式細胞模型，都在他處理過的資料光譜上。',
       en: 'His background bridges computer engineering and biomedicine: he writes code, designs models and builds high-performance computing frameworks, while speaking the language—and respecting the limits—of experimental science. This dual training makes him fluent in translating bench-side questions into computable ones; bacterial genomes, genome-wide association studies, single-cell transcriptomes and generative cell models all sit on his data spectrum.',
     },
     {
-      zh: '他也是 Julia Taiwan 社群共同創辦人與開源貢獻者——GeometricFlux.jl 是 Julia 官方機器學習生態系 Flux.jl 的幾何深度學習庫。他致力以 AI 解構生命的運作原理，拓展疾病模型，推進對於疾病的理解。',
-      en: 'He co-founded the Julia Taiwan community and contributes to open source—GeometricFlux.jl is the geometric deep learning library of the official Julia ML ecosystem, Flux.jl. He aims to deconstruct the operating principles of life with AI, expand disease models, and advance our understanding of disease.',
+      zh: '他也是 Julia Taiwan 社群共同創辦人與開源貢獻者——GeometricFlux.jl 是 Julia 官方機器學習生態系 Flux.jl 的幾何深度學習庫。',
+      en: 'He co-founded the Julia Taiwan community and contributes to open source—GeometricFlux.jl is the geometric deep learning library of the official Julia ML ecosystem, Flux.jl.',
     },
   ] as L<string>[],
 };

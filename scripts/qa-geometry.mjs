@@ -1,7 +1,7 @@
 /**
  * qa-geometry.mjs — deterministic layout QA via DOM measurement.
  * Checks: horizontal overflow, slide heights vs viewport, element overlaps,
- * chrome (header/dots/counter) presence. No vision needed.
+ * chrome (header) presence. No vision needed.
  *
  * Usage: node scripts/qa-geometry.mjs   (expects `npm run preview` on :4321)
  */
@@ -66,11 +66,8 @@ for (const vp of VIEWPORTS) {
         out.overlaps.push({ pair: 'portrait×bio', ix: Math.round(ix), iy: Math.round(iy) });
       }
 
-      // header / dots in viewport
-      for (const [key, sel] of [
-        ['header', '.site-header'],
-        ['dots', '.dots'],
-      ]) {
+      // header in viewport
+      for (const [key, sel] of [['header', '.site-header']]) {
         const el = document.querySelector(sel);
         if (!el) { out.chrome[key] = { missing: true }; continue; }
         const r = el.getBoundingClientRect();
