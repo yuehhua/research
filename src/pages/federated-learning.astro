@@ -1,7 +1,0 @@
----
-import ResearchPage from '../components/ResearchPage.astro';
-import { researchThemes, visuals, themeImages } from '../data/research';
-
-const theme = researchThemes.find((t) => t.slug === 'federated-learning')!;
----
-<ResearchPage theme={theme} lang="zh" visual={themeImages['federated-learning']} alt={visuals['federated-learning'].alt.zh} credit={visuals['federated-learning'].credit?.zh} />

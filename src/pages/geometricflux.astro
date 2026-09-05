@@ -1,7 +1,0 @@
----
-import ResearchPage from '../components/ResearchPage.astro';
-import { researchThemes, visuals, themeImages } from '../data/research';
-
-const theme = researchThemes.find((t) => t.slug === 'geometricflux')!;
----
-<ResearchPage theme={theme} lang="zh" visual={themeImages['geometricflux']} alt={visuals['geometricflux'].alt.zh} credit={visuals['geometricflux'].credit?.zh} />

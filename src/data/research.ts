@@ -1,8 +1,8 @@
 /**
  * research.ts — featured research themes (主題研究).
- * Deck: the #research slide shows one card per theme; each theme links to
- * its detail page (ResearchPage.astro). Related publications reference
- * content.ts `publications` by DOI (single source, no duplication).
+ * Deck: one slide per theme (title, one-liner, 領域標籤, visual figure).
+ * External actions link straight out (challenge site / GitHub / paper) —
+ * no detail pages. Full publication list lives at /publications/.
  */
 import type { ImageMetadata } from 'astro';
 import veImg from '../assets/research/virtual-embryo-task2.webp';
@@ -23,28 +23,22 @@ export interface ResearchTheme {
   slug: string;
   accent: 'sky' | 'leaf';
   name: L<string>;
-  status: L<string>; // e.g. 進行中 · 開源
-  short: L<string>; // card one-liner
-  desc: L<string>; // detail-page description
-  metrics: { value: string; label: L<string> }[];
-  links: { label: string; href: string }[];
+  short: L<string>; // slide one-liner
+  desc: L<string>; // kept for future use (e.g. detail pages)
+  metrics: { value: string; label: L<string> }[]; // kept for future use
+  links: { label: string; href: string }[]; // e.g. Paper ↗ / GitHub ↗
   tags: L<string>[]; // 領域標籤
-  pubDois: string[]; // related publications, resolved against content.ts
+  /** When set, the slide CTA links straight here (external site / repo). */
+  externalCta?: { label: L<string>; href: string };
 }
 
 export interface ResearchVisual {
-  file: string; // src/assets/research/<file>
   alt: L<string>;
-  credit?: L<string>;
 }
 
 export const themeUi = {
   sectionTitle: { zh: '主題研究', en: 'Featured research' },
-  viewTheme: { zh: '查看主題', en: 'View theme' },
-  backToResearch: { zh: '回主題研究', en: 'Back to research' },
   meetLab: { zh: '認識 ISB Lab', en: 'About ISB Lab' },
-  allPubs: { zh: '全部論文', en: 'All publications' },
-  relatedPubs: { zh: '相關論文', en: 'Related publications' },
   pubHeading: { zh: '論文', en: 'Publications' },
   pubIntro: {
     zh: '完整出版清單，依年份排列。',
@@ -58,7 +52,6 @@ export const researchThemes: ResearchTheme[] = [
     slug: 'virtual-embryo',
     accent: 'sky',
     name: { zh: 'Virtual Embryo Challenge', en: 'Virtual Embryo Challenge' },
-    status: { zh: 'NeurIPS 2026 競賽 · 進行中', en: 'NeurIPS 2026 Competition · In progress' },
     short: {
       zh: '預測胚胎發育的時空基因表現動態——哺乳類發育的預測式數位分身。',
       en: 'Predicting spatiotemporal gene expression across embryogenesis—a predictive digital twin.',
@@ -72,19 +65,21 @@ export const researchThemes: ResearchTheme[] = [
       { value: '11', label: { zh: '發育時間點', en: 'time points' } },
       { value: '3', label: { zh: '任務', en: 'tasks' } },
     ],
-    links: [{ label: 'virtualembryo.ai', href: 'https://virtualembryo.ai/challenge' }],
+    links: [],
     tags: [
       { zh: '計算生物學', en: 'Computational biology' },
       { zh: '空間轉錄體', en: 'Spatial transcriptomics' },
       { zh: '數位分身', en: 'Digital twins' },
     ],
-    pubDois: ['10.7554/eLife.75148'],
+    externalCta: {
+      label: { zh: '前往競賽網站', en: 'Go to the challenge' },
+      href: 'https://virtualembryo.ai/challenge',
+    },
   },
   {
     slug: 'geometricflux',
     accent: 'leaf',
     name: { zh: 'GeometricFlux.jl', en: 'GeometricFlux.jl' },
-    status: { zh: '開源 · Julia 官方生態系', en: 'Open source · official Julia ecosystem' },
     short: {
       zh: 'Julia 官方生態系的幾何深度學習與圖神經網路庫。',
       en: 'Geometric deep learning and graph neural networks for the official Julia ecosystem.',
@@ -98,19 +93,21 @@ export const researchThemes: ResearchTheme[] = [
       { value: '10+', label: { zh: '圖卷積層', en: 'graph conv layers' } },
       { value: 'CPU/CUDA', label: { zh: '雙後端', en: 'dual backends' } },
     ],
-    links: [{ label: 'GitHub', href: 'https://github.com/FluxML/GeometricFlux.jl' }],
+    links: [],
     tags: [
       { zh: '幾何深度學習', en: 'Geometric deep learning' },
       { zh: '圖神經網路', en: 'Graph neural networks' },
       { zh: '開源軟體', en: 'Open-source software' },
     ],
-    pubDois: [],
+    externalCta: {
+      label: { zh: 'GitHub', en: 'GitHub' },
+      href: 'https://github.com/FluxML/GeometricFlux.jl',
+    },
   },
   {
     slug: 'federated-learning',
     accent: 'sky',
     name: { zh: '聯邦式學習', en: 'Federated Learning' },
-    status: { zh: 'RAFAEL · Taiwan AI Labs 2023–2024', en: 'RAFAEL · Taiwan AI Labs 2023–2024' },
     short: {
       zh: '資料不出本地的安全多方運算——RAFAEL 聯邦式 GWAS 框架。',
       en: 'Secure multi-party analytics with data never leaving home—RAFAEL, a federated GWAS framework.',
@@ -131,18 +128,11 @@ export const researchThemes: ResearchTheme[] = [
       { zh: 'GWAS', en: 'GWAS' },
       { zh: '隱私運算', en: 'Privacy-preserving computation' },
     ],
-    pubDois: [
-      '10.1016/j.jmii.2020.12.007',
-      '10.3201/eid2601.190934',
-      '10.3201/eid2501.181103',
-      '10.1128/AAC.00213-18',
-    ],
   },
   {
     slug: 'cdgrn',
     accent: 'leaf',
     name: { zh: 'CDGRN', en: 'CDGRN' },
-    status: { zh: '博士研究 · Briefings in Bioinformatics 2023', en: 'Ph.D. research · Briefings in Bioinformatics 2023' },
     short: {
       zh: '首個整合基因調控網路與細胞軌跡推論的方法（CDGRNs.jl）。',
       en: 'The first method unifying gene regulatory network and trajectory inference (CDGRNs.jl).',
@@ -161,32 +151,23 @@ export const researchThemes: ResearchTheme[] = [
       { zh: '機器學習演算法設計', en: 'Machine learning algorithm design' },
       { zh: '單細胞體學資料分析', en: 'Single-cell omics data analysis' },
     ],
-    pubDois: ['10.1093/bib/bbac633', '10.1186/s12864-021-08092-1'],
   },
 ];
 
 export const visuals: Record<string, ResearchVisual> = {
   'virtual-embryo': {
-    file: 'virtual-embryo-task2.webp',
     alt: {
       zh: 'Virtual Embryo Challenge 任務示意：胚胎 3D MERFISH 點雲',
       en: 'Virtual Embryo Challenge task: 3D MERFISH point clouds of embryos',
     },
-    credit: {
-      zh: '視覺素材：Virtual Embryo Challenge',
-      en: 'Visual: Virtual Embryo Challenge',
-    },
   },
   geometricflux: {
-    file: 'geometricflux-logo.png',
     alt: { zh: 'GeometricFlux.jl 標誌', en: 'GeometricFlux.jl logo' },
   },
   'federated-learning': {
-    file: 'rafael-logo.png',
     alt: { zh: 'RAFAEL 標誌', en: 'RAFAEL logo' },
   },
   cdgrn: {
-    file: 'cdgrn-concept.svg',
     alt: { zh: 'CDGRN 方法概念圖', en: 'CDGRN method concept diagram' },
   },
 };

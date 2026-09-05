@@ -1,7 +1,0 @@
----
-import ResearchPage from '../../components/ResearchPage.astro';
-import { researchThemes, visuals, themeImages } from '../../data/research';
-
-const theme = researchThemes.find((t) => t.slug === 'cdgrn')!;
----
-<ResearchPage theme={theme} lang="en" visual={themeImages['cdgrn']} alt={visuals['cdgrn'].alt.en} credit={visuals['cdgrn'].credit?.en} />
