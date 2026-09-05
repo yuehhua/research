@@ -205,3 +205,10 @@ join       // { zh/en }: 條件、特質、CTA
 - 論文 DOI/PubMed 連結於 Stage 2 逐篇查證
 - 部署 token 設定需主持人操作（屆時提供步驟）
 - Hero 標語草稿（zh：「以智慧系統觀點，解碼生命」/ en: "Decoding life through the lens of intelligent systems"）——實作後給主持人替換確認
+
+### Stage 8：搬遷 /research → /lab ＋論文頁升根目錄 ✔️（2026-09-05）
+- [x] astro base '/lab'；QA scripts preview URL 同步
+- [x] 論文頁部署於部落格根目錄 `/publications/`（+`/en/publications/`）：workflow 從 /lab build 複製出去；選單「論文」與 canonical 改根目錄絕對路徑
+- [x] workflow 四步：dist→lab、publications→根、en/publications→根、空目錄→research（清除舊站）
+- [x] ⚠️ 部落格 `_config.yml` keep_files 需改為 `keep_files: lab publications en`
+**驗收**：build/桌機 11 頁門檻全綠；線上 /lab/ 200、/publications/ 200、/en/publications/ 200、/research/ 404

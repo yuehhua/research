@@ -48,9 +48,9 @@ for (const id of slideOrder.slice(1)) {
       });
     }
   } else if (id === 'join') {
-    // The full publication list lives off-deck; its nav entry is a page link.
+    // The publication list lives at the blog root (outside the /lab base).
     navItems.push({
-      href: `${lang === 'zh' ? base : `${base}/en`}/publications/`,
+      href: lang === 'zh' ? '/publications/' : '/en/publications/',
       label: t(ui.nav.publications),
       navId: 'publications',
     });

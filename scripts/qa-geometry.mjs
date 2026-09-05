@@ -7,7 +7,7 @@
  */
 import puppeteer from 'puppeteer-core';
 
-const BASE = 'http://localhost:4321/research';
+const BASE = 'http://localhost:4321/lab';
 const SLIDES = [
   'hero',
   'about',

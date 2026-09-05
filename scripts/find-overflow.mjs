@@ -3,7 +3,7 @@ const browser = await puppeteer.launch({ executablePath: '/usr/bin/google-chrome
 for (const vp of [{w:768,h:1024},{w:390,h:844}]) {
   const page = await browser.newPage();
   await page.setViewport({ width: vp.w, height: vp.h });
-  await page.goto('http://localhost:4321/research/', { waitUntil: 'networkidle0' });
+  await page.goto('http://localhost:4321/lab/', { waitUntil: 'networkidle0' });
   const culprits = await page.evaluate((vw) => {
     const out = [];
     for (const el of document.querySelectorAll('body *')) {

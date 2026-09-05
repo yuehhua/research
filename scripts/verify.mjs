@@ -8,7 +8,7 @@
 import puppeteer from 'puppeteer-core';
 import { mkdirSync } from 'node:fs';
 
-const BASE = 'http://localhost:4321/research';
+const BASE = 'http://localhost:4321/lab';
 const SLIDES = [
   'hero',
   'about',

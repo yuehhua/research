@@ -1,4 +1,4 @@
-name: Deploy to yuehhua.github.io/research
+name: Deploy to yuehhua.github.io
 
 on:
   push:
@@ -27,12 +27,48 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Publish dist/ to blog repo research/ directory
+      # The site lives at /lab/ …
+      - name: Publish dist/ to blog repo lab/ directory
         uses: peaceiris/actions-gh-pages@v4
         with:
           personal_token: ${{ secrets.DEPLOY_TOKEN }}
           external_repository: yuehhua/yuehhua.github.io
           publish_branch: master
           publish_dir: ./dist
-          destination_dir: research
+          destination_dir: lab
           commit_message: 'Deploy ISB Lab site (${{ github.sha }})'
+
+      # … while the publication list is served from the blog root.
+      - name: Publish publications/ to blog root
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.DEPLOY_TOKEN }}
+          external_repository: yuehhua/yuehhua.github.io
+          publish_branch: master
+          publish_dir: ./dist/publications
+          destination_dir: publications
+          commit_message: 'Deploy publications (${{ github.sha }})'
+
+      - name: Publish en/publications/ to blog root
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.DEPLOY_TOKEN }}
+          external_repository: yuehhua/yuehhua.github.io
+          publish_branch: master
+          publish_dir: ./dist/en/publications
+          destination_dir: en/publications
+          commit_message: 'Deploy en publications (${{ github.sha }})'
+
+      # The site moved /research → /lab; wipe the old directory (publishing an
+      # empty source dir makes peaceiris delete the destination's contents).
+      - name: Remove legacy research/ directory
+        run: mkdir -p ./empty
+      - name: Wipe research/
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.DEPLOY_TOKEN }}
+          external_repository: yuehhua/yuehhua.github.io
+          publish_branch: master
+          publish_dir: ./empty
+          destination_dir: research
+          commit_message: 'Remove legacy research/ (site moved to /lab) (${{ github.sha }})'
