@@ -77,6 +77,29 @@ export const researchThemes: ResearchTheme[] = [
     },
   },
   {
+    slug: 'cdgrn',
+    accent: 'leaf',
+    name: { zh: 'CDGRN', en: 'CDGRN' },
+    short: {
+      zh: '首個整合基因調控網路與細胞軌跡推論的方法（CDGRNs.jl）。',
+      en: 'The first method unifying gene regulatory network and trajectory inference (CDGRNs.jl).',
+    },
+    desc: {
+      zh: '第一個整合基因調控網路推論與細胞軌跡推論的方法：以高斯混合模型與未剪接轉錄體（unspliced transcripts）推導情境相依的調控動力學，同時解釋細胞命運軌跡。發表於 Briefings in Bioinformatics。',
+      en: 'The first method unifying gene regulatory network inference with trajectory inference: a Gaussian-mixture model over unspliced transcripts derives context-dependent regulatory dynamics while explaining cell-fate trajectories. Published in Briefings in Bioinformatics.',
+    },
+    metrics: [{ value: 'GRN + TI', label: { zh: '首個整合方法', en: 'first unified method' } }],
+    links: [
+      { label: 'Paper', href: 'https://doi.org/10.1093/bib/bbac633' },
+      { label: 'GitHub', href: 'https://github.com/yuehhua/CDGRNs.jl' },
+    ],
+    tags: [
+      { zh: '計算生物學', en: 'Computational biology' },
+      { zh: '機器學習演算法設計', en: 'Machine learning algorithm design' },
+      { zh: '單細胞體學資料分析', en: 'Single-cell omics data analysis' },
+    ],
+  },
+  {
     slug: 'geometricflux',
     accent: 'leaf',
     name: { zh: 'GeometricFlux.jl', en: 'GeometricFlux.jl' },
@@ -129,29 +152,6 @@ export const researchThemes: ResearchTheme[] = [
       { zh: '隱私運算', en: 'Privacy-preserving computation' },
     ],
   },
-  {
-    slug: 'cdgrn',
-    accent: 'leaf',
-    name: { zh: 'CDGRN', en: 'CDGRN' },
-    short: {
-      zh: '首個整合基因調控網路與細胞軌跡推論的方法（CDGRNs.jl）。',
-      en: 'The first method unifying gene regulatory network and trajectory inference (CDGRNs.jl).',
-    },
-    desc: {
-      zh: '第一個整合基因調控網路推論與細胞軌跡推論的方法：以高斯混合模型與未剪接轉錄體（unspliced transcripts）推導情境相依的調控動力學，同時解釋細胞命運軌跡。發表於 Briefings in Bioinformatics。',
-      en: 'The first method unifying gene regulatory network inference with trajectory inference: a Gaussian-mixture model over unspliced transcripts derives context-dependent regulatory dynamics while explaining cell-fate trajectories. Published in Briefings in Bioinformatics.',
-    },
-    metrics: [{ value: 'GRN + TI', label: { zh: '首個整合方法', en: 'first unified method' } }],
-    links: [
-      { label: 'Paper', href: 'https://doi.org/10.1093/bib/bbac633' },
-      { label: 'GitHub', href: 'https://github.com/yuehhua/CDGRNs.jl' },
-    ],
-    tags: [
-      { zh: '計算生物學', en: 'Computational biology' },
-      { zh: '機器學習演算法設計', en: 'Machine learning algorithm design' },
-      { zh: '單細胞體學資料分析', en: 'Single-cell omics data analysis' },
-    ],
-  },
 ];
 
 export const visuals: Record<string, ResearchVisual> = {
@@ -171,3 +171,4 @@ export const visuals: Record<string, ResearchVisual> = {
     alt: { zh: 'CDGRN 方法概念圖', en: 'CDGRN method concept diagram' },
   },
 };
+
