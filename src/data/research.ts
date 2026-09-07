@@ -5,7 +5,7 @@
  * no detail pages. Full publication list lives at /publications/.
  */
 import type { ImageMetadata } from 'astro';
-import veImg from '../assets/research/virtual-embryo-task2.webp';
+import veImg from '../assets/challenge/virtual-embryo-challenge.png';
 import gfImg from '../assets/research/geometricflux-logo.png';
 import flImg from '../assets/research/rafael-logo.png';
 import cdImg from '../assets/research/cdgrn-concept.png';
@@ -157,8 +157,8 @@ export const researchThemes: ResearchTheme[] = [
 export const visuals: Record<string, ResearchVisual> = {
   'virtual-embryo': {
     alt: {
-      zh: 'Virtual Embryo Challenge 任務示意：胚胎 3D MERFISH 點雲',
-      en: 'Virtual Embryo Challenge task: 3D MERFISH point clouds of embryos',
+      zh: 'Virtual Embryo Challenge 主視覺',
+      en: 'Virtual Embryo Challenge key visual',
     },
   },
   geometricflux: {
