@@ -34,6 +34,9 @@ export interface ResearchTheme {
 
 export interface ResearchVisual {
   alt: L<string>;
+  /** 'background' = key visual, blown up as the slide background (with scrim);
+      'figure' = logo, shown framed beside the text (never a background). */
+  mode: 'background' | 'figure';
 }
 
 export const themeUi = {
@@ -160,15 +163,19 @@ export const visuals: Record<string, ResearchVisual> = {
       zh: 'Virtual Embryo Challenge 主視覺',
       en: 'Virtual Embryo Challenge key visual',
     },
+    mode: 'background',
   },
   geometricflux: {
     alt: { zh: 'GeometricFlux.jl 標誌', en: 'GeometricFlux.jl logo' },
+    mode: 'figure',
   },
   'federated-learning': {
     alt: { zh: 'RAFAEL 標誌', en: 'RAFAEL logo' },
+    mode: 'figure',
   },
   cdgrn: {
     alt: { zh: 'CDGRN 方法概念圖', en: 'CDGRN method concept diagram' },
+    mode: 'background',
   },
 };
 

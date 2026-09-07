@@ -137,49 +137,66 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
 
       {/* ---------------------------------------------- 03–06 RESEARCH (one slide per theme) */}
       {
-        researchThemes.map((theme, i) => (
-          <Slide id={theme.slug} num={String(i + 3).padStart(2, '0')} label={t(eyebrow.research)}>
-            <div class="row g-4 g-lg-5 align-items-center research-slide-body">
-              <div class="research-slide-text col-12 col-lg-7">
-                <h2 class="slide__title research-slide-title">{t(theme.name)}</h2>
-                <p class="research-slide-short muted">{t(theme.short)}</p>
-                <ul class="research-tags d-flex flex-wrap gap-2 ps-0 mb-0">
-                  {theme.tags.map((tag) => (
-                    <li>{t(tag)}</li>
-                  ))}
-                </ul>
-                <div class="mt-4">
-                  {theme.externalCta && (
-                    <a class="btn btn-outline-sky btn-deck" href={theme.externalCta.href} target="_blank" rel="noopener">
-                      {t(theme.externalCta.label)} ↗
-                    </a>
-                  )}
-                </div>
-                {theme.links.length > 0 && (
-                  <p class="research-slide-links d-flex flex-wrap gap-3 small fw-bold mt-3 mb-0">
-                    {theme.links.map((l) => (
-                      <a class="research-slide-link" href={l.href} target="_blank" rel="noopener">
-                        {l.label} ↗
-                      </a>
-                    ))}
-                  </p>
-                )}
-              </div>
-              <div class="col-12 col-lg-5">
-                <div class="research-figure">
+        researchThemes.map((theme, i) => {
+          const isBg = visuals[theme.slug].mode === 'background';
+          return (
+            <Slide id={theme.slug} num={String(i + 3).padStart(2, '0')} label={t(eyebrow.research)}>
+              {isBg && (
+                <div class="research-nature" aria-hidden="true">
                   <Image
-                    class="research-figure-img"
+                    class="research-bg-img"
                     src={themeImages[theme.slug]}
-                    alt={t(visuals[theme.slug].alt)}
+                    alt=""
                     loading="lazy"
-                    widths={[360, 540, 760]}
-                    sizes="(max-width: 991px) 90vw, 460px"
+                    widths={[360, 540, 760, 1024]}
+                    sizes="(max-width: 991px) 90vw, 60vw"
                   />
                 </div>
+              )}
+              <div class={isBg ? 'research-slide-body' : 'row g-4 g-lg-5 align-items-center'}>
+                <div class={isBg ? '' : 'research-slide-text col-12 col-lg-7'}>
+                  <h2 class="slide__title research-slide-title">{t(theme.name)}</h2>
+                  <p class="research-slide-short muted">{t(theme.short)}</p>
+                  <ul class="research-tags d-flex flex-wrap gap-2 ps-0 mb-0">
+                    {theme.tags.map((tag) => (
+                      <li>{t(tag)}</li>
+                    ))}
+                  </ul>
+                  <div class="mt-4">
+                    {theme.externalCta && (
+                      <a class="btn btn-outline-sky btn-deck" href={theme.externalCta.href} target="_blank" rel="noopener">
+                        {t(theme.externalCta.label)} ↗
+                      </a>
+                    )}
+                  </div>
+                  {theme.links.length > 0 && (
+                    <p class="research-slide-links d-flex flex-wrap gap-3 small fw-bold mt-3 mb-0">
+                      {theme.links.map((l) => (
+                        <a class="research-slide-link" href={l.href} target="_blank" rel="noopener">
+                          {l.label} ↗
+                        </a>
+                      ))}
+                    </p>
+                  )}
+                </div>
+                {!isBg && (
+                  <div class="col-12 col-lg-5">
+                    <div class="research-figure">
+                      <Image
+                        class="research-figure-img"
+                        src={themeImages[theme.slug]}
+                        alt={t(visuals[theme.slug].alt)}
+                        loading="lazy"
+                        widths={[360, 540, 760]}
+                        sizes="(max-width: 991px) 90vw, 460px"
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
-            </div>
-          </Slide>
-        ))
+            </Slide>
+          );
+        })
       }
 
       {/* ---------------------------------------------- 07–10 LESSONS (one slide per course) */}
@@ -463,6 +480,69 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
   }
 
   /* ---------- Research slides (one per theme) ---------- */
+  /* Key visuals render as a large background layer (logos stay framed figures) */
+  .research-nature {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .research-nature::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.88) 0%,
+      rgba(255, 255, 255, 0.55) 45%,
+      rgba(255, 255, 255, 0.12) 80%
+    );
+  }
+
+  .research-bg-img {
+    position: absolute;
+    top: 50%;
+    right: max(2rem, 6vw);
+    translate: 0 -50%;
+    height: min(78svh, 46rem);
+    width: auto;
+    max-width: 64%;
+    object-fit: contain;
+  }
+
+  @media (max-width: 767px) {
+    .research-bg-img {
+      right: 50%;
+      translate: 50% -50%;
+      height: 88svh;
+      max-width: 96%;
+      opacity: 0.25;
+    }
+  }
+
+  .research-slide-body {
+    position: relative;
+    z-index: 1;
+    max-width: 60ch;
+  }
+
+  .research-figure {
+    background: var(--paper);
+    border: var(--hairline);
+    padding: clamp(1rem, 2vw, 1.75rem);
+    display: grid;
+    place-items: center;
+  }
+
+  .research-figure-img {
+    max-height: min(28rem, 46svh);
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
   .research-slide-title {
     max-width: 16ch;
     font-size: clamp(1.75rem, 3.2vw, 2.6rem);
