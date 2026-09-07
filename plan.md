@@ -218,3 +218,8 @@ join       // { zh/en }: 條件、特質、CTA
 - [x] `visuals.mode` 新增 `'none'`（文字型 slide，無視覺——尚無代表圖）
 - [x] Deck 從 11 頁增為 12 頁；slideOrder／編號／wash 交錯全部更新；選單「研究」群組自動涵蓋新主題（無需改 Header 硬編碼）
 **驗收**：桌機 1920×1080 12 頁單螢幕門檻全綠（zh/en）；nav-group 含 ai-agent；wash 相鄰不重複；截圖確認文字版型正常
+
+### Stage 10：AI Agent 手繪視覺 ✔️（2026-09-07）
+- [x] 手繪 `ai-agent-mascot.svg`（純手工 SVG，非 diagrams.net——Astro 可直接解析、免點陣化，僅 4KB）：揮手機器人主體，三個連線節點呼應記憶系統／自動科學發現／課程助理
+- [x] `visuals['ai-agent'].mode` 由 `'none'` 改為 `'background'`，套用與 VE／CDGRN 相同的滿版背景＋左側白漸層處理
+**驗收**：build 成功零錯誤；桌機 1920×1080 12 頁單螢幕門檻全綠；截圖確認插畫置右、文字區乾淨、配色純用品牌 sky/leaf

@@ -9,11 +9,13 @@ import veImg from '../assets/challenge/virtual-embryo-challenge.png';
 import gfImg from '../assets/research/geometricflux-logo.png';
 import flImg from '../assets/research/rafael-logo.png';
 import cdImg from '../assets/research/cdgrn-concept.png';
+import aiAgentImg from '../assets/research/ai-agent-mascot.svg';
 import type { L } from './content';
 
 /** Representative visual per theme (static imports so Vite can resolve them). */
 export const themeImages: Record<string, ImageMetadata> = {
   'virtual-embryo': veImg,
+  'ai-agent': aiAgentImg,
   geometricflux: gfImg,
   'federated-learning': flImg,
   cdgrn: cdImg,
@@ -195,8 +197,8 @@ export const visuals: Record<string, ResearchVisual> = {
     mode: 'figure',
   },
   'ai-agent': {
-    alt: { zh: 'AI Agent', en: 'AI agents' },
-    mode: 'none',
+    alt: { zh: 'ISB Lab AI Agent 吉祥物插畫', en: 'ISB Lab AI agent mascot illustration' },
+    mode: 'background',
   },
   cdgrn: {
     alt: { zh: 'CDGRN 方法概念圖', en: 'CDGRN method concept diagram' },
