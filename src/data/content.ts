@@ -37,6 +37,7 @@ export const slideOrder = [
   'hero',
   'about',
   'virtual-embryo',
+  'ai-agent',
   'cdgrn',
   'geometricflux',
   'federated-learning',

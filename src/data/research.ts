@@ -35,8 +35,9 @@ export interface ResearchTheme {
 export interface ResearchVisual {
   alt: L<string>;
   /** 'background' = key visual, blown up as the slide background (with scrim);
-      'figure' = logo, shown framed beside the text (never a background). */
-  mode: 'background' | 'figure';
+      'figure' = logo, shown framed beside the text (never a background);
+      'none' = no visual yet (text-only slide). */
+  mode: 'background' | 'figure' | 'none';
 }
 
 export const themeUi = {
@@ -78,6 +79,26 @@ export const researchThemes: ResearchTheme[] = [
       label: { zh: '前往競賽網站', en: 'Go to the challenge' },
       href: 'https://virtualembryo.ai/challenge',
     },
+  },
+  {
+    slug: 'ai-agent',
+    accent: 'sky',
+    name: { zh: 'AI Agent', en: 'AI Agents' },
+    short: {
+      zh: '與企業合作打造具記憶系統的 AI Agent，並實作自有智能體——邁向自動科學發現（AI Scientist），首個應用：課程 AI 助理。',
+      en: 'Industry-collaborated AI agents with memory systems, plus our own agent implementation—toward automated scientific discovery (AI Scientist); first application: a course AI assistant.',
+    },
+    desc: {
+      zh: '與企業合作研發 AI Agent 的記憶系統，並自行實作完整的 AI Agent。研究目標是把 AI Agent 推向自動科學發現（AI Scientist），減輕研究負擔；第一個應用場景是課程的 AI 助理。',
+      en: 'We build the memory system for AI agents in an industry collaboration and implement our own agent. The goal is pushing agents toward automated scientific discovery (AI Scientist) to ease the research burden; the first application is an AI assistant for courses.',
+    },
+    metrics: [],
+    links: [],
+    tags: [
+      { zh: 'AI Agent', en: 'AI agents' },
+      { zh: '記憶系統', en: 'Memory systems' },
+      { zh: '自動科學發現', en: 'Automated scientific discovery' },
+    ],
   },
   {
     slug: 'cdgrn',
@@ -172,6 +193,10 @@ export const visuals: Record<string, ResearchVisual> = {
   'federated-learning': {
     alt: { zh: 'RAFAEL 標誌', en: 'RAFAEL logo' },
     mode: 'figure',
+  },
+  'ai-agent': {
+    alt: { zh: 'AI Agent', en: 'AI agents' },
+    mode: 'none',
   },
   cdgrn: {
     alt: { zh: 'CDGRN 方法概念圖', en: 'CDGRN method concept diagram' },

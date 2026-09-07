@@ -12,6 +12,7 @@ const SLIDES = [
   'hero',
   'about',
   'virtual-embryo',
+  'ai-agent',
   'cdgrn',
   'geometricflux',
   'federated-learning',

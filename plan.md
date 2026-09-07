@@ -212,3 +212,9 @@ join       // { zh/en }: 條件、特質、CTA
 - [x] workflow 四步：dist→lab、publications→根、en/publications→根、空目錄→research（清除舊站）
 - [x] ⚠️ 部落格 `_config.yml` keep_files 需改為 `keep_files: lab publications en`
 **驗收**：build/桌機 11 頁門檻全綠；線上 /lab/ 200、/publications/ 200、/en/publications/ 200、/research/ 404
+
+### Stage 9：新增 AI Agent 研究主題 ✔️（2026-09-07）
+- [x] 於 Virtual Embryo 之後插入 `ai-agent` 主題（與企業合作記憶系統、自行實作 agent、目標 AI Scientist 自動科學發現、首個應用為課程 AI 助理）
+- [x] `visuals.mode` 新增 `'none'`（文字型 slide，無視覺——尚無代表圖）
+- [x] Deck 從 11 頁增為 12 頁；slideOrder／編號／wash 交錯全部更新；選單「研究」群組自動涵蓋新主題（無需改 Header 硬編碼）
+**驗收**：桌機 1920×1080 12 頁單螢幕門檻全綠（zh/en）；nav-group 含 ai-agent；wash 相鄰不重複；截圖確認文字版型正常

@@ -135,10 +135,12 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
         </div>
       </Slide>
 
-      {/* ---------------------------------------------- 03–06 RESEARCH (one slide per theme) */}
+      {/* ---------------------------------------------- 03–07 RESEARCH (one slide per theme) */}
       {
         researchThemes.map((theme, i) => {
-          const isBg = visuals[theme.slug].mode === 'background';
+          const mode = visuals[theme.slug].mode;
+          const isBg = mode === 'background';
+          const isFig = mode === 'figure';
           return (
             <Slide id={theme.slug} num={String(i + 3).padStart(2, '0')} label={t(eyebrow.research)}>
               {isBg && (
@@ -153,8 +155,8 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
                   />
                 </div>
               )}
-              <div class={isBg ? 'research-slide-body' : 'row g-4 g-lg-5 align-items-center'}>
-                <div class={isBg ? '' : 'research-slide-text col-12 col-lg-7'}>
+              <div class={isFig ? 'row g-4 g-lg-5 align-items-center' : 'research-slide-body'}>
+                <div class={isFig ? 'research-slide-text col-12 col-lg-7' : ''}>
                   <h2 class="slide__title research-slide-title">{t(theme.name)}</h2>
                   <p class="research-slide-short muted">{t(theme.short)}</p>
                   <ul class="research-tags d-flex flex-wrap gap-2 ps-0 mb-0">
@@ -179,7 +181,7 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
                     </p>
                   )}
                 </div>
-                {!isBg && (
+                {isFig && (
                   <div class="col-12 col-lg-5">
                     <div class="research-figure">
                       <Image
@@ -199,10 +201,10 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
         })
       }
 
-      {/* ---------------------------------------------- 07–10 LESSONS (one slide per course) */}
+      {/* ---------------------------------------------- 08–11 LESSONS (one slide per course) */}
       {
         lessonSlides.map(({ lesson, bg, linked }, i) => (
-          <Slide id={lesson.slug} num={String(i + 7).padStart(2, '0')} label={t(ui.lessonNav)}>
+          <Slide id={lesson.slug} num={String(i + 8).padStart(2, '0')} label={t(ui.lessonNav)}>
             {bg && (
               <div class="lesson-nature" aria-hidden="true">
                 <Image class="lesson-bg-img" src={bg} alt="" loading="lazy" widths={[640, 1024, 1376]} sizes="100vw" />
@@ -228,8 +230,8 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
         ))
       }
 
-      {/* ---------------------------------------------- 11 JOIN US */}
-      <Slide id="join" num="11" label={t(eyebrow.join)}>
+      {/* ---------------------------------------------- 12 JOIN US */}
+      <Slide id="join" num="12" label={t(eyebrow.join)}>
         <div class="join-content">
           <h2 class="slide__title">{t(join.heading)}</h2>
           <p class="join-slogan">{t(join.slogan)}</p>
@@ -745,14 +747,15 @@ const otherLangUrl = lang === 'zh' ? `${base}/en/` : `${base}/`;
 
   /* Research slides alternate leaf/sky so no two adjacent slides share a wash */
   #virtual-embryo,
-  #geometricflux {
+  #cdgrn,
+  #federated-learning {
     background:
       radial-gradient(46rem 26rem at -10% 100%, rgba(64, 160, 43, 0.08), transparent 60%),
       var(--leaf-wash);
   }
 
-  #cdgrn,
-  #federated-learning {
+  #ai-agent,
+  #geometricflux {
     background:
       radial-gradient(46rem 26rem at 110% 0%, rgba(116, 192, 252, 0.12), transparent 60%),
       var(--sky-wash);
