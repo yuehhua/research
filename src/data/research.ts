@@ -99,6 +99,8 @@ export const researchThemes: ResearchTheme[] = [
     tags: [
       { zh: 'AI Agent', en: 'AI agents' },
       { zh: '記憶系統', en: 'Memory systems' },
+      { zh: '生成式模型', en: 'Generative models' },
+      { zh: '世界模型', en: 'World models' },
       { zh: '自動科學發現', en: 'Automated scientific discovery' },
     ],
   },

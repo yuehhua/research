@@ -223,3 +223,7 @@ join       // { zh/en }: 條件、特質、CTA
 - [x] 手繪 `ai-agent-mascot.svg`（純手工 SVG，非 diagrams.net——Astro 可直接解析、免點陣化，僅 4KB）：揮手機器人主體，三個連線節點呼應記憶系統／自動科學發現／課程助理
 - [x] `visuals['ai-agent'].mode` 由 `'none'` 改為 `'background'`，套用與 VE／CDGRN 相同的滿版背景＋左側白漸層處理
 **驗收**：build 成功零錯誤；桌機 1920×1080 12 頁單螢幕門檻全綠；截圖確認插畫置右、文字區乾淨、配色純用品牌 sky/leaf
+
+### Stage 11：AI Agent 補充領域標籤 ✔️（2026-09-09）
+- [x] `researchThemes['ai-agent'].tags` 新增「生成式模型／Generative models」「世界模型／World models」，維持在同一張 slide 內（不拆分新主題）
+**驗收**：桌機/平板/手機×zh/en 全部 QA 通過（#ai-agent 三種尺寸皆單螢幕內）；截圖確認 5 個標籤自然換行為兩列，未擠壓機器人插畫或造成留白不足
