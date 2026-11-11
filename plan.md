@@ -227,3 +227,9 @@ join       // { zh/en }: 條件、特質、CTA
 ### Stage 11：AI Agent 補充領域標籤 ✔️（2026-09-09）
 - [x] `researchThemes['ai-agent'].tags` 新增「生成式模型／Generative models」「世界模型／World models」，維持在同一張 slide 內（不拆分新主題）
 **驗收**：桌機/平板/手機×zh/en 全部 QA 通過（#ai-agent 三種尺寸皆單螢幕內）；截圖確認 5 個標籤自然換行為兩列，未擠壓機器人插畫或造成留白不足
+
+### Stage：課程拆站（2026-11-11）✔️ 完成
+- [x] 課程（4 張 lesson slide、3 個 lesson 詳細頁、lessons.ts、背景圖）搬到 `../course-blog`（github.com/yuehhua/course → https://yuehhua.github.io/course/），新增封面 slide；Catalan-numbers 靜態站保留於原路徑、建置時複製進 dist
+- [x] 本站只留實驗室＋大學部專題生招募：deck 8 頁（封面→關於→研究×5→加入我們）；「課程」選單改為連到 `/course/` 的頁面連結
+- [x] 舊網址 `/lab/lessons/<slug>`（含 en）以 Astro `redirects` 轉址到課程站
+- 驗收：兩站 build 成功；course-blog qa-geometry 全過；lab qa-geometry 僅 mobile `#about`/`#join` 超高（既有、設計上允許）

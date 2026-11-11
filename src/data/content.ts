@@ -22,8 +22,8 @@ export const ui = {
     publications: { zh: '論文', en: 'Papers' },
     join: { zh: '加入我們', en: 'Join us' },
   },
-  /* Every lesson slide shares one nav label — the active one glows. */
-  lessonNav: { zh: '課程', en: 'Lesson' },
+  /* Courses moved to their own site (https://yuehhua.github.io/course/) — nav page link. */
+  courses: { zh: '課程', en: 'Lesson' },
   scrollHint: { zh: '捲動或按 ↓ 換頁', en: 'Scroll or press ↓' },
   langToggle: { zh: 'EN', en: '中文' },
   backToTop: { zh: '回封面', en: 'Back to top' },
@@ -31,8 +31,7 @@ export const ui = {
   currentFocus: { zh: '現況焦點', en: 'Current focus' },
 } as const;
 
-/* Research theme slugs (src/data/research.ts) and lesson slugs
-   (src/data/lessons.ts) each render as their own deck slide. */
+/* Research theme slugs (src/data/research.ts) each render as their own deck slide. */
 export const slideOrder = [
   'hero',
   'about',
@@ -41,10 +40,6 @@ export const slideOrder = [
   'cdgrn',
   'geometricflux',
   'federated-learning',
-  'discrete-math',
-  'data-structures-algorithms',
-  'bioinformatics',
-  'smart-healthcare-big-data',
   'join',
 ] as const;
 

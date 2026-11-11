@@ -73,7 +73,7 @@ html {
   }
 }
 
-/* Long-form pages (lesson pages) opt out of deck snapping via <html class="no-snap"> */
+/* Long-form pages (publications page) opt out of deck snapping via <html class="no-snap"> */
 html.no-snap {
   scroll-snap-type: none;
 }

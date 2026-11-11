@@ -17,10 +17,6 @@ const SLIDES = [
   'cdgrn',
   'geometricflux',
   'federated-learning',
-  'discrete-math',
-  'data-structures-algorithms',
-  'bioinformatics',
-  'smart-healthcare-big-data',
   'join',
 ];
 const VIEWPORTS = [
